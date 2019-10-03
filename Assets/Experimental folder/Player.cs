@@ -6,6 +6,11 @@ using UnityEngine;
 public class Player : Photon.MonoBehaviour {
     public float speed = 10f;
 
+    float Horizontalaxis;
+    float Verticalaxis;
+    float MouseX;
+    float MouseY;
+
     // Update is called once per frame
     void Update()
     {
@@ -37,25 +42,45 @@ public class Player : Photon.MonoBehaviour {
 
     private void InputMovement()
     {
-        if (Input.GetKey(KeyCode.W))
+
+        MouseX = Input.GetAxis("Mouse X");
+        MouseY = Input.GetAxis("Mouse Y");
+
+        Horizontalaxis = Input.GetAxisRaw("Horizontal");
+        Verticalaxis = Input.GetAxisRaw("Vertical");
+
+        Debug.Log(MouseX + " " + MouseY);
+
+
+        gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
+
+
+        if (Verticalaxis > 0)
         {
-            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position
-                + Vector3.forward * speed * Time.deltaTime);
+
+            gameObject.GetComponent<Transform>().Translate(Vector3.forward * speed * Time.deltaTime);
+
+
+            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + Vector3.forward * speed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Verticalaxis < 0)
         {
-            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position
-                - Vector3.forward * speed * Time.deltaTime);
+
+            gameObject.GetComponent<Transform>().Translate((-Vector3.forward) * speed * Time.deltaTime);
+
+            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position - Vector3.forward * speed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Horizontalaxis > 0)
         {
-            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position
-                + Vector3.right * speed * Time.deltaTime);
+            gameObject.GetComponent<Transform>().Translate(Vector3.right * speed * Time.deltaTime);
+
+            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position+ Vector3.right * speed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Horizontalaxis < 0)
         {
-            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position
-                - Vector3.right * speed * Time.deltaTime);
+            gameObject.GetComponent<Transform>().Translate((-Vector3.right) * speed * Time.deltaTime);
+
+            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position- Vector3.right * speed * Time.deltaTime);
         }
     }
 }
