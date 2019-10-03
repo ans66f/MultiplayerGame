@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2659196679327055164}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  PlayerCam: {fileID: 3771967989497905300}
 --- !u!114 &770106900578500904
 MonoBehaviour:
   m_ObjectHideFlags: 0

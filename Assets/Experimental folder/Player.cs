@@ -6,6 +6,9 @@ using UnityEngine;
 public class Player : Photon.MonoBehaviour {
     public float speed = 10f;
 
+    public GameObject PlayerCam;
+
+
     float Horizontalaxis;
     float Verticalaxis;
     float MouseX;
@@ -18,6 +21,14 @@ public class Player : Photon.MonoBehaviour {
         {
             InputMovement();
             InputColorChange();
+
+            PlayerCam.tag = "MainCamera";
+            PlayerCam.SetActive(true);
+        }
+        else
+        {
+            PlayerCam.tag = "Untagged";
+            PlayerCam.SetActive(false);
         }
     }
 
