@@ -10,6 +10,7 @@ public class CamMoveScript : MonoBehaviour
     float MouseX;
     float MouseY;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,21 +20,24 @@ public class CamMoveScript : MonoBehaviour
 
     }
 
+    public void RotateCam()
+    {
+
+        MouseX = Input.GetAxis("Mouse X");
+        MouseY = Input.GetAxis("Mouse Y");
+
+        gameObject.transform.Rotate(new Vector3((-MouseY * LookSpeed), 0, 0));
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
             }
 
-
-            MouseX = Input.GetAxis("Mouse X");
-            MouseY = Input.GetAxis("Mouse Y");
-
-            gameObject.transform.Rotate(new Vector3((-MouseY * LookSpeed), 0, 0));
 
     }
 }

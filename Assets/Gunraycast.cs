@@ -21,6 +21,7 @@ public class Gunraycast : MonoBehaviour
 
 
         int i = 0;
+
         Vector3[] linepositions;
         linepositions = new Vector3[10];
         for(i = 0; i < 10; i++)

@@ -18,24 +18,22 @@ public class Lerptoaimposition : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LerpUpdate()
     {
         l = lerpamount / lerptime;
 
 
-        if(lerpamount >= lerptime)
+        if (lerpamount >= lerptime)
         {
             lerpamount = lerptime;
         }
-        if(lerpamount <= 0)
+        if (lerpamount <= 0)
         {
             lerpamount = 0;
         }
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
-            Debug.Log("isdown");
             lerpamount += Time.deltaTime;
 
         }
@@ -45,6 +43,12 @@ public class Lerptoaimposition : MonoBehaviour
         }
         gameObject.transform.position = Vector3.Lerp(holdpositionobject.transform.position, aimpositionobject.transform.position, l);
 
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
 }

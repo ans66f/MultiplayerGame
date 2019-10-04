@@ -7,6 +7,8 @@ public class Player : Photon.MonoBehaviour {
     public float speed = 10f;
 
     public GameObject PlayerCam;
+    public GameObject PlayerStuff;
+    public GameObject pistol;
 
 
     float Horizontalaxis;
@@ -60,7 +62,9 @@ public class Player : Photon.MonoBehaviour {
         Horizontalaxis = Input.GetAxisRaw("Horizontal");
         Verticalaxis = Input.GetAxisRaw("Vertical");
 
-        Debug.Log(MouseX + " " + MouseY);
+
+        PlayerStuff.GetComponent<CamMoveScript>().RotateCam();
+        pistol.GetComponent<Lerptoaimposition>().LerpUpdate();
 
 
         gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
