@@ -41,6 +41,13 @@ public class Player : Photon.MonoBehaviour {
         }
     }
 
+
+    [PunRPC]
+    void AddForceToPlayer(Vector3 force)
+    {
+        gameObject.transform.GetComponent<Rigidbody>().AddForce(force);
+    }
+
     private void InputColorChange()
     {
         if (Input.GetKeyDown(KeyCode.R))

@@ -665,9 +665,6 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 3912274531653234350}
-  - {fileID: 477402513796232009, guid: b104e0cea2a194c42971ae34557ee21d, type: 3}
-  - {fileID: 325551484344277683, guid: dce34a8ec7e680140b8c9ac4d16dbffd, type: 3}
-  - {fileID: 2558002865579124206, guid: 24520c4cbfac89241a6d1609824b9f92, type: 3}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
