@@ -45,7 +45,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
 
-                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, p);
+                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered);
 
                     // hit.collider.gameObject.GetComponent<Player>().
 

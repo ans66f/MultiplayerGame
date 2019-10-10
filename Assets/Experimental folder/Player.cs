@@ -120,6 +120,13 @@ void Update()
     }
 
 
+    [PunRPC]
+    void AddForceToPlayer()
+    {
+        Debug.Log("AddForceToPlayer" + gameObject.name);
+        //gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.transform.forward * 100);
+    }
+
 
     [PunRPC]
     void ChangeColorTo(Vector3 color)
