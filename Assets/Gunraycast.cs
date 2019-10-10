@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gunraycast : MonoBehaviour
+public class Gunraycast : Photon.MonoBehaviour
 {
 
     // Start is called before the first frame update
@@ -36,9 +36,6 @@ public class Gunraycast : MonoBehaviour
             if (hit.collider.gameObject.tag == "Player")
             {
               //  hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
-
-
-                PhotonView photonView = PhotonView.Get(this);
 
 
                 Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
