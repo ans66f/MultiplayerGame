@@ -35,7 +35,7 @@ public class Gunraycast : MonoBehaviour
             }
             if (hit.collider.gameObject.tag == "Player")
             {
-                hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
+              //  hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
 
 
                 PhotonView photonView = PhotonView.Get(this);
@@ -43,7 +43,11 @@ public class Gunraycast : MonoBehaviour
 
                 Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
 
-                photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, p);
+
+                if (photonView.isMine)
+                {
+                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, p);
+                }
                // hit.collider.gameObject.GetComponent<Player>().
 
 
