@@ -87,7 +87,7 @@ public class Player : Photon.MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.Space) && !jumpbool)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1000, 0));
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
             jumpbool = true;
         }
 
