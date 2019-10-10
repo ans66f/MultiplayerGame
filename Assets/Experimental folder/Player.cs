@@ -129,7 +129,7 @@ void Update()
     void AddForceToPlayer()
     {
         Debug.Log("AddForceToPlayer" + gameObject.name);
-        //gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.transform.forward * 100);
+        gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.transform.forward * 100);
     }
 
 
