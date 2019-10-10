@@ -53,14 +53,28 @@ public class Player : Photon.MonoBehaviour
     public GameObject PlayerStuff;
     public GameObject pistol;
 
+    bool jumpbool;
+
     float Horizontalaxis;
     float Verticalaxis;
     float MouseX;
     float MouseY;
-       
-    // Update is called once per frame
 
-    void Update()
+    private void Start()
+    {
+        jumpbool = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumpbool = false;
+    }
+
+
+
+// Update is called once per frame
+
+void Update()
 
     {
 
@@ -80,6 +94,12 @@ public class Player : Photon.MonoBehaviour
             SyncedMovement();
             PlayerCam.tag = "Untagged";
             PlayerCam.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !jumpbool)
+        {
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1000, 0));
+            jumpbool = true;
         }
 
     }
