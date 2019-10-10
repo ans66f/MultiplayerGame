@@ -10,11 +10,18 @@ public class Player : Photon.MonoBehaviour {
     public GameObject PlayerStuff;
     public GameObject pistol;
 
+    bool jumpbool;
+
 
     float Horizontalaxis;
     float Verticalaxis;
     float MouseX;
     float MouseY;
+
+    private void Start()
+    {
+        jumpbool = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -53,6 +60,11 @@ public class Player : Photon.MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumpbool = false;
+    }
+
     private void InputMovement()
     {
 
@@ -68,6 +80,17 @@ public class Player : Photon.MonoBehaviour {
 
 
         gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
+
+
+
+
+
+        if(Input.GetKeyDown(KeyCode.Space) && !jumpbool)
+        {
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1000, 0));
+            jumpbool = true;
+        }
+
 
 
         if (Verticalaxis > 0)
