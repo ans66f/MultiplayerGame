@@ -39,7 +39,7 @@ public class Gunraycast : Photon.MonoBehaviour
                 if (hit.collider.gameObject.tag == "Player")
                 {
                     //  hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
-
+                    Debug.Log("Player Hit" + hit.collider.gameObject.name);
 
                     Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
 
