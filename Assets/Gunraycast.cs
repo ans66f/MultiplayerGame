@@ -18,36 +18,39 @@ public class Gunraycast : Photon.MonoBehaviour
 
         Debug.DrawRay(gameObject.transform.position, (gameObject.transform.forward * 100), Color.red, 1);
 
-        RaycastHit hit;
-        if (Input.GetMouseButtonDown(0))
+
+        if (photonView.isMine)
         {
-            Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
-            if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit))
+            RaycastHit hit;
+            if (Input.GetMouseButtonDown(0))
             {
-
-            }
-
-
-            if (hit.collider.gameObject.tag == "block")
-            {
-                Destroy(hit.collider.gameObject);
-
-            }
-            if (hit.collider.gameObject.tag == "Player")
-            {
-              //  hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
-
-
-                Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
-
-
-                if (photonView.isMine)
+                Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
+                if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit))
                 {
-                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, p);
+
                 }
-               // hit.collider.gameObject.GetComponent<Player>().
 
 
+                if (hit.collider.gameObject.tag == "block")
+                {
+                    Destroy(hit.collider.gameObject);
+
+                }
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    //  hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(-hit.collider.gameObject.transform.forward * 50);
+
+
+                    Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
+
+
+
+                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, p);
+
+                    // hit.collider.gameObject.GetComponent<Player>().
+
+
+                }
             }
         }
 
