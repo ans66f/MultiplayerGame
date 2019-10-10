@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - PistolHold
+  - bottomwall
+  - topwall
+  - leftwall
+  - rightwall
   layers:
   - Default
   - TransparentFX
