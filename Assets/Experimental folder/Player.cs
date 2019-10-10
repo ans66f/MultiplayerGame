@@ -119,6 +119,11 @@ void Update()
 
     }
 
+    public void DoForceThing()
+    {
+        photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered);
+    }
+
 
     [PunRPC]
     void AddForceToPlayer()

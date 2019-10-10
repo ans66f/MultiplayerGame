@@ -5,10 +5,17 @@ using UnityEngine;
 public class Gunraycast : Photon.MonoBehaviour
 {
 
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    void AddForceToPlayer()
+    {
+
     }
 
     // Update is called once per frame
@@ -43,9 +50,9 @@ public class Gunraycast : Photon.MonoBehaviour
 
                     Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
 
+                    player.GetComponent<Player>().DoForceThing();
 
-
-                    photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered);
+                    
 
                     // hit.collider.gameObject.GetComponent<Player>().
 
