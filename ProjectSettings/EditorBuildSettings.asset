@@ -69,7 +69,10 @@ EditorBuildSettings:
     path: Assets/Photon Unity Networking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
       for 4.unity
     guid: e7a7f9734636d415ca84ef3aaf7680f6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/NoliTestscene.unity
+    guid: 0c268bb6db1e32d49b5a6801902a22d4
   m_configObjects: {}

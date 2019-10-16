@@ -10,6 +10,9 @@ TagManager:
   - leftwall
   - rightwall
   - block
+  - healthPack
+  - healthLabel
+  - healthPanel
   layers:
   - Default
   - TransparentFX

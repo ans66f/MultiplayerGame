@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -49,11 +50,21 @@ public class Player : Photon.MonoBehaviour
     //    lastSynchronizationTime = Time.time;
     //}
 
+    [Header("Objects")]
     public GameObject PlayerCam;
     public GameObject PlayerStuff;
     public GameObject pistol;
 
     bool jumpbool;
+
+    [Header("Health")]
+    public int maxHealth = 100;
+    public int currHealth;
+    public Text currHealthLabel;
+    public bool isDead
+    {
+        get { return currHealth == 0; }
+    }
 
     float Horizontalaxis;
     float Verticalaxis;
@@ -63,6 +74,11 @@ public class Player : Photon.MonoBehaviour
     private void Start()
     {
         jumpbool = false;
+        currHealth = maxHealth/2;
+        if (photonView.isMine) {
+            currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
+        }
+        UpdateGUI();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -104,12 +120,32 @@ void Update()
 
     }
 
+    void UpdateGUI()
+    {
+        if (currHealthLabel != null)
+            currHealthLabel.text = currHealth.ToString();
+    }
 
+    public void modifyHealth(int amount)
+    {
+        currHealth += amount;
+        currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
+        checkIfDead();
+        UpdateGUI();
+    }
+
+    private void checkIfDead()
+    {
+        if (isDead)
+        {
+            // what happens when the player is dead ? TODO
+        }
+    }
 
     private void InputColorChange()
 
     {
-
+        
         if (Input.GetKeyDown(KeyCode.R))
 
         {
