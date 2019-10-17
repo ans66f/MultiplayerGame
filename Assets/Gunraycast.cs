@@ -51,8 +51,8 @@ public class Gunraycast : Photon.MonoBehaviour
                     Vector3 p = new Vector3((-hit.collider.gameObject.transform.forward * 50).x, (-hit.collider.gameObject.transform.forward * 50).y, (-hit.collider.gameObject.transform.forward * 50).z);
 
 
-                    int ownerId = hit.collider.gameObject.GetComponent<PhotonView>().ownerId;
-                    player.GetComponent<Player>().DoForceThing(ownerId);
+                    //int ownerId = hit.collider.gameObject.GetComponent<PhotonView>().ownerId;
+                    hit.collider.gameObject.GetComponent<Player>().DoForceThing();
 
                     
 
