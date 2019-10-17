@@ -18,6 +18,7 @@ public class blockscript : Photon.MonoBehaviour
     [PunRPC]
     void RemoveBlock()
     {
+        Debug.Log("Destroyed block :" + gameObject.transform.position);
         Destroy(gameObject);
     }
 
