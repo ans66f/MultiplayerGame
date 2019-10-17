@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5983289275832712386}
   - component: {fileID: 5983289275832712389}
   - component: {fileID: 5983289275832712388}
-  - component: {fileID: 6624712060225626451}
   - component: {fileID: 8448567239199371533}
   m_Layer: 0
   m_Name: Block
@@ -93,33 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6624712060225626451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5983289275832712391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 3
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 5983289275832712387}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &8448567239199371533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba03e3e9e04eac479b7c895368c9448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 3912274531653234346, guid: f2b17a313dbb168489a7cc47594b1b1d, type: 3}
