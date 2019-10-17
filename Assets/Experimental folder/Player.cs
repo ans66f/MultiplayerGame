@@ -158,7 +158,7 @@ void Update()
         GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
         if (photonView.isMine)
         {
-            photonView.RPC("ChangeColorTo", PhotonTargets.OthersBuffered, color);
+            photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
         }
 
     }
