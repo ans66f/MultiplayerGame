@@ -151,8 +151,15 @@ void Update()
     }
 
 
+
+
+    public void HitChangeColour(Vector3 color)
+    {
+        photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
+    }
+
     [PunRPC]
-   public void ChangeColorTo(Vector3 color)
+    void ChangeColorTo(Vector3 color)
 
     {
         GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
