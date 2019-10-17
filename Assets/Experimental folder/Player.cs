@@ -108,7 +108,7 @@ void Update()
     {
         float f = (float)maxHealth / (float)currHealth;
         healthbar.GetComponent<RawImage>().rectTransform.sizeDelta = new Vector2(healthbarwidth / f, healthbar.GetComponent<RawImage>().rectTransform.rect.height);
-        Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
+       // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
 
         if (photonView.isMine)
