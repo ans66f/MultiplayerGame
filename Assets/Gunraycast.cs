@@ -40,7 +40,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 if (hit.collider.gameObject.tag == "block")
                 {
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.gameObject.GetComponent<blockscript>().CallRemoveBlock();
 
                 }
                 if (hit.collider.gameObject.tag == "Player")
