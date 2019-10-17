@@ -172,17 +172,18 @@ void Update()
 
     }
 
-    public void DoForceThing()
+    public void DoForceThing(int viewId)
     {
-        photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered);
+        photonView.RPC("AddForceToPlayer", PhotonTargets.OthersBuffered, viewId);
     }
 
 
     [PunRPC]
-    void AddForceToPlayer()
+    void AddForceToPlayer(int viewId)
     {
         Debug.Log("AddForceToPlayer" + gameObject.name);
-        gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.transform.forward * 100);
+        if (viewId == GetComponent<PhotonView>().viewID)
+            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
     }
 
 
