@@ -28,6 +28,7 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - AddForceToPlayer
   - ChangeColorTo
   - Chat
   - ColorRpc

@@ -13,6 +13,7 @@ TagManager:
   - healthPack
   - healthLabel
   - healthPanel
+  - HealthBar
   layers:
   - Default
   - TransparentFX

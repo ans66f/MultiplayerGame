@@ -61,6 +61,12 @@ public class Player : Photon.MonoBehaviour
     public int maxHealth = 100;
     public int currHealth;
     public Text currHealthLabel;
+
+    GameObject healthbar;
+    float healthbarwidth;
+
+
+
     public bool isDead
     {
         get { return currHealth == 0; }
@@ -73,6 +79,13 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
+        healthbar = GameObject.FindGameObjectWithTag("HealthBar");
+        healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
+
+
+
+
+
         jumpbool = false;
         currHealth = maxHealth/2;
         if (photonView.isMine) {
@@ -93,6 +106,10 @@ public class Player : Photon.MonoBehaviour
 void Update()
 
     {
+        float f = maxHealth / currHealth;
+        healthbar.GetComponent<RawImage>().rectTransform.sizeDelta = new Vector2(healthbarwidth / f, healthbar.GetComponent<RawImage>().rectTransform.rect.height);
+
+
 
         if (photonView.isMine)
 
