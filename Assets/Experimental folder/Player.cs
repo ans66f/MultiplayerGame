@@ -178,6 +178,8 @@ void Update()
     }
 
 
+
+
     [PunRPC]
     void AddForceToPlayer()
     {
@@ -191,7 +193,7 @@ void Update()
 
 
     [PunRPC]
-    void ChangeColorTo(Vector3 color)
+   public void ChangeColorTo(Vector3 color)
 
     {
         GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);

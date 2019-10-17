@@ -53,8 +53,8 @@ public class Gunraycast : Photon.MonoBehaviour
 
                     //int ownerId = hit.collider.gameObject.GetComponent<PhotonView>().ownerId;
                     hit.collider.gameObject.GetComponent<Player>().DoForceThing();
+                    hit.collider.gameObject.GetComponent<Player>().ChangeColorTo(new Vector3(0, 1, 0));
 
-                    
 
                     // hit.collider.gameObject.GetComponent<Player>().
 
