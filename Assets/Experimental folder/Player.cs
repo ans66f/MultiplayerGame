@@ -170,6 +170,29 @@ void Update()
     }
 
 
+
+
+    public void CallRemoveBlock(Vector3 pos)
+    {
+        photonView.RPC("RemoveBlock", PhotonTargets.All, pos);
+    }
+    [PunRPC]
+    void RemoveBlock(Vector3 pos)
+    {
+      GameObject[] blocks = GameObject.FindGameObjectsWithTag("block");
+
+        foreach(GameObject block in blocks)
+        {
+            if (block.transform.position == pos)
+            {
+                Debug.Log("Destroyed block :" + gameObject.transform.position);
+                Destroy(block);
+            }
+        }
+
+    }
+
+
     /*
     [PunRPC]
     void ChangeColorTo(Vector3 color)
