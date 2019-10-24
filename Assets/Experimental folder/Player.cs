@@ -18,7 +18,7 @@ public class Player : Photon.MonoBehaviour
     bool jumpbool;
 
     [Header("Health")]
-    public int maxHealth = 100;
+    public int maxHealth = 200;
     public int currHealth;
     public Text currHealthLabel;
 
@@ -102,12 +102,15 @@ void Update()
             currHealthLabel.text = currHealth.ToString();
     }
 
-    public void modifyHealth(int amount)
+    [PunRPC]
+    public void ModifyHealth(int amount)
     {
         currHealth += amount;
         currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
         checkIfDead();
         UpdateGUI();
+        if (photonView.isMine)
+            photonView.RPC("ModifyHealth", PhotonTargets.Others, amount);
     }
 
     private void checkIfDead()

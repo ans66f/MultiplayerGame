@@ -46,4 +46,8 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - RemoveBlock
+  - activateHealthPack
+  - deactivateHealthPack
+  - modifyHealth
+  - ModifyHealth
   DisableAutoOpenWizard: 1
