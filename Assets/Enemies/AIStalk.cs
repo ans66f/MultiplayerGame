@@ -11,7 +11,21 @@ public class AIStalk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(target);
-        transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+        if (target != null)
+        {
+
+            Vector3 disp = target.transform.position - GetComponent<Transform>().position;
+
+            if (disp.magnitude > 5)
+            {
+
+                transform.LookAt(target);
+                transform.Translate(transform.forward * 5 * Time.deltaTime);
+            }
+        }
+        else
+        {
+            if(GameObject.FindGameObjectWithTag("Player")) target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 }

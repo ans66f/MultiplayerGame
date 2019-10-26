@@ -12,7 +12,8 @@ public class GameManager : Photon.MonoBehaviour
 
     public void CallDestroyBlock(int id)
     {
-        photonView.RPC("DestroyBlock", PhotonTargets.All, id);
+        DestroyBlock(id);
+        photonView.RPC("DestroyBlock", PhotonTargets.OthersBuffered, id);
     }
 
     [PunRPC]
