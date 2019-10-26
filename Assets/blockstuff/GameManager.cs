@@ -6,7 +6,37 @@ public class GameManager : Photon.MonoBehaviour
 {
     public GameObject block;
     public Vector2 Size;
-    List<GameObject> blocks;
+    public List<GameObject> blocks;
+    int blockid = 0;
+
+
+    public void CallDestroyBlock(int id)
+    {
+        photonView.RPC("DestroyBlock", PhotonTargets.All, id);
+    }
+
+    [PunRPC]
+    public void DestroyBlock(int id)
+    {
+        int i = 0;
+        foreach (GameObject block in blocks)
+        {
+                if (block.GetComponent<blockscript>().blockid == id)
+                {
+
+                block.SetActive(false);
+                block.GetComponent<Renderer>().material.color = Color.black;
+
+                }
+            i++;
+        }
+
+        if (photonView.isMine)
+        {
+
+        }
+
+    }
 
 
     void SpawnChunks(int sizex, int sizey)
@@ -55,7 +85,9 @@ public class GameManager : Photon.MonoBehaviour
 
                 GameObject b = Instantiate(block, blockpos, Quaternion.identity, c.transform);
                 b.name = "block(" + blockpos.x + ", " + blockpos.y + ", " + blockpos.z + ")" +  " - " + c.name;
+                b.GetComponent<blockscript>().blockid = blockid;
                 blocks.Add(b);
+                blockid++;
             }
 
         }

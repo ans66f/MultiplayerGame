@@ -6,6 +6,7 @@ public class Gunraycast : Photon.MonoBehaviour
 {
 
     public GameObject player;
+    GameObject blockmanager;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,14 @@ public class Gunraycast : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(blockmanager != null)
+        {
+
+        }
+        else
+        {
+            blockmanager = GameObject.FindGameObjectWithTag("GameManager");
+        }
 
 
         Debug.DrawRay(gameObject.transform.position, (gameObject.transform.forward * 100), Color.red, 1);
@@ -47,7 +56,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
                     Vector3 pos = hit.collider.gameObject.transform.position;
-                    hit.collider.gameObject.GetComponent<blockscript>().player.GetComponent<Player>().CallRemoveBlock(pos);
+                    blockmanager.GetComponent<GameManager>().CallDestroyBlock(hit.collider.gameObject.GetComponent<blockscript>().blockid);
 
                 }
                 if (hit.collider.gameObject.tag == "Player")

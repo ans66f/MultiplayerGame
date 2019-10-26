@@ -8,6 +8,7 @@ public class NetworkManager : MonoBehaviour
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
     private RoomInfo[] roomsList;
     public GameObject player;
+    public GameObject blockmanager;
     // Use this for initialization
     void Start()
     {

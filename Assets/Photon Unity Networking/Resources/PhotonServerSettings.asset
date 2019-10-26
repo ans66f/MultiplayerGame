@@ -50,4 +50,5 @@ MonoBehaviour:
   - deactivateHealthPack
   - modifyHealth
   - ModifyHealth
+  - DestroyBlock
   DisableAutoOpenWizard: 1
