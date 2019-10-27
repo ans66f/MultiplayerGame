@@ -10,6 +10,24 @@ public class GameManager : Photon.MonoBehaviour
     int blockid = 0;
 
 
+
+    public void CallCreateBlock(Vector3 pos)
+    {
+        CreateBlock(pos);
+        photonView.RPC("CreateBlock", PhotonTargets.OthersBuffered, pos);
+    }
+
+    [PunRPC]
+    void CreateBlock(Vector3 pos)
+    {
+        GameObject b = Instantiate(block, pos, Quaternion.identity);
+        b.name = "block(" + pos.x + ", " + pos.y + ", " + pos.z + ")" + " - ";
+        b.GetComponent<blockscript>().blockid = blockid;
+        blocks.Add(b);
+        blockid++;
+    }
+
+
     public void CallDestroyBlock(int id)
     {
         DestroyBlock(id);

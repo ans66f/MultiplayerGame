@@ -8,6 +8,8 @@ public class Gunraycast : Photon.MonoBehaviour
     public GameObject player;
     GameObject blockmanager;
 
+    bool ToggleCreateMode = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +58,36 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
                     Vector3 pos = hit.collider.gameObject.transform.position;
-                    blockmanager.GetComponent<GameManager>().CallDestroyBlock(hit.collider.gameObject.GetComponent<blockscript>().blockid);
+
+                    if (ToggleCreateMode)
+                    {
+                        Vector3 disp = hit.collider.gameObject.GetComponent<Transform>().position - hit.point;
+
+                        Debug.Log(disp.x);
+
+                        if (disp.x > 0.4f) disp.x = 1;
+                        else if (disp.x < -0.4f) disp.x = -1;
+                        else disp.x = 0;
+
+
+                        if (disp.y > 0.4f) disp.y = 1;
+                        else if (disp.y < -0.4f) disp.y = -1;
+                        else disp.y = 0;
+
+
+                        if (disp.z > 0.4f) disp.z = 1;
+                        else if (disp.z < -0.4f) disp.z = -1;
+                        else disp.z = 0;
+
+                        Vector3 newblockpos = hit.collider.gameObject.GetComponent<Transform>().position - disp;
+                        blockmanager.GetComponent<GameManager>().CallCreateBlock(newblockpos);
+
+                    }
+                    else
+                    {
+
+                        blockmanager.GetComponent<GameManager>().CallDestroyBlock(hit.collider.gameObject.GetComponent<blockscript>().blockid);
+                    }
 
                 }
                 if (hit.collider.gameObject.tag == "Player")
@@ -77,6 +108,11 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 }
             }
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.F)) {
+            ToggleCreateMode = !ToggleCreateMode;
         }
 
 
