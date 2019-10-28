@@ -26,6 +26,8 @@ public class Player : Photon.MonoBehaviour
     public Text currHealthLabel;
     public Text currHealthLabelWorldspace;
 
+    public int ShootDamage = 10;
+
     public GameObject healthbar;
     public GameObject healthbarworldspace;
     float healthbarwidth;
@@ -35,6 +37,9 @@ public class Player : Photon.MonoBehaviour
     public int startMoney = 50;
     public int currMoney;
     public Text currMoneyLabel;
+
+    public Text currMoneyLabelWorldSpace;
+    float moneybarwidth;
 
 
     public bool isDead
@@ -49,6 +54,8 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
+        currMoney = startMoney;
+
         if (photonView.isMine)
         {
             LocalCanvas.SetActive(true);
@@ -123,6 +130,12 @@ void Update()
 
         if (currHealthLabelWorldspace != null)
             currHealthLabelWorldspace.text = currHealth.ToString();
+
+        if (currMoneyLabel != null)
+            currMoneyLabel.text = "$" + currMoney.ToString();
+
+        if (currMoneyLabelWorldSpace != null)
+            currMoneyLabelWorldSpace.text = "$" + currMoney.ToString();
     }
 
 
@@ -136,6 +149,22 @@ void Update()
     public void ModifyHealth(int amount)
     {
         currHealth = amount;
+        UpdateGUI();
+
+    }
+
+
+
+
+    public void DoModifyMoney(int amount)
+    {
+        photonView.RPC("ModifyMoney", PhotonTargets.AllBuffered, amount);
+    }
+
+    [PunRPC]
+    public void ModifyMoney(int amount)
+    {
+        currMoney = amount;
         UpdateGUI();
 
     }

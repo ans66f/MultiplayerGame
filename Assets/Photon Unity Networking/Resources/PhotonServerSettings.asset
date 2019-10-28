@@ -51,4 +51,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - ModifyMoney
   DisableAutoOpenWizard: 1

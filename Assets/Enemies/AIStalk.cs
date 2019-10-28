@@ -10,6 +10,9 @@ public class AIStalk : Photon.MonoBehaviour
     GameObject[] players;
     public float EnemySpeed;
 
+
+    public int MoneyWorth = 10;
+
     [Header("Health")]
 
     public int maxHealth = 200;
@@ -55,6 +58,10 @@ public class AIStalk : Photon.MonoBehaviour
         float f = (float)maxHealth / (float)currHealth;
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = new Vector2(healthbarwidth / f, healthbarworldspace.GetComponent<RawImage>().rectTransform.rect.height);
 
+        if(currHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
 
         players = GameObject.FindGameObjectsWithTag("Player");
 

@@ -50,13 +50,18 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
-                    hit.collider.gameObject.GetComponent<AIStalk>().DoModifyHealth(hit.collider.gameObject.GetComponent<AIStalk>().currHealth - 10);
+                    if(hit.collider.gameObject.GetComponent<AIStalk>().currHealth - player.GetComponent<Player>().ShootDamage <= 0)
+                    {
+                        player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney + hit.collider.gameObject.GetComponent<AIStalk>().MoneyWorth);
+                    }
+                    hit.collider.gameObject.GetComponent<AIStalk>().DoModifyHealth(hit.collider.gameObject.GetComponent<AIStalk>().currHealth - player.GetComponent<Player>().ShootDamage);
+
                 }
 
 
                     if (hit.collider.gameObject.tag == "Player")
                 {
-                    hit.collider.gameObject.GetComponent<Player>().DoModifyHealth(hit.collider.gameObject.GetComponent<Player>().currHealth - 10);
+                    hit.collider.gameObject.GetComponent<Player>().DoModifyHealth(hit.collider.gameObject.GetComponent<Player>().currHealth - player.GetComponent<Player>().ShootDamage);
                 }
 
 
