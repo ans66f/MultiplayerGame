@@ -25,7 +25,7 @@ public class Player : Photon.MonoBehaviour
     public Text currHealthLabel;
     public Text currHealthLabelWorldspace;
 
-    GameObject healthbar;
+    public GameObject healthbar;
     public GameObject healthbarworldspace;
     float healthbarwidth;
 
@@ -48,7 +48,7 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
-        healthbar = GameObject.FindGameObjectWithTag("HealthBar");
+        //healthbar = GameObject.FindGameObjectWithTag("HealthBar");
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
 
@@ -58,7 +58,7 @@ public class Player : Photon.MonoBehaviour
         jumpbool = false;
         currHealth = maxHealth/2;
         if (photonView.isMine) {
-            currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
+            //currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
         }
         UpdateGUI();
     }
