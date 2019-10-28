@@ -53,4 +53,5 @@ MonoBehaviour:
   - TaggedPlayer
   - ModifyMoney
   - DestroyWallAndThis
+  - SyncID
   DisableAutoOpenWizard: 1

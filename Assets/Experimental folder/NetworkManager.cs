@@ -9,6 +9,9 @@ public class NetworkManager : MonoBehaviour
     private RoomInfo[] roomsList;
     public GameObject player;
     public GameObject blockmanager;
+
+    public GameObject spawnpoint;
+
     // Use this for initialization
     void Start()
     {
@@ -67,7 +70,7 @@ public class NetworkManager : MonoBehaviour
     void OnJoinedRoom()
     {
         Debug.Log("Connected to Room");
-        PhotonNetwork.Instantiate(player.name, Vector3.up * 5, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(player.name, spawnpoint.transform.position, Quaternion.identity, 0);
     }
 }
     
