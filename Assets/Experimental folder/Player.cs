@@ -118,12 +118,13 @@ void Update()
     [PunRPC]
     public void ModifyHealth(int amount)
     {
-        currHealth += amount;
-        currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
-        checkIfDead();
+        currHealth = amount;
         UpdateGUI();
+
         if (photonView.isMine)
-            photonView.RPC("ModifyHealth", PhotonTargets.Others, amount);
+        {
+            photonView.RPC("ModifyHealth", PhotonTargets.OthersBuffered, amount);
+        }
     }
 
     private void checkIfDead()

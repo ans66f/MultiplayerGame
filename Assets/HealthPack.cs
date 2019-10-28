@@ -20,14 +20,15 @@ public class HealthPack : Photon.MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-        {
+        {    
             Player player = other.GetComponent<Player>();
+            
 
             if (player != null)
             {
                 if (player.currHealth != player.maxHealth)
                 {
-                    player.ModifyHealth(healing);
+                    player.ModifyHealth(player.currHealth + healing);
                     // play an audio TODO
                     deactivateHealthPack();
                 }
@@ -44,8 +45,12 @@ public class HealthPack : Photon.MonoBehaviour
             associatedGenerator.ReloadPack();
         }
 
-        gameObject.SetActive(false);
+
         if (photonView.isMine)
-            photonView.RPC("deactivateHealthPack", PhotonTargets.Others);
+        {
+            photonView.RPC("deactivateHealthPack", PhotonTargets.OthersBuffered);
+        }
+        gameObject.SetActive(false);
+
     }
 }

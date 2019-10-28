@@ -743,6 +743,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: instantiationId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
       propertyPath: m_Name
@@ -808,6 +823,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969649972683120056, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: viewIdField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969649972683120056, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: instantiationId
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a8a782b2d47804ebd2c32eab269d2e, type: 3}
 --- !u!1001 &1598055833
@@ -817,6 +842,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5649650743772329615, guid: 726be3bbc3ebca44f8e469d667979c26,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5649650743772329615, guid: 726be3bbc3ebca44f8e469d667979c26,
+        type: 3}
+      propertyPath: viewIdField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -5649650743772329615, guid: 726be3bbc3ebca44f8e469d667979c26,
+        type: 3}
+      propertyPath: instantiationId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 716190618416118561, guid: 726be3bbc3ebca44f8e469d667979c26,
         type: 3}
       propertyPath: m_Name
@@ -983,6 +1023,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: instantiationId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
       propertyPath: m_Name
@@ -1052,6 +1107,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969649972683120056, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: viewIdField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969649972683120056, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: instantiationId
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a8a782b2d47804ebd2c32eab269d2e, type: 3}
