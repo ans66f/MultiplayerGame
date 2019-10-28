@@ -62,6 +62,7 @@ public class Gunraycast : Photon.MonoBehaviour
                     if (hit.collider.gameObject.tag == "Player")
                 {
                     hit.collider.gameObject.GetComponent<Player>().DoModifyHealth(hit.collider.gameObject.GetComponent<Player>().currHealth - player.GetComponent<Player>().ShootDamage);
+                    player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney - 1);
                 }
 
 
