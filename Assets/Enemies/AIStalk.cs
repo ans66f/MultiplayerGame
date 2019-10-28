@@ -7,6 +7,7 @@ public class AIStalk : MonoBehaviour
     Transform destination;
 
     GameObject[] players;
+    public float EnemySpeed;
 
 
     private void Start()
@@ -39,8 +40,19 @@ public class AIStalk : MonoBehaviour
             Vector3 disptonearest = nearestplayer.transform.position - GetComponent<Transform>().position;
             if (disptonearest.magnitude > 5)
             {
+                
+
+                float speed = EnemySpeed * Time.deltaTime;
+
                 transform.LookAt(nearestplayer.transform);
-                transform.Translate(transform.forward * 5 * Time.deltaTime);
+                Vector3 v = new Vector3(transform.forward.x * speed, 0, transform.forward.z * speed);
+
+                GetComponent<Rigidbody>().velocity = v;
+                //transform.Translate(transform.forward * 5 * Time.deltaTime);
+            }
+            else
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             }
         }
 
