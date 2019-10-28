@@ -15,6 +15,7 @@ TagManager:
   - healthPanel
   - HealthBar
   - GameManager
+  - Enemy
   layers:
   - Default
   - TransparentFX

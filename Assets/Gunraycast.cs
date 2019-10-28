@@ -48,6 +48,17 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 }
 
+                if (hit.collider.gameObject.tag == "Enemy")
+                {
+                    hit.collider.gameObject.GetComponent<AIStalk>().DoModifyHealth(hit.collider.gameObject.GetComponent<AIStalk>().currHealth - 10);
+                }
+
+
+                    if (hit.collider.gameObject.tag == "Player")
+                {
+                    hit.collider.gameObject.GetComponent<Player>().DoModifyHealth(hit.collider.gameObject.GetComponent<Player>().currHealth - 10);
+                }
+
 
                 if (hit.collider.gameObject.tag == "block")
                 {
