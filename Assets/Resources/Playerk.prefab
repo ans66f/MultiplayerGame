@@ -1125,7 +1125,7 @@ MonoBehaviour:
   PlayerStuff: {fileID: 3742007866276802486}
   pistol: {fileID: 3742007866276802472}
   jumpstrength: 300
-  LocalCanvas: {fileID: 1484541878087846293}
+  LocalCanvas: {fileID: 3596193564188223292}
   maxHealth: 100
   currHealth: 0
   currHealthLabel: {fileID: 4384072801277300159}

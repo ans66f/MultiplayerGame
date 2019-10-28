@@ -49,7 +49,15 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
-        LocalCanvas.SetActive(false);
+        if (photonView.isMine)
+        {
+            LocalCanvas.SetActive(true);
+        }
+        else
+        {
+            LocalCanvas.SetActive(false);
+        }
+
         //healthbar = GameObject.FindGameObjectWithTag("HealthBar");
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
@@ -86,7 +94,6 @@ void Update()
         if (photonView.isMine)
 
         {
-            LocalCanvas.SetActive(true);
             InputMovement();
             InputColorChange();
             PlayerCam.tag = "MainCamera";
