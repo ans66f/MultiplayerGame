@@ -52,4 +52,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - ModifyMoney
+  - DestroyWallAndThis
   DisableAutoOpenWizard: 1

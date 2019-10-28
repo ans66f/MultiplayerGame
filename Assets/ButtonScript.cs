@@ -20,6 +20,18 @@ public class ButtonScript : Photon.MonoBehaviour
         
     }
 
+    void DoDestroyWallAndThis()
+    {
+        photonView.RPC("DestroyWallAndThis", PhotonTargets.AllBuffered);
+    }
+
+    [PunRPC]
+    void DestroyWallAndThis()
+    {
+        Wall.SetActive(false);
+        GetComponent<Transform>().position = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y - 1000, GetComponent<Transform>().position.z);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (Wall.GetActive())
@@ -32,8 +44,9 @@ public class ButtonScript : Photon.MonoBehaviour
                     if (other.gameObject.GetComponent<Player>().currMoney >= WallCost)
                     {
                         other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - WallCost);
-                        Wall.SetActive(false);
-                        Destroy(gameObject);
+                        
+                        DoDestroyWallAndThis();
+                        
                     }
                     else
                     {
