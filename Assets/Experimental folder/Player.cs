@@ -18,6 +18,7 @@ public class Player : Photon.MonoBehaviour
     public float jumpstrength;
 
     bool jumpbool;
+    public GameObject LocalCanvas;
 
     [Header("Health")]
     public int maxHealth = 200;
@@ -48,6 +49,7 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
+        LocalCanvas.SetActive(false);
         //healthbar = GameObject.FindGameObjectWithTag("HealthBar");
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
@@ -84,6 +86,7 @@ void Update()
         if (photonView.isMine)
 
         {
+            LocalCanvas.SetActive(true);
             InputMovement();
             InputColorChange();
             PlayerCam.tag = "MainCamera";
