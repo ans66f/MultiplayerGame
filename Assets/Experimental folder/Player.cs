@@ -23,10 +23,17 @@ public class Player : Photon.MonoBehaviour
     public int maxHealth = 200;
     public int currHealth;
     public Text currHealthLabel;
+    public Text currHealthLabelWorldspace;
 
     GameObject healthbar;
+    public GameObject healthbarworldspace;
     float healthbarwidth;
 
+
+    [Header("Money")]
+    public int startMoney = 50;
+    public int currMoney;
+    public Text currMoneyLabel;
 
 
     public bool isDead
@@ -43,7 +50,7 @@ public class Player : Photon.MonoBehaviour
     {
         healthbar = GameObject.FindGameObjectWithTag("HealthBar");
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
-
+        healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
 
 
 
@@ -70,7 +77,8 @@ void Update()
     {
         float f = (float)maxHealth / (float)currHealth;
         healthbar.GetComponent<RawImage>().rectTransform.sizeDelta = new Vector2(healthbarwidth / f, healthbar.GetComponent<RawImage>().rectTransform.rect.height);
-       // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
+        healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
+        // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
 
         if (photonView.isMine)
@@ -102,6 +110,9 @@ void Update()
     {
         if (currHealthLabel != null)
             currHealthLabel.text = currHealth.ToString();
+
+        if (currHealthLabelWorldspace != null)
+            currHealthLabelWorldspace.text = currHealth.ToString();
     }
 
     [PunRPC]
@@ -168,29 +179,6 @@ void Update()
     void ChangeColorTo(Vector3 color)
     {
         GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
-
-    }
-
-
-
-
-    public void CallRemoveBlock(Vector3 pos)
-    {
-        photonView.RPC("RemoveBlock", PhotonTargets.All, pos);
-    }
-    [PunRPC]
-    void RemoveBlock(Vector3 pos)
-    {
-      GameObject[] blocks = GameObject.FindGameObjectsWithTag("block");
-
-        foreach(GameObject block in blocks)
-        {
-            if (block.transform.position == pos)
-            {
-                Debug.Log("Destroyed block :" + gameObject.transform.position);
-                Destroy(block);
-            }
-        }
 
     }
 
