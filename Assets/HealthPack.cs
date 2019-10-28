@@ -28,7 +28,7 @@ public class HealthPack : Photon.MonoBehaviour
             {
                 if (player.currHealth != player.maxHealth)
                 {
-                    player.ModifyHealth(player.currHealth + healing);
+                    player.DoModifyHealth(player.currHealth + healing);
                     // play an audio TODO
                     deactivateHealthPack();
                 }

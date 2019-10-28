@@ -115,16 +115,19 @@ void Update()
             currHealthLabelWorldspace.text = currHealth.ToString();
     }
 
+
+
+    public void DoModifyHealth(int amount)
+    {
+        photonView.RPC("ModifyHealth", PhotonTargets.AllBuffered, amount);
+    }
+
     [PunRPC]
     public void ModifyHealth(int amount)
     {
         currHealth = amount;
         UpdateGUI();
 
-        if (photonView.isMine)
-        {
-            photonView.RPC("ModifyHealth", PhotonTargets.OthersBuffered, amount);
-        }
     }
 
     private void checkIfDead()
