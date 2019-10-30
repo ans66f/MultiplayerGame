@@ -82,7 +82,7 @@ public class Player : Photon.MonoBehaviour
 
 
         jumpbool = false;
-        currHealth = maxHealth/2;
+        currHealth = maxHealth;
         if (photonView.isMine) {
             //currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
         }
@@ -222,13 +222,13 @@ public class Player : Photon.MonoBehaviour
         {
             currCountdown = deathCountdown;
             currCountdownLabel.gameObject.SetActive(true);
-            deathCo = DecreaseCountdown();
-            StartCoroutine(deathCo);
+            //deathCo = DecreaseCountdown();
+            StartCoroutine(DecreaseCountdown());
         }
         else
         {
-            StopCoroutine(deathCo);
-            deathCo = null;
+            StopCoroutine(DecreaseCountdown());
+           // deathCo = null;
             currCountdownLabel.gameObject.SetActive(false);
         }
     }
