@@ -10,8 +10,6 @@ public class Player : Photon.MonoBehaviour
 {
     public float speed = 10f;
 
-    public int playerid = -1;
-
     [Header("Objects")]
     public GameObject PlayerCam;
     public GameObject PlayerStuff;
@@ -35,8 +33,6 @@ public class Player : Photon.MonoBehaviour
     float healthbarwidth;
 
 
-
-
     [Header("Money")]
     public int startMoney = 50;
     public int currMoney;
@@ -56,27 +52,8 @@ public class Player : Photon.MonoBehaviour
     float MouseX;
     float MouseY;
 
-    [PunRPC]
-    void SyncID(int id)
-    {
-        playerid = id;
-    }
-
     private void Start()
     {
-        if (photonView.isMine)
-        {
-            playerid = GameObject.FindGameObjectsWithTag("Player").Length;
-            photonView.RPC("SyncID", PhotonTargets.AllBuffered, playerid);
-
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().player = gameObject;
-        }
-        else
-        {
-            Destroy(GetComponent<Rigidbody>());
-
-        }
-
         currMoney = startMoney;
 
         if (photonView.isMine)
@@ -122,6 +99,7 @@ void Update()
 
 
         if (photonView.isMine)
+
         {
             InputMovement();
             InputColorChange();
@@ -137,13 +115,10 @@ void Update()
             PlayerCam.SetActive(false);
         }
 
-        if (photonView.isMine)
+        if (Input.GetKeyDown(KeyCode.Space) && !jumpbool)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !jumpbool)
-            {
-                gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpstrength, 0));
-                jumpbool = true;
-            }
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpstrength, 0));
+            jumpbool = true;
         }
 
     }
@@ -230,7 +205,7 @@ void Update()
         //if (ownerId == GetComponent<PhotonView>().ownerId)
         {
             Debug.Log("given force");
-           if(gameObject.GetComponent<Rigidbody>()) gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
+            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
         }
     }
 

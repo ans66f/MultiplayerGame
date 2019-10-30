@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class blockscript : Photon.MonoBehaviour
 {
+    public GameObject player;
     public int blockid = -1;
-
-    public GameObject block;
-
-    public bool isdestroyed = false;
-    public bool inview = false;
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
 
@@ -21,10 +16,8 @@ public class blockscript : Photon.MonoBehaviour
 
 
         // Update is called once per frame
-        /*
     void Update()
     {
         
     }
-    */
 }
