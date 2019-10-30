@@ -83,7 +83,7 @@ public class AIStalk : Photon.MonoBehaviour
         if (nearestplayer != null)
         {
             Vector3 disptonearest = nearestplayer.transform.position - GetComponent<Transform>().position;
-            if (disptonearest.magnitude > 5)
+            if (disptonearest.magnitude > 2)
             {
                 
 

@@ -9,9 +9,14 @@ public class NetworkManager : MonoBehaviour
     private RoomInfo[] roomsList;
     public GameObject player;
     public GameObject blockmanager;
+
+
+    GameObject[] spawnpoints;
+
     // Use this for initialization
     void Start()
     {
+        spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         PhotonNetwork.ConnectUsingSettings("v1.0");
     }
 
@@ -66,8 +71,17 @@ public class NetworkManager : MonoBehaviour
 
     void OnJoinedRoom()
     {
+        GameObject randspawnpoint = spawnpoints[0];
+        foreach(GameObject spawnpoint in spawnpoints)
+        {
+            if(Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
+            {
+                randspawnpoint = spawnpoint;
+            }
+        }
+
         Debug.Log("Connected to Room");
-        PhotonNetwork.Instantiate(player.name, Vector3.up * 5, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(player.name, randspawnpoint.transform.position, Quaternion.identity, 0);
     }
 }
     

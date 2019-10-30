@@ -14,7 +14,7 @@ public class HealthPack : Photon.MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healing = -200;
+        //healing = -200;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -36,14 +36,15 @@ public class Gunraycast : Photon.MonoBehaviour
 
         Debug.DrawRay(gameObject.transform.position, (gameObject.transform.forward * 100), Color.red, 1);
 
-
+        int layerMask = 1 << 8;
+        layerMask = ~layerMask;
         if (photonView.isMine)
         {
             RaycastHit hit;
             if (Input.GetMouseButtonDown(0))
             {
                 Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
-                if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit))
+                if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, Mathf.Infinity, layerMask))
                 {
 
                 }

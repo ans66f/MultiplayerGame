@@ -50,11 +50,11 @@ public class Player : Photon.MonoBehaviour
     public Text currMoneyLabelWorldSpace;
     float moneybarwidth;
 
+    GameObject[] spawnpoints;
 
-    public bool isDead
-    {
-        get { return currHealth == 0; }
-    }
+
+    public bool isDead;
+    bool donedeadcheck;
 
     float Horizontalaxis;
     float Verticalaxis;
@@ -63,6 +63,10 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
+        isDead = false;
+        donedeadcheck = false;
+        currCountdown = deathCountdown;
+        spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         currMoney = startMoney;
 
         if (photonView.isMine)
@@ -120,6 +124,25 @@ public class Player : Photon.MonoBehaviour
     }
 
 
+    void Respawn()
+    {
+        currCountdownLabel.gameObject.SetActive(false);
+        isDead = false;
+        donedeadcheck = false;
+        currMoney = 0;
+        currHealth = maxHealth;
+        UpdateGUI();
+
+        GameObject randspawnpoint = spawnpoints[0];
+        foreach (GameObject spawnpoint in spawnpoints)
+        {
+            if (UnityEngine.Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
+            {
+                randspawnpoint = spawnpoint;
+            }
+        }
+        GetComponent<Transform>().position = randspawnpoint.transform.position;
+    }
 
 // Update is called once per frame
 
@@ -130,16 +153,30 @@ public class Player : Photon.MonoBehaviour
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
-        if (isDead)
+
+
+
+
+        
+        if(currHealth <= 0 && !isDead)
         {
-            if (currCountdown == 0)
-            {
-                gameObject.SetActive(false);
-            }
+            currCountdown = deathCountdown;
+            isDead = true;
         }
 
-        else
+        
 
+
+        if (isDead)
+        {
+            if (currCountdown <= 0)
+            {
+                currCountdown = deathCountdown;
+                Respawn();
+               // gameObject.SetActive(false);
+            }
+        }
+        else
         {
             if (photonView.isMine)
             {
@@ -151,7 +188,6 @@ public class Player : Photon.MonoBehaviour
             }
 
             else
-
             {
                 PlayerCam.tag = "Untagged";
                 PlayerCam.SetActive(false);
@@ -195,7 +231,7 @@ public class Player : Photon.MonoBehaviour
     public void ModifyHealth(int amount)
     {
         currHealth = Mathf.Clamp(amount, 0, maxHealth);
-        CheckIfDead();
+        if(!donedeadcheck) CheckIfDead();
         UpdateGUI();
 
     }
@@ -224,6 +260,7 @@ public class Player : Photon.MonoBehaviour
             currCountdownLabel.gameObject.SetActive(true);
             //deathCo = DecreaseCountdown();
             StartCoroutine(DecreaseCountdown());
+            donedeadcheck = true;
         }
         else
         {

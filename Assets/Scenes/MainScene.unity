@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemySpeed: 350
+  MoneyWorth: 10
   maxHealth: 100
   currHealth: 100
   currHealthLabelworldspace: {fileID: 856472547}
@@ -810,6 +811,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_Name
+      value: healthPackGenerator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
       propertyPath: ObservedComponents.Array.size
@@ -824,16 +835,6 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
-        type: 3}
-      propertyPath: m_Name
-      value: healthPackGenerator (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757375134029895726, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
@@ -909,6 +910,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 716190618416118561, guid: 726be3bbc3ebca44f8e469d667979c26,
+        type: 3}
+      propertyPath: m_Name
+      value: healthPack
+      objectReference: {fileID: 0}
+    - target: {fileID: 716190618416118561, guid: 726be3bbc3ebca44f8e469d667979c26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5649650743772329615, guid: 726be3bbc3ebca44f8e469d667979c26,
         type: 3}
       propertyPath: ObservedComponents.Array.size
@@ -923,16 +934,6 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 716190618416118561, guid: 726be3bbc3ebca44f8e469d667979c26,
-        type: 3}
-      propertyPath: m_Name
-      value: healthPack
-      objectReference: {fileID: 0}
-    - target: {fileID: 716190618416118561, guid: 726be3bbc3ebca44f8e469d667979c26,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8766265102026695665, guid: 726be3bbc3ebca44f8e469d667979c26,
         type: 3}
@@ -1090,6 +1091,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_Name
+      value: healthPackGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8374354125597663200, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
       propertyPath: ObservedComponents.Array.size
@@ -1104,16 +1115,6 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
-        type: 3}
-      propertyPath: m_Name
-      value: healthPackGenerator
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757375134029895726, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
@@ -1170,11 +1171,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6009478693124781880, guid: c5a8a782b2d47804ebd2c32eab269d2e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.76
-      objectReference: {fileID: 0}
     - target: {fileID: 1969649972683120056, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
       propertyPath: viewIdField
@@ -1184,6 +1180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009478693124781880, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.76
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a8a782b2d47804ebd2c32eab269d2e, type: 3}
