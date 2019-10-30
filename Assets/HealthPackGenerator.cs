@@ -23,14 +23,17 @@ public class HealthPackGenerator : Photon.MonoBehaviour
     private IEnumerator Generate()
     {
         yield return new WaitForSeconds(regenTime);
-        activateHealthPack();
+        DoActivateHealthPack();
     }
 
     [PunRPC]
     void activateHealthPack()
     {
         healthPack.SetActive(true);
-        if (photonView.isMine)
-            photonView.RPC("activateHealthPack", PhotonTargets.Others);
+    }
+
+    void DoActivateHealthPack()
+    {
+        photonView.RPC("activateHealthPack", PhotonTargets.AllBuffered);
     }
 }

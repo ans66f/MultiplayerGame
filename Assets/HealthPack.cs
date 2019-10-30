@@ -14,7 +14,7 @@ public class HealthPack : Photon.MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healing = 10;
+        healing = -200;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +30,7 @@ public class HealthPack : Photon.MonoBehaviour
                 {
                     player.DoModifyHealth(player.currHealth + healing);
                     // play an audio TODO
-                    deactivateHealthPack();
+                    DoDeactivateHealthPack();
                 }
             }
         }
@@ -40,17 +40,19 @@ public class HealthPack : Photon.MonoBehaviour
     void deactivateHealthPack()
     {
         HealthPackGenerator associatedGenerator = GetComponentInParent<HealthPackGenerator>();
+        gameObject.SetActive(false);
         if (associatedGenerator != null)
         {
             associatedGenerator.ReloadPack();
         }
 
 
-        if (photonView.isMine)
-        {
-            photonView.RPC("deactivateHealthPack", PhotonTargets.OthersBuffered);
-        }
-        gameObject.SetActive(false);
+        
 
+    }
+
+    void DoDeactivateHealthPack()
+    {
+        photonView.RPC("deactivateHealthPack", PhotonTargets.AllBuffered);
     }
 }

@@ -12,6 +12,9 @@ public class Player : Photon.MonoBehaviour
 
     public int playerid = -1;
 
+    private bool keypress = true;
+    private float timePressed = 0f;
+
     [Header("Objects")]
     public GameObject PlayerCam;
     public GameObject PlayerStuff;
@@ -34,7 +37,10 @@ public class Player : Photon.MonoBehaviour
     public GameObject healthbarworldspace;
     float healthbarwidth;
 
-
+    public int deathCountdown = 15;
+    public int currCountdown;
+    public Text currCountdownLabel;
+    IEnumerator deathCo;
 
 
     [Header("Money")]
@@ -106,48 +112,83 @@ public class Player : Photon.MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         jumpbool = false;
+
+        if (collision.collider.tag == "Player")
+        {
+            Player player = collision.collider.GetComponent<Player>();
+            if (player.isDead)
+            {
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    player.DoModifyHealth(maxHealth / 4);
+                    //if (keypress)
+                    //{
+                    //    keypress = false;
+                    //    timePressed = Time.time;
+                    //}
+                    //else
+                    //{
+                    //    if (Time.time - timePressed > 3.0f)
+                    //    {
+                    //        keypress = true;
+                    //        player.ModifyHealth(maxHealth / 4);
+                    //    }
+                    //}
+                }
+            }
+        }
     }
 
 
 
 // Update is called once per frame
 
-void Update()
-
+    void Update()
     {
         float f = (float)maxHealth / (float)currHealth;
         healthbar.GetComponent<RawImage>().rectTransform.sizeDelta = new Vector2(healthbarwidth / f, healthbar.GetComponent<RawImage>().rectTransform.rect.height);
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
-
-        if (photonView.isMine)
+        if (isDead)
         {
-            InputMovement();
-            InputColorChange();
-            PlayerCam.tag = "MainCamera";
-            PlayerCam.SetActive(true);
-
+            if (currCountdown == 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         else
 
         {
-            PlayerCam.tag = "Untagged";
-            PlayerCam.SetActive(false);
-        }
-
-        if (photonView.isMine)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && !jumpbool)
+            if (photonView.isMine)
             {
-                gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpstrength, 0));
-                jumpbool = true;
+                InputMovement();
+                InputColorChange();
+                PlayerCam.tag = "MainCamera";
+                PlayerCam.SetActive(true);
+
+            }
+
+            else
+
+            {
+                PlayerCam.tag = "Untagged";
+                PlayerCam.SetActive(false);
+            }
+
+            if (photonView.isMine)
+            {
+                if (Input.GetKeyDown(KeyCode.Space) && !jumpbool)
+                {
+                    gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpstrength, 0));
+                    jumpbool = true;
+                }
             }
         }
-
     }
 
+    
     void UpdateGUI()
     {
         if (currHealthLabel != null)
@@ -173,7 +214,8 @@ void Update()
     [PunRPC]
     public void ModifyHealth(int amount)
     {
-        currHealth = amount;
+        currHealth = Mathf.Clamp(amount, 0, maxHealth);
+        CheckIfDead();
         UpdateGUI();
 
     }
@@ -194,25 +236,47 @@ void Update()
 
     }
 
-    private void checkIfDead()
+    private void CheckIfDead()
     {
         if (isDead)
         {
-            // what happens when the player is dead ? TODO
+            currCountdown = deathCountdown;
+            currCountdownLabel.gameObject.SetActive(true);
+            deathCo = DecreaseCountdown();
+            StartCoroutine(deathCo);
+        }
+        else
+        {
+            StopCoroutine(deathCo);
+            deathCo = null;
+            currCountdownLabel.gameObject.SetActive(false);
         }
     }
+
+    private IEnumerator DecreaseCountdown()
+    {
+        while (isDead && currCountdown > 0)
+        {
+            currCountdown -= 1;
+            if (currCountdownLabel != null)
+                currCountdownLabel.text = currCountdown.ToString();
+            yield return new WaitForSeconds(1);
+        }
+    }
+
 
     private void InputColorChange()
 
     {
-        
-        if (Input.GetKeyDown(KeyCode.R))
-
+        if (!isDead)
         {
-            ChangeColorTo(new Vector3(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f),
-            UnityEngine.Random.Range(0f, 1f)));
-        }
+            if (Input.GetKeyDown(KeyCode.R))
 
+            {
+                ChangeColorTo(new Vector3(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f),
+                UnityEngine.Random.Range(0f, 1f)));
+            }
+        }
     }
 
     public void DoForceThing()
@@ -270,47 +334,49 @@ void Update()
     private void InputMovement()
 
     {
-        MouseX = Input.GetAxis("Mouse X");
-        MouseY = Input.GetAxis("Mouse Y");
-        Horizontalaxis = Input.GetAxisRaw("Horizontal");
-        Verticalaxis = Input.GetAxisRaw("Vertical");
-        PlayerStuff.GetComponent<CamMoveScript>().RotateCam();
-        pistol.GetComponent<Lerptoaimposition>().LerpUpdate();
-        gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
-
-        if (Verticalaxis > 0)
-
+        if (!isDead)
         {
-            gameObject.GetComponent<Transform>().Translate(Vector3.forward * speed * Time.deltaTime);
-            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + Vector3.forward * speed * Time.deltaTime);
+            MouseX = Input.GetAxis("Mouse X");
+            MouseY = Input.GetAxis("Mouse Y");
+            Horizontalaxis = Input.GetAxisRaw("Horizontal");
+            Verticalaxis = Input.GetAxisRaw("Vertical");
+            PlayerStuff.GetComponent<CamMoveScript>().RotateCam();
+            pistol.GetComponent<Lerptoaimposition>().LerpUpdate();
+            gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
 
+            if (Verticalaxis > 0)
+
+            {
+                gameObject.GetComponent<Transform>().Translate(Vector3.forward * speed * Time.deltaTime);
+                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + Vector3.forward * speed * Time.deltaTime);
+
+            }
+
+            if (Verticalaxis < 0)
+
+            {
+                gameObject.GetComponent<Transform>().Translate((-Vector3.forward) * speed * Time.deltaTime);
+                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position - Vector3.forward * speed * Time.deltaTime);
+
+            }
+
+            if (Horizontalaxis > 0)
+
+            {
+
+                gameObject.GetComponent<Transform>().Translate(Vector3.right * speed * Time.deltaTime);
+                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position+ Vector3.right * speed * Time.deltaTime);
+
+            }
+
+            if (Horizontalaxis < 0)
+
+            {
+                gameObject.GetComponent<Transform>().Translate((-Vector3.right) * speed * Time.deltaTime);
+                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position- Vector3.right * speed * Time.deltaTime);
+
+            }
         }
-
-        if (Verticalaxis < 0)
-
-        {
-            gameObject.GetComponent<Transform>().Translate((-Vector3.forward) * speed * Time.deltaTime);
-            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position - Vector3.forward * speed * Time.deltaTime);
-
-        }
-
-        if (Horizontalaxis > 0)
-
-        {
-
-            gameObject.GetComponent<Transform>().Translate(Vector3.right * speed * Time.deltaTime);
-            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position+ Vector3.right * speed * Time.deltaTime);
-
-        }
-
-        if (Horizontalaxis < 0)
-
-        {
-            gameObject.GetComponent<Transform>().Translate((-Vector3.right) * speed * Time.deltaTime);
-            //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position- Vector3.right * speed * Time.deltaTime);
-
-        }
-
     }
 
 }
