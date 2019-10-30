@@ -8,9 +8,6 @@ public class GameManager : Photon.MonoBehaviour
     public Vector2 Size;
     public List<GameObject> blocks;
     int blockid = 0;
-    public GameObject player;
-
-    public float blockrenderdistance = 20;
 
 
 
@@ -46,10 +43,8 @@ public class GameManager : Photon.MonoBehaviour
                 if (block.GetComponent<blockscript>().blockid == id)
                 {
 
-                Destroy(block.GetComponent<blockscript>().block);
-                Destroy(block.GetComponent<BoxCollider>());
-                //block.SetActive(false);
-                //block.GetComponent<Renderer>().material.color = Color.black;
+                block.SetActive(false);
+                block.GetComponent<Renderer>().material.color = Color.black;
 
                 }
             i++;
@@ -124,44 +119,13 @@ public class GameManager : Photon.MonoBehaviour
     {
         blocks = new List<GameObject>();
 
+
         SpawnChunks((int)Size.x, (int)Size.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
-        {
-
-
-            foreach (GameObject block in blocks)
-            {
-
-                Vector3 playerfrontpos = player.transform.position + (player.transform.forward * (blockrenderdistance - 2));
-                Vector3 disp = playerfrontpos - block.transform.position;
-
-                if (disp.magnitude > blockrenderdistance)
-                {
-                    block.SetActive(false);
-                    //   block.GetComponent<blockscript>().inview = false;
-                    //   block.GetComponent<blockscript>().block.SetActive(false);
-                }
-                else
-                {
-                    block.SetActive(true);
-                    //   block.GetComponent<blockscript>().inview = true;
-                    //  block.GetComponent<blockscript>().block.SetActive(true);
-
-                }
-            }
-        }
-        else
-        {
-            foreach (GameObject block in blocks)
-            {
-                block.SetActive(false);
-            }
-        }
         
     }
 }

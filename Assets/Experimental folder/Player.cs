@@ -42,7 +42,6 @@ public class Player : Photon.MonoBehaviour
     public Text currCountdownLabel;
     IEnumerator deathCo;
 
-
     [Header("Money")]
     public int startMoney = 50;
     public int currMoney;
@@ -62,27 +61,8 @@ public class Player : Photon.MonoBehaviour
     float MouseX;
     float MouseY;
 
-    [PunRPC]
-    void SyncID(int id)
-    {
-        playerid = id;
-    }
-
     private void Start()
     {
-        if (photonView.isMine)
-        {
-            playerid = GameObject.FindGameObjectsWithTag("Player").Length;
-            photonView.RPC("SyncID", PhotonTargets.AllBuffered, playerid);
-
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().player = gameObject;
-        }
-        else
-        {
-            Destroy(GetComponent<Rigidbody>());
-
-        }
-
         currMoney = startMoney;
 
         if (photonView.isMine)
@@ -294,7 +274,7 @@ public class Player : Photon.MonoBehaviour
         //if (ownerId == GetComponent<PhotonView>().ownerId)
         {
             Debug.Log("given force");
-           if(gameObject.GetComponent<Rigidbody>()) gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
+            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
         }
     }
 

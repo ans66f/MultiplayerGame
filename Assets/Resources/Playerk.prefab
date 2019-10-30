@@ -1124,7 +1124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  playerid: -1
   PlayerCam: {fileID: 3742007866276802481}
   PlayerStuff: {fileID: 3742007866276802486}
   pistol: {fileID: 3742007866276802472}
@@ -1134,7 +1133,6 @@ MonoBehaviour:
   currHealth: 0
   currHealthLabel: {fileID: 4384072801277300159}
   currHealthLabelWorldspace: {fileID: 662150420300218315}
-  ShootDamage: 10
   healthbar: {fileID: 7402747647157002600}
   healthbarworldspace: {fileID: 8244652314637745754}
   deathCountdown: 10
