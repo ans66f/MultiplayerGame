@@ -42,6 +42,13 @@ public class Player : Photon.MonoBehaviour
     public Text currCountdownLabel;
     IEnumerator deathCo;
 
+
+    public GameObject UniqueIDObject;
+    public GameObject PlayerNameText;
+    public GameObject PlayerNameTextWorld;
+
+
+
     [Header("Money")]
     public int startMoney = 50;
     public int currMoney;
@@ -154,11 +161,15 @@ public class Player : Photon.MonoBehaviour
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
 
+        if (UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID != -1)
+        {
+            PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
+            PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
 
 
+        }
 
-        
-        if(currHealth <= 0 && !isDead)
+        if (currHealth <= 0 && !isDead)
         {
             currCountdown = deathCountdown;
             isDead = true;
@@ -218,6 +229,11 @@ public class Player : Photon.MonoBehaviour
 
         if (currMoneyLabelWorldSpace != null)
             currMoneyLabelWorldSpace.text = "$" + currMoney.ToString();
+
+
+
+
+        
     }
 
 

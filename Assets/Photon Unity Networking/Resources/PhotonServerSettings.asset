@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppID: 5abc05d7-a3b4-4fc2-9b51-d377419e52d2
   VoiceAppID: 
-  ChatAppID: 5abc05d7-a3b4-4fc2-9b51-d377419e52d2
+  ChatAppID: 
   HostType: 1
   PreferredRegion: 0
   EnabledRegions: -1
@@ -38,6 +38,7 @@ MonoBehaviour:
   - DestroyBlock
   - DestroyRpc
   - DestroyWallAndThis
+  - DestroyWeaponAndThis
   - DoJump
   - Flash
   - InstantiateRpc
@@ -52,5 +53,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
-  - DestroyWeaponAndThis
+  - UpdateUniqueID
   DisableAutoOpenWizard: 1
