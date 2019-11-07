@@ -8,7 +8,20 @@ public class Gunraycast : Photon.MonoBehaviour
     public GameObject player;
     GameObject blockmanager;
 
+    public GameObject BulletTemplate;
+
     bool ToggleCreateMode = false;
+
+    public float RateOfFire = 0.2f;
+    float CurrentRateOfFireValue = 0.0f;
+
+    public int Damage = 10;
+    public float BulletSpeed = 10000.0f;
+
+    public bool isleftclick = false;
+
+    public GameObject Minigun = null;
+    public bool IsMinigun = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +32,19 @@ public class Gunraycast : Photon.MonoBehaviour
     void AddForceToPlayer()
     {
 
+    }
+
+
+    void SpawnBullet()
+    {
+        CurrentRateOfFireValue = RateOfFire;
+
+        GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
+
+        Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        b.GetComponent<Rigidbody>().velocity = r.direction * BulletSpeed * Time.deltaTime;
+        b.GetComponent<bulletscript>().SetValues(Damage, player);
+        b.GetComponent<bulletscript>().player = player;
     }
 
     // Update is called once per frame
@@ -41,14 +67,35 @@ public class Gunraycast : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             RaycastHit hit;
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
+                isleftclick = true;
                 Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, Mathf.Infinity, layerMask))
                 {
 
                 }
 
+                CurrentRateOfFireValue -= Time.deltaTime;
+                if(CurrentRateOfFireValue <= 0 )
+                {
+                    if (IsMinigun)
+                    {
+                        if (Minigun.GetComponent<minigunscript>().IsSpunUp)
+                        {
+                            SpawnBullet();
+                        }
+                    }
+                    else
+                    {
+                        
+                        SpawnBullet();
+                    }
+                }
+
+
+
+                /*
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
                     if(hit.collider.gameObject.GetComponent<AIStalk>().currHealth - player.GetComponent<Player>().ShootDamage <= 0)
@@ -65,7 +112,7 @@ public class Gunraycast : Photon.MonoBehaviour
                     hit.collider.gameObject.GetComponent<Player>().DoModifyHealth(hit.collider.gameObject.GetComponent<Player>().currHealth - player.GetComponent<Player>().ShootDamage);
                     player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney - 1);
                 }
-
+                
 
                 if (hit.collider.gameObject.tag == "block")
                 {
@@ -125,6 +172,12 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
                 }
+                */
+            }
+            else
+            {
+                isleftclick = false;
+                CurrentRateOfFireValue = 0.0f;
             }
         }
 
@@ -141,7 +194,7 @@ public class Gunraycast : Photon.MonoBehaviour
         linepositions[0] = gameObject.transform.position;
         linepositions[1] = (gameObject.transform.forward * 100) + gameObject.transform.position;
 
-        GetComponent<LineRenderer>().SetPositions(linepositions);
+     //   GetComponent<LineRenderer>().SetPositions(linepositions);
 
     }
 }

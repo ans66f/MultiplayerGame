@@ -15,10 +15,15 @@ public class Player : Photon.MonoBehaviour
     private bool keypress = true;
     private float timePressed = 0f;
 
+    [Header("Weapons")]
+    public GameObject pistol;
+    public GameObject smg;
+    public GameObject minigun;
+
     [Header("Objects")]
     public GameObject PlayerCam;
     public GameObject PlayerStuff;
-    public GameObject pistol;
+
 
     public float jumpstrength;
 
@@ -30,8 +35,6 @@ public class Player : Photon.MonoBehaviour
     public int currHealth;
     public Text currHealthLabel;
     public Text currHealthLabelWorldspace;
-
-    public int ShootDamage = 10;
 
     public GameObject healthbar;
     public GameObject healthbarworldspace;
@@ -374,7 +377,13 @@ public class Player : Photon.MonoBehaviour
             Horizontalaxis = Input.GetAxisRaw("Horizontal");
             Verticalaxis = Input.GetAxisRaw("Vertical");
             PlayerStuff.GetComponent<CamMoveScript>().RotateCam();
+
+
             pistol.GetComponent<Lerptoaimposition>().LerpUpdate();
+            smg.GetComponent<Lerptoaimposition>().LerpUpdate();
+            minigun.GetComponent<Lerptoaimposition>().LerpUpdate();
+
+
             gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
 
             if (Verticalaxis > 0)
