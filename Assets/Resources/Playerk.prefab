@@ -573,6 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659302698739127413}
   - component: {fileID: 928197914787202820}
+  - component: {fileID: 8357926192319571374}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -613,6 +614,33 @@ MonoBehaviour:
   pistol: {fileID: 3742007866276802472}
   smg: {fileID: 8291632766147433301}
   minigun: {fileID: 1932764872832533395}
+--- !u!114 &8357926192319571374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664025616198206949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!1 &1796664717862590587
 GameObject:
   m_ObjectHideFlags: 0

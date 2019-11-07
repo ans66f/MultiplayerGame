@@ -34,7 +34,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
     }
 
-
+    [PunRPC]
     void SpawnBullet()
     {
         CurrentRateOfFireValue = RateOfFire;
@@ -83,13 +83,13 @@ public class Gunraycast : Photon.MonoBehaviour
                     {
                         if (Minigun.GetComponent<minigunscript>().IsSpunUp)
                         {
-                            SpawnBullet();
+                            photonView.RPC("SpawnBullet", PhotonTargets.All);
                         }
                     }
                     else
                     {
-                        
-                        SpawnBullet();
+
+                        photonView.RPC("SpawnBullet", PhotonTargets.All);
                     }
                 }
 

@@ -54,4 +54,6 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - UpdateUniqueID
+  - SetCurrentWeapon
+  - SpawnBullet
   DisableAutoOpenWizard: 1
