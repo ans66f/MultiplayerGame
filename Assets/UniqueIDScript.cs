@@ -27,6 +27,6 @@ public class UniqueIDScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.name = "Player " + UniqueID;
     }
 }

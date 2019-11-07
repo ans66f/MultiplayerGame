@@ -766,6 +766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunbarrel: {fileID: 8563058700541168920}
   miniguncylinder: {fileID: 8113694372005123950}
+  Camera: {fileID: 3742007866276802481}
   IsSpunUp: 0
 --- !u!1 &2136469575225390942
 GameObject:

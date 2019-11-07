@@ -10,6 +10,8 @@ public class minigunscript : MonoBehaviour
     float maxcylinderspeed = 10.0f;
     float cylinderspeed = 0.0f;
 
+    public GameObject Camera;
+
     public bool IsSpunUp;
 
     // Start is called before the first frame update
@@ -47,7 +49,7 @@ public class minigunscript : MonoBehaviour
             IsSpunUp = false;
         }
 
-        miniguncylinder.GetComponent<Transform>().Rotate(gunbarrel.GetComponent<Transform>().up, cylinderspeed);
+        miniguncylinder.GetComponent<Transform>().Rotate(miniguncylinder.GetComponent<Transform>().forward, cylinderspeed);
 
         Debug.Log(cylinderspeed);
     }

@@ -8,7 +8,7 @@ public class bulletscript : Photon.MonoBehaviour
     public GameObject player;
     int damage = 0;
 
-    float DespawnTimer = 100.0f;
+    float DespawnTimer = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
