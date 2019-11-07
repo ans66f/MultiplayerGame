@@ -85,6 +85,7 @@ public class Player : Photon.MonoBehaviour
         }
         else
         {
+            GetComponent<Rigidbody>().useGravity = false;
             LocalCanvas.SetActive(false);
         }
 
