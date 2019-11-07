@@ -525,11 +525,11 @@ GameObject:
   - component: {fileID: 7793735475540349717}
   m_Layer: 8
   m_Name: AttackBox
-  m_TagString: Untagged
+  m_TagString: AttackBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8929675263260938043
 Transform:
   m_ObjectHideFlags: 0

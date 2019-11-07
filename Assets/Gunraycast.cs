@@ -43,6 +43,10 @@ public class Gunraycast : Photon.MonoBehaviour
 
         Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
         b.GetComponent<Rigidbody>().velocity = r.direction * BulletSpeed * Time.deltaTime;
+
+
+        if (!photonView.isMine) Damage = 0; //so that a bullet will only hit the target once and not a second time on the copy
+
         b.GetComponent<bulletscript>().SetValues(Damage, player);
         b.GetComponent<bulletscript>().player = player;
     }
@@ -76,24 +80,28 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 }
 
-                CurrentRateOfFireValue -= Time.deltaTime;
-                if(CurrentRateOfFireValue <= 0 )
+                if (player.GetComponent<Player>().isDead == false)
                 {
-                    if (IsMinigun)
+
+                    CurrentRateOfFireValue -= Time.deltaTime;
+                    if (CurrentRateOfFireValue <= 0)
                     {
-                        if (Minigun.GetComponent<minigunscript>().IsSpunUp)
+                        if (IsMinigun)
                         {
+                            if (Minigun.GetComponent<minigunscript>().IsSpunUp)
+                            {
+                                photonView.RPC("SpawnBullet", PhotonTargets.All);
+                            }
+                        }
+                        else
+                        {
+
                             photonView.RPC("SpawnBullet", PhotonTargets.All);
                         }
                     }
-                    else
-                    {
 
-                        photonView.RPC("SpawnBullet", PhotonTargets.All);
-                    }
+
                 }
-
-
 
                 /*
                 if (hit.collider.gameObject.tag == "Enemy")

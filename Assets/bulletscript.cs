@@ -34,6 +34,33 @@ public class bulletscript : Photon.MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<Player>().DoModifyHealth(other.gameObject.GetComponent<Player>().currHealth - damage);
+            player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney - 1);
+        }
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("HitEnemy");
+            if (other.gameObject.GetComponent<AIStalk>().currHealth - damage <= 0)
+            {
+                player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney + other.gameObject.GetComponent<AIStalk>().MoneyWorth);
+            }
+            other.gameObject.GetComponent<AIStalk>().DoModifyHealth(other.gameObject.GetComponent<AIStalk>().currHealth - damage);
+        }
+        if (other.gameObject.tag != "AttackBox")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -52,5 +79,6 @@ public class bulletscript : Photon.MonoBehaviour
         }
         Destroy(gameObject);
     }
+    */
 
 }
