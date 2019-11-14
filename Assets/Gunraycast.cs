@@ -17,6 +17,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
     public int Damage = 10;
     public float BulletSpeed = 10000.0f;
+    public int GunType = -1;
 
     public bool isleftclick = false;
 
@@ -47,8 +48,22 @@ public class Gunraycast : Photon.MonoBehaviour
 
         if (!photonView.isMine) Damage = 0; //so that a bullet will only hit the target once and not a second time on the copy
 
-        b.GetComponent<bulletscript>().SetValues(Damage, player);
+        b.GetComponent<bulletscript>().SetValues(Damage, player, GunType);
         b.GetComponent<bulletscript>().player = player;
+
+        if(GunType == 1)
+        {
+            b.GetComponent<AudioSource>().clip = player.GetComponent<AudioReferences>().pistolbullet;
+        }
+        if (GunType == 2)
+        {
+            b.GetComponent<AudioSource>().clip = player.GetComponent<AudioReferences>().pistolbullet;
+        }
+        if (GunType == 3)
+        {
+            b.GetComponent<AudioSource>().clip = player.GetComponent<AudioReferences>().gatlingbullet;
+        }
+
     }
 
     // Update is called once per frame
@@ -91,6 +106,7 @@ public class Gunraycast : Photon.MonoBehaviour
                             if (Minigun.GetComponent<minigunscript>().IsSpunUp)
                             {
                                 photonView.RPC("SpawnBullet", PhotonTargets.All);
+
                             }
                         }
                         else

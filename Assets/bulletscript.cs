@@ -7,21 +7,23 @@ public class bulletscript : Photon.MonoBehaviour
 
     public GameObject player;
     int damage = 0;
+    int GunType;
 
-    AudioSource audioPistol;
-    AudioSource audioGatling;
+    //AudioSource audioPistol;
+    //AudioSource audioGatling;
 
     float DespawnTimer = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
-        audioPistol.Play(0);
+        GetComponent<AudioSource>().Play(0);
     }
 
-    public void SetValues(int d, GameObject p)
+    public void SetValues(int d, GameObject p, int gtype)
     {
         damage = d;
         player = p;
+        GunType = gtype;
     }
 
     // Update is called once per frame

@@ -686,6 +686,7 @@ GameObject:
   - component: {fileID: 8895823380158353693}
   - component: {fileID: 8948890828400413994}
   - component: {fileID: 712739895509027226}
+  - component: {fileID: 2083805605531319485}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Untagged
@@ -768,6 +769,103 @@ MonoBehaviour:
   miniguncylinder: {fileID: 8113694372005123950}
   Camera: {fileID: 3742007866276802481}
   IsSpunUp: 0
+  gatlingpart1: {fileID: 8300000, guid: 724be08aa48865545ac8af03adcbe4e4, type: 3}
+--- !u!82 &2083805605531319485
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932764872832533395}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2136469575225390942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1600,7 @@ MonoBehaviour:
   RateOfFire: 0.4
   Damage: 10
   BulletSpeed: 5000
+  GunType: 1
   isleftclick: 0
   Minigun: {fileID: 0}
   IsMinigun: 0
@@ -1981,6 +2080,7 @@ GameObject:
   - component: {fileID: 4351102545728827583}
   - component: {fileID: 770106900578500904}
   - component: {fileID: 9162581535743125994}
+  - component: {fileID: 7823327455587874623}
   m_Layer: 0
   m_Name: Playerk
   m_TagString: Player
@@ -2157,6 +2257,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UniqueID: 0
+--- !u!114 &7823327455587874623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912274531653234346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fc693fe40982340ac709b34d604c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pistolbullet: {fileID: 8300000, guid: 6600447a9b2b19742a35f5282629a486, type: 3}
+  gatlingbullet: {fileID: 8300000, guid: 0833b4f2650102840baa216a09633b1d, type: 3}
 --- !u!1 &4204940357153161578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,6 +2663,7 @@ MonoBehaviour:
   RateOfFire: 0.1
   Damage: 4
   BulletSpeed: 5000
+  GunType: 2
   isleftclick: 0
   Minigun: {fileID: 0}
   IsMinigun: 0
@@ -3479,6 +3594,7 @@ MonoBehaviour:
   RateOfFire: 0.01
   Damage: 1
   BulletSpeed: 5000
+  GunType: 3
   isleftclick: 0
   Minigun: {fileID: 1932764872832533395}
   IsMinigun: 1
