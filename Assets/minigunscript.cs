@@ -72,7 +72,7 @@ public class minigunscript : MonoBehaviour
         }
 
         miniguncylinder.GetComponent<Transform>().Rotate(miniguncylinder.GetComponent<Transform>().forward, cylinderspeed);
-
+        //transform.rotation = Quaternion.FromToRotation(Vector3.up, transform.forward);
         Debug.Log(cylinderspeed);
     }
 }
