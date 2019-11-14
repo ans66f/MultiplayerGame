@@ -17,15 +17,30 @@ public class MenuButtonScript : MonoBehaviour
 
     void TaskOnClick()
     {
-        Debug.Log("You have clicked the button!");
+       
         if (buttontype == 1)
         {
+            Debug.Log("Start Button Pressed");
+
             SceneManager.LoadScene("GarethTestscene");
+
         }
         if (buttontype == 2)
         {
+            Debug.Log("Create Account Button Pressed");
 
-        }  
+        }
+        if (buttontype == 3)
+        {
+            Debug.Log("Login Account Button Pressed");
+
+        }
+        if (buttontype == 4)
+        {
+            Debug.Log("Exit Button Pressed");
+
+            Application.Quit();
+        }
     }
 
     /*
