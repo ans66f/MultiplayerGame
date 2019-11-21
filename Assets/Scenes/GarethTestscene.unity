@@ -3400,7 +3400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapontype: 2
-  WeaponCost: 80
+  WeaponCost: 10
   CostTextObject: {fileID: 1774574}
 --- !u!114 &1365142539
 MonoBehaviour:
