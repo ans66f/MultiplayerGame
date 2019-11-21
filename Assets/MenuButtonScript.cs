@@ -6,6 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtonScript : MonoBehaviour
 {
+
+    public GameObject UsernameTextObject;
+    public GameObject PasswordTextObject;
+
+
+    string usernametext;
+    string passwordtext;
+
+
+
+
     public int buttontype;
 
     // Start is called before the first frame update
@@ -13,10 +24,13 @@ public class MenuButtonScript : MonoBehaviour
     {
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+
     }
 
     void TaskOnClick()
     {
+
+
        
         if (buttontype == 1)
         {
@@ -25,14 +39,20 @@ public class MenuButtonScript : MonoBehaviour
             SceneManager.LoadScene("GarethTestscene");
 
         }
-        if (buttontype == 2)
+        if (buttontype == 2) // create account
         {
             Debug.Log("Create Account Button Pressed");
 
+            Debug.Log("Username: " + usernametext);
+            Debug.Log("Password: " + passwordtext);
+
         }
-        if (buttontype == 3)
+        if (buttontype == 3) // login
         {
             Debug.Log("Login Account Button Pressed");
+
+            Debug.Log("Username: " + usernametext);
+            Debug.Log("Password: " + passwordtext);
 
         }
         if (buttontype == 4)
@@ -43,11 +63,15 @@ public class MenuButtonScript : MonoBehaviour
         }
     }
 
-    /*
+    
     // Update is called once per frame
     void Update()
     {
-        
+        if (UsernameTextObject != null && PasswordTextObject != null)
+        {
+            usernametext = UsernameTextObject.GetComponent<InputField>().text;
+            passwordtext = PasswordTextObject.GetComponent<InputField>().text;
+        }
     }
-    */
+    
 }
