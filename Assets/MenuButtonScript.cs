@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static dbController;
 
 public class MenuButtonScript : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class MenuButtonScript : MonoBehaviour
         WrongPasswordText.SetActive(false);
         WrongUsernameText.SetActive(false);
 
-        if (buttontype == 1)
+        if (buttontype == 1) // can we play the game without being connected?
         {
             Debug.Log("Start Button Pressed");
 
