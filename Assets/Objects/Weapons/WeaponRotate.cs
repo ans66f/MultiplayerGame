@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponRotate : Photon.MonoBehaviour
 {
@@ -8,10 +9,17 @@ public class WeaponRotate : Photon.MonoBehaviour
     public GameObject Weapon;
     public int WeaponCost;
 
+
+    public GameObject CostTextObject;
+
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(Vector3.up * speed * Time.deltaTime);
+
+
+
+        CostTextObject.GetComponent<Text>().text = "Cost: " + WeaponCost;
     }
 
 
@@ -40,7 +48,7 @@ public class WeaponRotate : Photon.MonoBehaviour
                     {
                         other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - WeaponCost);
 
-                        DoDestroyWeaponAndThis();
+                       // DoDestroyWeaponAndThis();
 
                     }
                     else

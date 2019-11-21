@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gunraycast : Photon.MonoBehaviour
 {
@@ -24,6 +25,59 @@ public class Gunraycast : Photon.MonoBehaviour
     public GameObject Minigun = null;
     public bool IsMinigun = false;
 
+
+
+
+    public GameObject AmmoTextObject;
+    public int CurrentAmmo = 0;
+    public int MaxCurrentAmmo = 10;
+    public int CurrentAmmoStorage = 40;
+    public int MaxAmmoStorage = 50;
+
+
+
+    public void DoReload()
+    {
+        int d = MaxCurrentAmmo - CurrentAmmo;
+
+
+        if(CurrentAmmoStorage - d >= 0)
+        {
+            CurrentAmmoStorage -= d;
+            CurrentAmmo += d;
+        }
+        else
+        {       
+            CurrentAmmo += CurrentAmmoStorage;
+            CurrentAmmoStorage = 0;
+        }
+    }
+
+    void SetAmmoLimits()
+    {
+        if(CurrentAmmo <= 0)
+        {
+            CurrentAmmo = 0;
+        }
+        if(CurrentAmmo >= MaxCurrentAmmo)
+        {
+            CurrentAmmo = MaxCurrentAmmo;
+        }
+
+        if(CurrentAmmoStorage <= 0)
+        {
+            CurrentAmmoStorage = 0;
+        }
+        if(CurrentAmmoStorage >= MaxAmmoStorage)
+        {
+            CurrentAmmoStorage = MaxAmmoStorage;
+        }
+
+
+
+        AmmoTextObject.GetComponent<Text>().text = CurrentAmmo + " / " + CurrentAmmoStorage;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +92,9 @@ public class Gunraycast : Photon.MonoBehaviour
     [PunRPC]
     void SpawnBullet()
     {
+        CurrentAmmo--;
+
+
         CurrentRateOfFireValue = RateOfFire;
 
         GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
@@ -69,7 +126,15 @@ public class Gunraycast : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(blockmanager != null)
+        SetAmmoLimits();
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            DoReload();
+        }
+
+
+        if (blockmanager != null)
         {
 
         }
@@ -95,24 +160,32 @@ public class Gunraycast : Photon.MonoBehaviour
 
                 }
 
+
+
+
                 if (player.GetComponent<Player>().isDead == false)
                 {
 
                     CurrentRateOfFireValue -= Time.deltaTime;
                     if (CurrentRateOfFireValue <= 0)
                     {
-                        if (IsMinigun)
+
+                        if (CurrentAmmo > 0)
                         {
-                            if (Minigun.GetComponent<minigunscript>().IsSpunUp)
+
+                            if (IsMinigun)
                             {
-                                photonView.RPC("SpawnBullet", PhotonTargets.All);
+                                if (Minigun.GetComponent<minigunscript>().IsSpunUp)
+                                {
+                                    photonView.RPC("SpawnBullet", PhotonTargets.All);
 
+                                }
                             }
-                        }
-                        else
-                        {
+                            else
+                            {
 
-                            photonView.RPC("SpawnBullet", PhotonTargets.All);
+                                photonView.RPC("SpawnBullet", PhotonTargets.All);
+                            }
                         }
                     }
 
