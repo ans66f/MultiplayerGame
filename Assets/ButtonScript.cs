@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonScript : Photon.MonoBehaviour
 {
 
     public GameObject Wall;
     public int WallCost;
+    public GameObject CostText;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +19,7 @@ public class ButtonScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CostText.GetComponent<Text>().text = "Cost: " + WallCost;
     }
 
     void DoDestroyWallAndThis()

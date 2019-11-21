@@ -11,13 +11,17 @@ public class minigunscript : MonoBehaviour
     float cylinderspeed = 0.0f;
 
     public GameObject Camera;
+    bool isdoingspeedup = false;
+    bool hasdonespeedupsound = false;
 
     public bool IsSpunUp;
+
+    public AudioClip gatlingpart1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<AudioSource>().clip = gatlingpart1;
     }
 
     public void SpeedUpCylinder()
@@ -34,11 +38,29 @@ public class minigunscript : MonoBehaviour
         if(gunbarrel.GetComponent<Gunraycast>().isleftclick)
         {
             SpeedUpCylinder();
+            isdoingspeedup = true;
         }
         else
         {
+            isdoingspeedup = false;
+            hasdonespeedupsound = false;
+
             cylinderspeed -= Time.deltaTime * 10;
         }
+
+        if(isdoingspeedup && !hasdonespeedupsound)
+        {
+            //play speedup sound once
+            GetComponent<AudioSource>().Play(0);
+
+            hasdonespeedupsound = true;
+        }
+        else
+        {
+            //GetComponent<AudioSource>().Stop();
+        }
+
+
 
         if(cylinderspeed > 8)
         {
@@ -50,7 +72,7 @@ public class minigunscript : MonoBehaviour
         }
 
         miniguncylinder.GetComponent<Transform>().Rotate(miniguncylinder.GetComponent<Transform>().forward, cylinderspeed);
-
+        //transform.rotation = Quaternion.FromToRotation(Vector3.up, transform.forward);
         Debug.Log(cylinderspeed);
     }
 }

@@ -178,6 +178,10 @@ public class Player : Photon.MonoBehaviour
             currCountdown = deathCountdown;
             isDead = true;
         }
+        if(currMoney <= 0)
+        {
+            currMoney = 0;
+        }
 
         
 
