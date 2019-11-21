@@ -15,7 +15,14 @@ public class Player : Photon.MonoBehaviour
     private bool keypress = true;
     private float timePressed = 0f;
 
+
+
+
+
     [Header("Weapons")]
+    public GameObject WeaponsObject;
+
+
     public GameObject pistol;
     public GameObject smg;
     public GameObject minigun;
@@ -71,8 +78,16 @@ public class Player : Photon.MonoBehaviour
     float MouseX;
     float MouseY;
 
+
+
+
+
     private void Start()
     {
+
+
+
+
         isDead = false;
         donedeadcheck = false;
         currCountdown = deathCountdown;

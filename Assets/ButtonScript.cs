@@ -10,10 +10,13 @@ public class ButtonScript : Photon.MonoBehaviour
     public int WallCost;
     public GameObject CostText;
 
+
+    GameObject PressETextObject;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        PressETextObject = GameObject.FindGameObjectWithTag("PressETextObject");
     }
 
     // Update is called once per frame
@@ -55,8 +58,16 @@ public class ButtonScript : Photon.MonoBehaviour
                         Debug.Log("Not enough money skrub, need: " + (WallCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
                     }
                 }
+
+
+                PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
             }
-        }
+        }       
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(false);
     }
 
 }
