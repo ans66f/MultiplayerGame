@@ -614,8 +614,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentgun: 0
   pistol: {fileID: 3742007866276802472}
+  pistolbarrel: {fileID: 3742007866276802471}
   smg: {fileID: 8291632766147433301}
+  smgbarrel: {fileID: 5031915977455576423}
   minigun: {fileID: 1932764872832533395}
+  minigunbarrel: {fileID: 8563058700541168920}
+  pistolpurchaseamount: 0
+  smgpurchaseamount: 0
+  minigunpurchaseamount: 0
 --- !u!114 &8357926192319571374
 MonoBehaviour:
   m_ObjectHideFlags: 0

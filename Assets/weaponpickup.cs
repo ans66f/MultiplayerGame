@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class weaponpickup : MonoBehaviour
 {
     public int weapontype;
     GameObject PressETextObject;
 
+
+    public int WeaponCost;
+    public GameObject CostTextObject;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +21,10 @@ public class weaponpickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
+
+        CostTextObject.GetComponent<Text>().text = "Cost: " + WeaponCost;
     }
 
 
@@ -28,7 +35,24 @@ public class weaponpickup : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                other.gameObject.GetComponent<Player>().WeaponsObject.GetComponent<currentweaponscript>().ReloadWeapon(weapontype);
+                if (other.gameObject.GetComponent<Player>().currMoney >= WeaponCost)
+                {
+                    if (other.gameObject.GetComponent<Player>().IsCurrentGunNotMaxStorageAmmo(weapontype))
+                    {
+
+
+                        other.gameObject.GetComponent<Player>().WeaponsObject.GetComponent<currentweaponscript>().AddAmmoAndWeapon(weapontype);
+                        other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - WeaponCost);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Not enough money skrub, need: " + (WeaponCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
+                }
+
+
+
+                
             }
 
 

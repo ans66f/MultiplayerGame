@@ -2999,8 +2999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 1222938073}
-  WeaponCost: 10
-  CostTextObject: {fileID: 1550868052}
 --- !u!114 &1222938075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3014,6 +3012,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapontype: 0
+  WeaponCost: 10
+  CostTextObject: {fileID: 1550868052}
 --- !u!65 &1222938076
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3400,6 +3400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapontype: 2
+  WeaponCost: 80
+  CostTextObject: {fileID: 1774574}
 --- !u!114 &1365142539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3413,8 +3415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 2121588391}
-  WeaponCost: 100
-  CostTextObject: {fileID: 1774574}
 --- !u!65 &1365142540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5483,8 +5483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 2121588391}
-  WeaponCost: 40
-  CostTextObject: {fileID: 1224204969}
 --- !u!114 &2121588394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5498,6 +5496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapontype: 1
+  WeaponCost: 30
+  CostTextObject: {fileID: 1224204969}
 --- !u!4 &2121588395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: c42010fe0bd86e44484e33b85661592e,
