@@ -16,10 +16,8 @@ public class dbController : MonoBehaviour
 
     public string[] items;
 
-    void Start()
-    {
-
-    }
+    public string log;
+    bool done = false;
 
     IEnumerator Waiter() // just for testing
     {
@@ -42,6 +40,11 @@ public class dbController : MonoBehaviour
         LoadStats("nolwennlg");
     }
 
+    void Start()
+    {
+        // StartCoroutine(Waiter());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +55,7 @@ public class dbController : MonoBehaviour
     {
         StartCoroutine(CCreateUser(user, pass));
     }
+
 
     public void CheckUser(string user, string pass)
     {
@@ -82,6 +86,7 @@ public class dbController : MonoBehaviour
 
     IEnumerator CCreateUser(string user, string pass)
     {
+        done = false;
         WWWForm form = new WWWForm();
 
         form.AddField("username", user);
@@ -89,26 +94,31 @@ public class dbController : MonoBehaviour
 
         WWW webRequest = new WWW(createUserURL, form);
         yield return webRequest;
-
         if (!string.IsNullOrEmpty(webRequest.error))
         {
             print("Error: " + webRequest.error);
         }
         else
         {
+            log = webRequest.text.ToString();
             Debug.Log(webRequest.text.ToString());
         }
+
+        done = true;
 
         //create stats
-        WWW webRequest2 = new WWW(createStatsURL, form);
-        yield return webRequest;
-        if (!string.IsNullOrEmpty(webRequest.error))
+        if (!log.Equals("user_already_taken"))
         {
-            print("Error: " + webRequest.error);
-        }
-        else
-        {
-            Debug.Log(webRequest.text.ToString());
+            WWW webRequest2 = new WWW(createStatsURL, form);
+            yield return webRequest;
+            if (!string.IsNullOrEmpty(webRequest.error))
+            {
+                print("Error: " + webRequest.error);
+            }
+            else
+            {
+                Debug.Log(webRequest.text.ToString());
+            }
         }
     }
 
@@ -208,7 +218,7 @@ public class dbController : MonoBehaviour
         return value;
     }
 
-    public static string GetSha1(string value)
+    public string GetSha1(string value)
     {
         var data = Encoding.ASCII.GetBytes(value);
         var hashData = new SHA1Managed().ComputeHash(data);
