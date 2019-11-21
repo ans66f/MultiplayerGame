@@ -39,6 +39,10 @@ public class MenuButtonScript : MonoBehaviour
 
     void TaskOnClick()
     {
+        UsernameTakenText.SetActive(false);
+        WrongPasswordText.SetActive(false);
+        WrongUsernameText.SetActive(false);
+
         if (buttontype == 1)
         {
             Debug.Log("Start Button Pressed");
@@ -54,6 +58,7 @@ public class MenuButtonScript : MonoBehaviour
         if (buttontype == 3) // login
         {
             Debug.Log("Login Account Button Pressed");
+            StartCoroutine(Login());
         }
         if (buttontype == 4)
         {
@@ -77,6 +82,26 @@ public class MenuButtonScript : MonoBehaviour
             UsernameTakenText.SetActive(true);
         }
         else
+        {
+            SceneManager.LoadScene("GarethTestscene"); // we need to pass on the username here...
+        }
+    }
+
+    IEnumerator Login()
+    {
+        DbControllerManager.GetComponent<dbController>().CheckUser(usernametext, DbControllerManager.GetComponent<dbController>().GetSha1(passwordtext));
+
+        LoadingText.SetActive(true);
+        yield return new WaitForSeconds(1);
+        log = DbControllerManager.GetComponent<dbController>().log;
+        LoadingText.SetActive(false);
+
+        if (log.Equals("wrong_password"))
+        {
+            WrongPasswordText.SetActive(true);
+        } else if (log.Equals("no_such_username")) {
+            WrongUsernameText.SetActive(true);
+        } else
         {
             SceneManager.LoadScene("GarethTestscene"); // we need to pass on the username here...
         }

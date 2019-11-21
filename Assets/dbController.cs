@@ -138,6 +138,7 @@ public class dbController : MonoBehaviour
         }
         else
         {
+            log = webRequest.text.ToString();
             Debug.Log(webRequest.text.ToString());
             // ok for connection
         }

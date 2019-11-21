@@ -864,8 +864,8 @@ MonoBehaviour:
   CreateAccountButtonObject: {fileID: 1104657640}
   LoadingText: {fileID: 213066181}
   UsernameTakenText: {fileID: 28026551}
-  WrongUsernameText: {fileID: 0}
-  WrongPasswordText: {fileID: 0}
+  WrongUsernameText: {fileID: 1414919243}
+  WrongPasswordText: {fileID: 478122104}
   DbControllerManager: {fileID: 1859391120}
   buttontype: 2
 --- !u!114 &1104657643
@@ -1640,10 +1640,10 @@ MonoBehaviour:
   PasswordTextObject: {fileID: 1338834302}
   LoginButtonObject: {fileID: 1702277852}
   CreateAccountButtonObject: {fileID: 1104657640}
-  LoadingText: {fileID: 0}
-  UsernameTakenText: {fileID: 0}
-  WrongUsernameText: {fileID: 0}
-  WrongPasswordText: {fileID: 0}
+  LoadingText: {fileID: 213066181}
+  UsernameTakenText: {fileID: 28026551}
+  WrongUsernameText: {fileID: 1414919243}
+  WrongPasswordText: {fileID: 478122104}
   DbControllerManager: {fileID: 1859391120}
   buttontype: 3
 --- !u!114 &1702277855
