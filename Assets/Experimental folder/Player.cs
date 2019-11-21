@@ -17,7 +17,7 @@ public class Player : Photon.MonoBehaviour
 
 
 
-
+   
 
     [Header("Weapons")]
     public GameObject WeaponsObject;
@@ -80,7 +80,37 @@ public class Player : Photon.MonoBehaviour
 
 
 
+    public bool IsCurrentGunNotMaxStorageAmmo(int weapontype)
+    {
+       // int currweapon = WeaponsObject.GetComponent<currentweaponscript>().currentgun;
 
+
+            if (weapontype == 0)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+
+            }
+            if (weapontype == 1)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+            }
+            if (weapontype == 2)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+            }
+        
+        return false;
+
+    }
 
     private void Start()
     {

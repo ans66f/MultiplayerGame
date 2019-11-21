@@ -8,8 +8,18 @@ public class currentweaponscript : Photon.MonoBehaviour
     int availableguns = 2;
 
     public GameObject pistol;
+    public GameObject pistolbarrel;
+
     public GameObject smg;
+    public GameObject smgbarrel;
+
     public GameObject minigun;
+    public GameObject minigunbarrel;
+
+
+    int pistolpurchaseamountgiven = 21;
+    int smgpurchaseamountgiven = 150;
+    int minigunpurchaseamountgiven = 500;
 
 
     List<int> enabledweapons = new List<int>();
@@ -21,27 +31,45 @@ public class currentweaponscript : Photon.MonoBehaviour
     }
 
 
-    public void ReloadWeapon(int weapontype)
+    public void AddAmmoAndWeapon(int weapontype)
     {
         bool alreadyhasweapon = false;
-        foreach(int num in enabledweapons)
+        foreach (int num in enabledweapons)
         {
-            if(num == weapontype)
+            if (num == weapontype)
             {
                 alreadyhasweapon = true;
             }
         }
 
-        if(!alreadyhasweapon)
+        if (!alreadyhasweapon)
         {
             enabledweapons.Add(weapontype);
         }
 
-    }
 
-    public void BuyAmmo(int amount)
-    {
-        
+
+        if (weapontype == 0 && CheckIfPlayerHasWeapon(0)) //pistol
+        {
+            if (pistolbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < pistolbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+            {
+                pistolbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage += pistolpurchaseamountgiven;
+            }
+        }
+        if (weapontype == 1 && CheckIfPlayerHasWeapon(1)) //smg
+        {
+            if (smgbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < smgbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+            {
+                smgbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage += smgpurchaseamountgiven;
+            }
+        }
+        if (weapontype == 2 && CheckIfPlayerHasWeapon(2)) //minigun
+        {
+            if (minigunbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < minigunbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+            {
+                minigunbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage += minigunpurchaseamountgiven;
+            }
+        }
     }
 
 
