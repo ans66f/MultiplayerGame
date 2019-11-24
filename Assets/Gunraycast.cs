@@ -26,6 +26,7 @@ public class Gunraycast : Photon.MonoBehaviour
     public bool IsMinigun = false;
 
 
+    //public Transform target;
 
 
     public GameObject AmmoTextObject;
@@ -33,8 +34,6 @@ public class Gunraycast : Photon.MonoBehaviour
     public int MaxCurrentAmmo = 10;
     public int CurrentAmmoStorage = 40;
     public int MaxAmmoStorage = 50;
-
-
 
     public void DoReload()
     {
@@ -96,11 +95,32 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
         CurrentRateOfFireValue = RateOfFire;
+        
+        //Quaternion randomRotation = Random.rotation;
+
+        //float angle;
+        //Vector3 axis;
+
+        //randomRotation.ToAngleAxis(out angle, out axis);
+
+        //Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+        //To Euler
+        // Vector3 inEuler = randomRotation.eulerAngles;
+        //Back into Quaternion
+        // Quaternion inQuaternion = Quaternion.Euler(inEuler);
+
+
+        //Vector3 relativePos = target.position - target.position;
+        //transform.rotation = Quaternion.LookRotation(relativePos);
+
+
 
         GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
 
         Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
         b.GetComponent<Rigidbody>().velocity = r.direction * BulletSpeed * Time.deltaTime;
+
 
 
         if (!photonView.isMine) Damage = 0; //so that a bullet will only hit the target once and not a second time on the copy

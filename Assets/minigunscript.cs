@@ -16,7 +16,7 @@ public class minigunscript : MonoBehaviour
 
     public bool IsSpunUp;
 
-    public AudioClip gatlingpart1;
+    public AudioClip gatlingpart1;    
 
     // Start is called before the first frame update
     void Start()
@@ -71,8 +71,8 @@ public class minigunscript : MonoBehaviour
             IsSpunUp = false;
         }
 
-        miniguncylinder.GetComponent<Transform>().Rotate(miniguncylinder.GetComponent<Transform>().forward, cylinderspeed);
-        //transform.rotation = Quaternion.FromToRotation(Vector3.up, transform.forward);
+        miniguncylinder.GetComponent<Transform>().Rotate(0,0, cylinderspeed);
+
         Debug.Log(cylinderspeed);
     }
 }

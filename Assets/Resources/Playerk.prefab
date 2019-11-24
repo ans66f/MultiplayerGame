@@ -619,9 +619,6 @@ MonoBehaviour:
   smgbarrel: {fileID: 5031915977455576423}
   minigun: {fileID: 1932764872832533395}
   minigunbarrel: {fileID: 8563058700541168920}
-  pistolpurchaseamount: 0
-  smgpurchaseamount: 0
-  minigunpurchaseamount: 0
 --- !u!114 &8357926192319571374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3760,7 +3757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8563058700541168920}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.88, y: 2.1, z: 1.51}
+  m_LocalPosition: {x: 10.75, y: 2.1, z: 1.51}
   m_LocalScale: {x: 0.26517466, y: 0.2651669, z: 0.26518375}
   m_Children: []
   m_Father: {fileID: 2650018849655828527}
@@ -4018,6 +4015,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3912274531653234350}
     m_Modifications:
+    - target: {fileID: 119000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
+      propertyPath: m_Name
+      value: TT_demo_male_B
+      objectReference: {fileID: 0}
     - target: {fileID: 439102, guid: 907fd825e3988774caab4234b943bf44, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000036019
@@ -4073,10 +4074,6 @@ PrefabInstance:
     - target: {fileID: 439102, guid: 907fd825e3988774caab4234b943bf44, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3021877
-      objectReference: {fileID: 0}
-    - target: {fileID: 119000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
-      propertyPath: m_Name
-      value: TT_demo_male_B
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
