@@ -148,7 +148,7 @@ public class Gunraycast : Photon.MonoBehaviour
     {
         SetAmmoLimits();
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && isleftclick == false)
         {
             DoReload();
         }
