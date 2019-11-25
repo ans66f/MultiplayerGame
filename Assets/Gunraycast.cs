@@ -9,6 +9,7 @@ public class Gunraycast : Photon.MonoBehaviour
     public GameObject player;
     GameObject blockmanager;
 
+    public GameObject bulletSpawn;
     public GameObject BulletTemplate;
 
     bool ToggleCreateMode = false;
@@ -24,6 +25,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
     public GameObject Minigun = null;
     public bool IsMinigun = false;
+    bool isPaused = false;
 
 
     //public Transform target;
@@ -80,7 +82,7 @@ public class Gunraycast : Photon.MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     void AddForceToPlayer()
@@ -95,7 +97,7 @@ public class Gunraycast : Photon.MonoBehaviour
 
 
         CurrentRateOfFireValue = RateOfFire;
-        
+
         //Quaternion randomRotation = Random.rotation;
 
         //float angle;
@@ -115,11 +117,21 @@ public class Gunraycast : Photon.MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(relativePos);
 
 
+        //Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        //Vector3 bulletDirection =  r.direction * BulletSpeed * Time.deltaTime;
 
-        GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
+        //GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
+        //b.transform.LookAt(transform.position + bulletDirection);
 
-        Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
-        b.GetComponent<Rigidbody>().velocity = r.direction * BulletSpeed * Time.deltaTime;
+        //b.GetComponent<Rigidbody>().velocity = bulletDirection;
+
+        Ray r = new Ray(bulletSpawn.transform.position, bulletSpawn.transform.forward);;
+        Vector3 bulletDirection = r.direction * BulletSpeed * Time.deltaTime;
+
+        GameObject b = Instantiate(BulletTemplate, bulletSpawn.transform.position, bulletSpawn.transform.rotation, null);
+        //b.transform.LookAt(transform.position + bulletDirection);
+
+        b.GetComponent<Rigidbody>().velocity = bulletDirection;
 
 
 
@@ -146,6 +158,9 @@ public class Gunraycast : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+            UnityEditor.EditorApplication.isPaused = !isPaused;
+
         SetAmmoLimits();
 
         if(Input.GetKeyDown(KeyCode.R) && isleftclick == false)

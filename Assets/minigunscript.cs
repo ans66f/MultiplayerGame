@@ -73,6 +73,6 @@ public class minigunscript : MonoBehaviour
 
         miniguncylinder.GetComponent<Transform>().Rotate(0,0, cylinderspeed);
 
-        Debug.Log(cylinderspeed);
+        //Debug.Log(cylinderspeed);
     }
 }
