@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: c42010fe0bd86e44484e33b85661592e
+guid: dc88ad8a2658c634d8cf0ff4e1a2b37b
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pCube1Mat
-    second: {fileID: 2100000, guid: 218ad97d086fced4ead957d388c9f03c, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0

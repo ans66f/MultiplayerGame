@@ -33,7 +33,7 @@ public class bulletscript : Photon.MonoBehaviour
     void Update()
     {
 
-        gameObject.GetComponent<Transform>().LookAt(GetComponent<Rigidbody>().velocity.normalized);
+        //gameObject.GetComponent<Transform>().LookAt(GetComponent<Rigidbody>().velocity.normalized);
 
         DespawnTimer -= Time.deltaTime;
         if(DespawnTimer <= 0)
