@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-public class DbController : MonoBehaviour
+public class dbController : MonoBehaviour
 {string createUserURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createUser.php";
     string createStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createStats.php";
     string loadScoresURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/scoreData.php";

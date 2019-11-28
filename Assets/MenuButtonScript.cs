@@ -69,11 +69,11 @@ public class MenuButtonScript : MonoBehaviour
 
     IEnumerator CreateAccount()
     {
-        DbControllerManager.GetComponent<DbController>().CreateUser(usernametext, DbControllerManager.GetComponent<DbController>().GetSha1(passwordtext));
+        DbControllerManager.GetComponent<dbController>().CreateUser(usernametext, DbControllerManager.GetComponent<dbController>().GetSha1(passwordtext));
 
         LoadingText.SetActive(true);
         yield return new WaitForSeconds(1);
-        log = DbControllerManager.GetComponent<DbController>().log;
+        log = DbControllerManager.GetComponent<dbController>().log;
         LoadingText.SetActive(false);
 
         if (log.Equals("user_already_exists"))
@@ -89,11 +89,11 @@ public class MenuButtonScript : MonoBehaviour
 
     IEnumerator Login()
     {
-        DbControllerManager.GetComponent<DbController>().CheckUser(usernametext, DbControllerManager.GetComponent<DbController>().GetSha1(passwordtext));
+        DbControllerManager.GetComponent<dbController>().CheckUser(usernametext, DbControllerManager.GetComponent<dbController>().GetSha1(passwordtext));
 
         LoadingText.SetActive(true);
         yield return new WaitForSeconds(1);
-        log = DbControllerManager.GetComponent<DbController>().log;
+        log = DbControllerManager.GetComponent<dbController>().log;
         LoadingText.SetActive(false);
 
         if (log.Equals("wrong_password"))

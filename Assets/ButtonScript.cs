@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class ButtonScript : Photon.MonoBehaviour
 {
 
-    //public GameObject Wall;
+    public GameObject Wall;
     public int WallCost;
     public GameObject CostText;
 
-    public bool IsGateOpen = false;
 
     GameObject PressETextObject;
 
@@ -34,14 +33,13 @@ public class ButtonScript : Photon.MonoBehaviour
     [PunRPC]
     void DestroyWallAndThis()
     {
-        IsGateOpen = true;
-        GetComponent<Animator>().SetBool("IsGateOpen", IsGateOpen);
+        Destroy(Wall);
         GetComponent<Transform>().position = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y - 1000, GetComponent<Transform>().position.z);
     }
 
     private void OnTriggerStay(Collider other)
     {
-       // if (Wall.GetActive())
+        if (Wall.GetActive())
         {
             if (other.tag == "Player")
             {
