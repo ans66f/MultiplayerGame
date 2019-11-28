@@ -30,15 +30,15 @@ public class StatsMenuScript : MonoBehaviour
     IEnumerator GetStats()
     {
         string[] stats = null;
-        DbControllerManager.GetComponent<dbController>().LoadStats(username);
+        DbControllerManager.GetComponent<DbController>().LoadStats(username);
         yield return new WaitForSeconds(1);
-        stats = DbControllerManager.GetComponent<dbController>().stats;
+        stats = DbControllerManager.GetComponent<DbController>().stats;
 
-        this.NbOfGamesTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(stats[0], "nbOfGames:");
-        this.TimePlayedTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(stats[0], "timePlayed:");
-        this.NbOfKillsTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(stats[0], "nbOfKills:");
-        this.TotalScoreTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(stats[0], "totalScore:");
-        this.BulletsShotTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(stats[0], "bulletsShot:");
+        this.NbOfGamesTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<DbController>().GetDataValue(stats[0], "nbOfGames:");
+        this.TimePlayedTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<DbController>().GetDataValue(stats[0], "timePlayed:");
+        this.NbOfKillsTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<DbController>().GetDataValue(stats[0], "nbOfKills:");
+        this.TotalScoreTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<DbController>().GetDataValue(stats[0], "totalScore:");
+        this.BulletsShotTextNb.GetComponent<Text>().text = DbControllerManager.GetComponent<DbController>().GetDataValue(stats[0], "bulletsShot:");
 
     }
 }

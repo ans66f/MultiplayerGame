@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-public class dbController : MonoBehaviour
+public class DbController : MonoBehaviour
 {string createUserURL = "http://127.0.0.1/unitySQL/createUser.php";
     string createStatsURL = "http://127.0.0.1/unitySQL/createStats.php";
     string loadScoresURL = "http://127.0.0.1/unitySQL/scoreData.php";

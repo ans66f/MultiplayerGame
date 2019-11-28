@@ -19,7 +19,8 @@ public class Player : Photon.MonoBehaviour
     public int nbOfKills = 0;
     public int totalScore = 0;
     public int bulletsShot = 0;
-   
+
+    public int nbOfWavesCompleted = 0;
 
     [Header("Weapons")]
     public GameObject WeaponsObject;
@@ -488,9 +489,21 @@ public class Player : Photon.MonoBehaviour
 
     void EndOfGame()
     {
+        totalScore += 8 * nbOfKills;
+        for (int i = 0; i < nbOfWavesCompleted; i++)
+        {
+            if (i < 5)
+            {
+                totalScore += 5;
+            } else
+            {
+                totalScore += 10;
+            }
+        }
+        totalScore += currMoney;
         // When the game ends, you save stuff to the database
-        DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
-        DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
+        DbControllerManager.GetComponent<DbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
+        DbControllerManager.GetComponent<DbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
     }
 
 }
