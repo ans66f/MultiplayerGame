@@ -9,6 +9,9 @@ public class bulletscript : Photon.MonoBehaviour
     int damage = 0;
     int GunType;
 
+    float speed = 50.0f;
+
+
     //AudioSource audioPistol;
     //AudioSource audioGatling;
 
@@ -30,8 +33,7 @@ public class bulletscript : Photon.MonoBehaviour
     void Update()
     {
 
-        gameObject.GetComponent<Transform>().LookAt(GetComponent<Rigidbody>().velocity.normalized);
-
+        //gameObject.GetComponent<Transform>().LookAt(GetComponent<Rigidbody>().velocity.normalized);
 
         DespawnTimer -= Time.deltaTime;
         if(DespawnTimer <= 0)

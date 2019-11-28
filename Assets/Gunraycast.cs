@@ -9,6 +9,7 @@ public class Gunraycast : Photon.MonoBehaviour
     public GameObject player;
     GameObject blockmanager;
 
+    public GameObject bulletSpawn;
     public GameObject BulletTemplate;
 
     bool ToggleCreateMode = false;
@@ -24,8 +25,10 @@ public class Gunraycast : Photon.MonoBehaviour
 
     public GameObject Minigun = null;
     public bool IsMinigun = false;
+    bool isPaused = false;
 
 
+    //public Transform target;
 
 
     public GameObject AmmoTextObject;
@@ -33,8 +36,6 @@ public class Gunraycast : Photon.MonoBehaviour
     public int MaxCurrentAmmo = 10;
     public int CurrentAmmoStorage = 40;
     public int MaxAmmoStorage = 50;
-
-
 
     public void DoReload()
     {
@@ -81,7 +82,7 @@ public class Gunraycast : Photon.MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     void AddForceToPlayer()
@@ -97,10 +98,41 @@ public class Gunraycast : Photon.MonoBehaviour
 
         CurrentRateOfFireValue = RateOfFire;
 
-        GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
+        //Quaternion randomRotation = Random.rotation;
 
-        Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
-        b.GetComponent<Rigidbody>().velocity = r.direction * BulletSpeed * Time.deltaTime;
+        //float angle;
+        //Vector3 axis;
+
+        //randomRotation.ToAngleAxis(out angle, out axis);
+
+        //Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+        //To Euler
+        // Vector3 inEuler = randomRotation.eulerAngles;
+        //Back into Quaternion
+        // Quaternion inQuaternion = Quaternion.Euler(inEuler);
+
+
+        //Vector3 relativePos = target.position - target.position;
+        //transform.rotation = Quaternion.LookRotation(relativePos);
+
+
+        //Ray r = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        //Vector3 bulletDirection =  r.direction * BulletSpeed * Time.deltaTime;
+
+        //GameObject b = Instantiate(BulletTemplate, gameObject.transform.position, Quaternion.identity, null);
+        //b.transform.LookAt(transform.position + bulletDirection);
+
+        //b.GetComponent<Rigidbody>().velocity = bulletDirection;
+
+        Ray r = new Ray(bulletSpawn.transform.position, bulletSpawn.transform.forward);;
+        Vector3 bulletDirection = r.direction * BulletSpeed * Time.deltaTime;
+
+        GameObject b = Instantiate(BulletTemplate, bulletSpawn.transform.position, bulletSpawn.transform.rotation, null);
+        //b.transform.LookAt(transform.position + bulletDirection);
+
+        b.GetComponent<Rigidbody>().velocity = bulletDirection;
+
 
 
         if (!photonView.isMine) Damage = 0; //so that a bullet will only hit the target once and not a second time on the copy
@@ -126,9 +158,12 @@ public class Gunraycast : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+            UnityEditor.EditorApplication.isPaused = !isPaused;
+
         SetAmmoLimits();
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && isleftclick == false)
         {
             DoReload();
         }
