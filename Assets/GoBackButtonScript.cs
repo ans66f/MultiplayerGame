@@ -16,6 +16,6 @@ public class GoBackButtonScript : MonoBehaviour
 
     void TaskOnClick()
     {
-        SceneManager.LoadScene("GarethTestscene"); // we need to pass on the username here...
+        SceneManager.LoadScene("GarethTestscene");
     }
 }

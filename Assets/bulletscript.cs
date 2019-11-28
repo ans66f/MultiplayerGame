@@ -20,6 +20,7 @@ public class bulletscript : Photon.MonoBehaviour
     void Start()
     {
         GetComponent<AudioSource>().Play(0);
+        player.GetComponent<Player>().bulletsShot += 1;
     }
 
     public void SetValues(int d, GameObject p, int gtype)
@@ -59,6 +60,10 @@ public class bulletscript : Photon.MonoBehaviour
                 player.GetComponent<Player>().DoModifyMoney(player.GetComponent<Player>().currMoney + other.gameObject.GetComponent<AIStalk>().MoneyWorth);
             }
             other.gameObject.GetComponent<AIStalk>().DoModifyHealth(other.gameObject.GetComponent<AIStalk>().currHealth - damage);
+            if (other.gameObject.GetComponent<AIStalk>().currHealth <= 0)
+            {
+                player.GetComponent<Player>().nbOfKills += 1;
+            }
         }
         if (other.gameObject.tag != "AttackBox")
         {

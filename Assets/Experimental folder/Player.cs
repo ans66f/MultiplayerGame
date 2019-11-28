@@ -15,8 +15,10 @@ public class Player : Photon.MonoBehaviour
     private bool keypress = true;
     private float timePressed = 0f;
 
-
-
+    public int timePlayed = 0;
+    public int nbOfKills = 0;
+    public int totalScore = 0;
+    public int bulletsShot = 0;
    
 
     [Header("Weapons")]
@@ -57,7 +59,7 @@ public class Player : Photon.MonoBehaviour
     public GameObject PlayerNameText;
     public GameObject PlayerNameTextWorld;
 
-
+    public GameObject DbControllerManager;
 
     [Header("Money")]
     public int startMoney = 50;
@@ -72,6 +74,7 @@ public class Player : Photon.MonoBehaviour
 
     public bool isDead;
     bool donedeadcheck;
+    bool gameIsDone;
 
     float Horizontalaxis;
     float Verticalaxis;
@@ -114,10 +117,6 @@ public class Player : Photon.MonoBehaviour
 
     private void Start()
     {
-
-
-
-
         isDead = false;
         donedeadcheck = false;
         currCountdown = deathCountdown;
@@ -139,14 +138,24 @@ public class Player : Photon.MonoBehaviour
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
 
 
-
-
         jumpbool = false;
         currHealth = maxHealth;
         if (photonView.isMine) {
             //currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
         }
+
+        StartCoroutine(Timing());
+
         UpdateGUI();
+    }
+
+    IEnumerator Timing()
+    {
+        while(!gameIsDone)
+        {
+            yield return new WaitForSeconds(1);
+            timePlayed += 1;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -228,8 +237,6 @@ public class Player : Photon.MonoBehaviour
             currMoney = 0;
         }
 
-        
-
 
         if (isDead)
         {
@@ -283,10 +290,6 @@ public class Player : Photon.MonoBehaviour
         if (currMoneyLabelWorldSpace != null)
             currMoneyLabelWorldSpace.text = "$" + currMoney.ToString();
 
-
-
-
-        
     }
 
 
@@ -304,8 +307,6 @@ public class Player : Photon.MonoBehaviour
         UpdateGUI();
 
     }
-
-
 
 
     public void DoModifyMoney(int amount)
@@ -468,7 +469,19 @@ public class Player : Photon.MonoBehaviour
                 //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position- Vector3.right * speed * Time.deltaTime);
 
             }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                EndOfGame();
+            }
         }
+    }
+
+    void EndOfGame()
+    {
+        // When the game ends, you save stuff to the database
+        DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
+        DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -49,6 +50,10 @@ public class NetworkManager : MonoBehaviour
                         PhotonNetwork.JoinRoom(roomsList[i].Name);
                     }
                 }
+            }
+            if (GUI.Button(new Rect(400, 100, 250, 100), "View user stats"))
+            {
+                SceneManager.LoadScene("UserStatsScene");
             }
         }
     }
