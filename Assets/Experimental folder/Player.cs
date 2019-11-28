@@ -493,8 +493,8 @@ public class Player : Photon.MonoBehaviour
         }
         totalScore += currMoney;
         // When the game ends, you save stuff to the database
-        DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
-        DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
+        DbControllerManager.GetComponent<DbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
+        DbControllerManager.GetComponent<DbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
     }
 
 }
