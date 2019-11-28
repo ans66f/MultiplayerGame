@@ -20,6 +20,7 @@ TagManager:
   - SpawnPoint
   - AttackBox
   - PressETextObject
+  - LampLight
   layers:
   - Default
   - TransparentFX
