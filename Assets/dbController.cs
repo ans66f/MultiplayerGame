@@ -15,6 +15,7 @@ public class dbController : MonoBehaviour
     string updateStatsURL = "http://127.0.0.1/unitySQL/updateStats.php";
 
     public string[] items;
+    public string[] stats;
 
     public string log;
     bool done = false;
@@ -183,9 +184,10 @@ public class dbController : MonoBehaviour
         WWW webRequest = new WWW(loadStatsURL, form);
         yield return webRequest;
         string itemsDataString = webRequest.text;
-        print(itemsDataString);
+        //print(itemsDataString);
         items = itemsDataString.Split(';');
-        print(GetDataValue(items[0], "nbOfKills:"));
+        this.stats = items;
+        //print(GetDataValue(items[0], "nbOfKills:"));
     }
 
     IEnumerator CUpdateStats(string user, int nbOfGames, int timePlayed, int nbOfKills, int totalScore, int bulletsShot)
@@ -212,7 +214,7 @@ public class dbController : MonoBehaviour
         }
     }
 
-    string GetDataValue(string data, string index)
+    public string GetDataValue(string data, string index)
     {
         string value = data.Substring(data.IndexOf(index) + index.Length);
         if (value.Contains("|")) value = value.Remove(value.IndexOf("|"));
