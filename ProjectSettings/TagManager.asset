@@ -21,6 +21,7 @@ TagManager:
   - AttackBox
   - PressETextObject
   - LampLight
+  - ReviveHitbox
   layers:
   - Default
   - TransparentFX

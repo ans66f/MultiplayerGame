@@ -65,7 +65,7 @@ public class bulletscript : Photon.MonoBehaviour
                 player.GetComponent<Player>().nbOfKills += 1;
             }
         }
-        if (other.gameObject.tag != "AttackBox")
+        if (other.gameObject.tag != "AttackBox" && other.gameObject.tag != "ReviveHitbox")
         {
             Destroy(gameObject);
         }

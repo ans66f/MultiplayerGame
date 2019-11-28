@@ -162,6 +162,12 @@ public class Player : Photon.MonoBehaviour
     {
         jumpbool = false;
 
+    }
+
+
+    /*
+    private void OnCollisionStay(Collision collision)
+    {
         if (collision.collider.tag == "Player")
         {
             Player player = collision.collider.GetComponent<Player>();
@@ -170,6 +176,8 @@ public class Player : Photon.MonoBehaviour
                 if (Input.GetKey(KeyCode.Q))
                 {
                     player.DoModifyHealth(maxHealth / 4);
+                    player.isDead = false;
+
                     //if (keypress)
                     //{
                     //    keypress = false;
@@ -187,6 +195,7 @@ public class Player : Photon.MonoBehaviour
             }
         }
     }
+    */
 
 
     void Respawn()

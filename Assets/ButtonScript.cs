@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class ButtonScript : Photon.MonoBehaviour
 {
 
-    public GameObject Wall;
+    //public GameObject Wall;
     public int WallCost;
     public GameObject CostText;
 
+    public bool IsGateOpen = false;
 
     GameObject PressETextObject;
 
@@ -33,35 +34,37 @@ public class ButtonScript : Photon.MonoBehaviour
     [PunRPC]
     void DestroyWallAndThis()
     {
-        Wall.SetActive(false);
+        IsGateOpen = true;
+        GetComponent<Animator>().SetBool("IsGateOpen", IsGateOpen);
         GetComponent<Transform>().position = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y - 1000, GetComponent<Transform>().position.z);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (Wall.GetActive())
+       // if (Wall.GetActive())
         {
             if (other.tag == "Player")
             {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (other.gameObject.GetComponent<Player>().currMoney >= WallCost)
+                        {
+                            other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - WallCost);
 
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (other.gameObject.GetComponent<Player>().currMoney >= WallCost)
-                    {
-                        other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - WallCost);
-                        
-                        DoDestroyWallAndThis();
-                        
+                            DoDestroyWallAndThis();
+
+                        }
+                        else
+                        {
+                            Debug.Log("Not enough money skrub, need: " + (WallCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
+                        }
                     }
-                    else
-                    {
-                        Debug.Log("Not enough money skrub, need: " + (WallCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
-                    }
+
+
+
+                    PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
                 }
 
-
-                PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
-            }
         }       
     }
 
