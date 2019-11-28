@@ -158,8 +158,10 @@ public class Gunraycast : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.P))
             UnityEditor.EditorApplication.isPaused = !isPaused;
+            */
 
         SetAmmoLimits();
 
