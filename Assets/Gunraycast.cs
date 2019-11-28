@@ -325,6 +325,7 @@ public class Gunraycast : Photon.MonoBehaviour
         Vector3[] linepositions = new Vector3[2];
         linepositions[0] = gameObject.transform.position;
         linepositions[1] = (gameObject.transform.forward * 100) + gameObject.transform.position;
+        GetComponent<LineRenderer>().enabled = false;
 
      //   GetComponent<LineRenderer>().SetPositions(linepositions);
 
