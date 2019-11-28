@@ -6,13 +6,13 @@ using System.Text;
 using UnityEngine;
 
 public class DbController : MonoBehaviour
-{string createUserURL = "http://127.0.0.1/unitySQL/createUser.php";
-    string createStatsURL = "http://127.0.0.1/unitySQL/createStats.php";
-    string loadScoresURL = "http://127.0.0.1/unitySQL/scoreData.php";
-    string saveScoresURL = "http://127.0.0.1/unitySQL/saveGameScore.php";
-    string checkUserURL = "http://127.0.0.1/unitySQL/checkUserConnection.php";
-    string loadStatsURL = "http://127.0.0.1/unitySQL/statsData.php";
-    string updateStatsURL = "http://127.0.0.1/unitySQL/updateStats.php";
+{string createUserURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createUser.php";
+    string createStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createStats.php";
+    string loadScoresURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/scoreData.php";
+    string saveScoresURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/saveGameScore.php";
+    string checkUserURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/checkUserConnection.php";
+    string loadStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/statsData.php";
+    string updateStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/updateStats.php";
 
     public string[] items;
     public string[] stats;

@@ -83,7 +83,7 @@ public class MenuButtonScript : MonoBehaviour
         else
         {
             DataHandler.username = usernametext;
-            SceneManager.LoadScene("GarethTestscene"); // we need to pass on the username here...
+            SceneManager.LoadScene("GarethTestscene");
         }
     }
 
