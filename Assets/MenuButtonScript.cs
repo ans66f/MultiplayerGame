@@ -38,9 +38,7 @@ public class MenuButtonScript : MonoBehaviour
 
     void TaskOnClick()
     {
-        UsernameTakenText.SetActive(false);
-        WrongPasswordText.SetActive(false);
-        WrongUsernameText.SetActive(false);
+
 
         if (buttontype == 1) // can we play the game without being connected?
         {
@@ -48,6 +46,12 @@ public class MenuButtonScript : MonoBehaviour
 
             SceneManager.LoadScene("GarethTestscene");
 
+        }
+        else
+        {
+            UsernameTakenText.SetActive(false);
+            WrongPasswordText.SetActive(false);
+            WrongUsernameText.SetActive(false);
         }
         if (buttontype == 2) // create account
         {
