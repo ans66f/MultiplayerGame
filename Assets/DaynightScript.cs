@@ -7,7 +7,7 @@ public class DaynightScript : Photon.MonoBehaviour
 
     public GameObject[] AllLampLights;
 
-    public float sunspeed = 0.1f;
+    float sunspeed = 10f;
 
     public bool AreStreetLightsOn = false;
     GameObject ThisPlayer;
@@ -68,7 +68,7 @@ public class DaynightScript : Photon.MonoBehaviour
 
 
 
-        GetComponent<Transform>().Rotate(Vector3.right, sunspeed);
+        GetComponent<Transform>().Rotate(Vector3.right, sunspeed * Time.deltaTime);
 
 
 

@@ -131,7 +131,7 @@ public class Gunraycast : Photon.MonoBehaviour
         GameObject b = Instantiate(BulletTemplate, bulletSpawn.transform.position, bulletSpawn.transform.rotation, null);
         //b.transform.LookAt(transform.position + bulletDirection);
 
-        b.GetComponent<Rigidbody>().velocity = bulletDirection;
+        b.GetComponent<Rigidbody>().velocity = bulletDirection.normalized;
 
 
 
