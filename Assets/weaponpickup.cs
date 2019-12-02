@@ -9,6 +9,8 @@ public class weaponpickup : Photon.MonoBehaviour
     GameObject PressETextObject;
 
 
+    bool IsInTrigger = false;
+
     public int WeaponCost;
     public GameObject CostTextObject;
 
@@ -34,12 +36,19 @@ public class weaponpickup : Photon.MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
-            foreach(GameObject p in allplayers)
+
+            IsInTrigger = false;
+            foreach (GameObject p in allplayers)
             {
+                if (p.GetPhotonView().isMine)
+                {
+                    IsInTrigger = true;
+                }
+
                 Debug.Log("Photonview is mine: " + p.GetPhotonView().isMine);
             }
 
-            if (photonView.isMine)
+            if (IsInTrigger)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
