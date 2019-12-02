@@ -16,6 +16,8 @@ public class GateScript : Photon.MonoBehaviour
 
     GameObject PressETextObject;
 
+    GameObject ThisPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,22 @@ public class GateScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ThisPlayer == null)
+        {
+            GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject p in allplayers)
+            {
+                if (p.GetPhotonView().isMine)
+                {
+                    ThisPlayer = p;
+                }
+
+            }
+        }
+
+
+
+
         CostText.GetComponent<Text>().text = "Cost: " + GateCost;
 
         
@@ -65,28 +83,30 @@ public class GateScript : Photon.MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                if (photonView.isMine)
-                {
-                    if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        if (other.gameObject.GetComponent<Player>().currMoney >= GateCost)
-                        {
-                            other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - GateCost);
 
-                            DoDestroyWallAndThis();
+                if(other.gameObject == ThisPlayer) {
 
-                        }
-                        else
+                        if (Input.GetKeyDown(KeyCode.E))
                         {
-                            Debug.Log("Not enough money skrub, need: " + (GateCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
-                        }
+                            if (other.gameObject.GetComponent<Player>().currMoney >= GateCost)
+                            {
+                                other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - GateCost);
+
+                                DoDestroyWallAndThis();
+
+                            }
+                            else
+                            {
+                                Debug.Log("Not enough money skrub, need: " + (GateCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
+                            }
+                        
+
+
+
+
+
+                        PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
                     }
-                
-
-
-
-
-                    PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
                 }
             }
 

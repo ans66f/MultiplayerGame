@@ -110,10 +110,12 @@ public class currentweaponscript : Photon.MonoBehaviour
             if (Input.mouseScrollDelta.y > 0)
             {
                 currentgun--;
+                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun);
             }
             if (Input.mouseScrollDelta.y < 0)
             {
                 currentgun++;
+                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun);
             }
 
             if (currentgun < 0) currentgun = availableguns;
@@ -121,7 +123,7 @@ public class currentweaponscript : Photon.MonoBehaviour
 
 
 
-            photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun);
+            
         }
 
 
