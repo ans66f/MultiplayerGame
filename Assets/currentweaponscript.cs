@@ -75,25 +75,31 @@ public class currentweaponscript : Photon.MonoBehaviour
 
 
     [PunRPC]
-    void SetCurrentWeapon(int currentgunnum, int availgun, List<int> enweapons)
+    void SetCurrentWeapon(int currentgunnum, int availgun)
     {
         currentgun = currentgunnum;
         availableguns = availgun;
-        enabledweapons = enweapons;
     }
 
     bool CheckIfPlayerHasWeapon(int w)
     {
-        bool hasweapon = false;
-        foreach (int num in enabledweapons)
+        if (photonView.isMine)
         {
-            if (num == w)
+            bool hasweapon = false;
+            foreach (int num in enabledweapons)
             {
-                hasweapon = true;
+                if (num == w)
+                {
+                    hasweapon = true;
+                }
             }
-        }
 
-        return hasweapon;
+            return hasweapon;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     // Update is called once per frame
@@ -116,7 +122,7 @@ public class currentweaponscript : Photon.MonoBehaviour
             if (currentgun > availableguns) currentgun = 0;
 
 
-            photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns, enabledweapons);
+            photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns);
 
         }
 
