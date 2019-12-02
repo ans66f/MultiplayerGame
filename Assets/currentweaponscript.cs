@@ -75,10 +75,11 @@ public class currentweaponscript : Photon.MonoBehaviour
 
 
     [PunRPC]
-    void SetCurrentWeapon(int currentgunnum, int availgun)
+    void SetCurrentWeapon(int currentgunnum, int availgun, List<int> enweapons)
     {
         currentgun = currentgunnum;
         availableguns = availgun;
+        enabledweapons = enweapons;
     }
 
     bool CheckIfPlayerHasWeapon(int w)
@@ -103,20 +104,20 @@ public class currentweaponscript : Photon.MonoBehaviour
             if (Input.mouseScrollDelta.y > 0)
             {
                 currentgun--;
-                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns);
+                
             }
             if (Input.mouseScrollDelta.y < 0)
             {
                 currentgun++;
-                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns);
+                
             }
 
             if (currentgun < 0) currentgun = availableguns;
             if (currentgun > availableguns) currentgun = 0;
 
 
+            photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns, enabledweapons);
 
-            
         }
 
 
