@@ -33,6 +33,12 @@ public class weaponpickup : Photon.MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach(GameObject p in allplayers)
+            {
+                Debug.Log("Photonview is mine: " + p.GetPhotonView().isMine);
+            }
+
             if (photonView.isMine)
             {
                 if (Input.GetKeyDown(KeyCode.E))
