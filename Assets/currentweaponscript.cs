@@ -29,14 +29,6 @@ public class currentweaponscript : Photon.MonoBehaviour
     {
         enabledweapons.Add(0);
 
-        if(photonView.isMine)
-        {
-
-        }
-        else
-        {
-            availableguns = 10000000;
-        }
     }
 
 
@@ -83,9 +75,10 @@ public class currentweaponscript : Photon.MonoBehaviour
 
 
     [PunRPC]
-    void SetCurrentWeapon(int currentgunnum)
+    void SetCurrentWeapon(int currentgunnum, int availgun)
     {
         currentgun = currentgunnum;
+        availableguns = availgun;
     }
 
     bool CheckIfPlayerHasWeapon(int w)
@@ -110,12 +103,12 @@ public class currentweaponscript : Photon.MonoBehaviour
             if (Input.mouseScrollDelta.y > 0)
             {
                 currentgun--;
-                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun);
+                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns);
             }
             if (Input.mouseScrollDelta.y < 0)
             {
                 currentgun++;
-                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun);
+                photonView.RPC("SetCurrentWeapon", PhotonTargets.Others, currentgun, availableguns);
             }
 
             if (currentgun < 0) currentgun = availableguns;
