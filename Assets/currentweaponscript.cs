@@ -28,6 +28,15 @@ public class currentweaponscript : Photon.MonoBehaviour
     void Start()
     {
         enabledweapons.Add(0);
+
+        if(photonView.isMine)
+        {
+
+        }
+        else
+        {
+            availableguns = 10000000;
+        }
     }
 
 
