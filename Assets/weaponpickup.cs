@@ -14,10 +14,25 @@ public class weaponpickup : Photon.MonoBehaviour
     public int WeaponCost;
     public GameObject CostTextObject;
 
+
+    GameObject ThisPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         PressETextObject = GameObject.FindGameObjectWithTag("PressETextObject");
+
+
+        GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject p in allplayers)
+        {
+            if (p.GetPhotonView().isMine)
+            {
+                ThisPlayer = p;
+            }
+
+        }
+
     }
 
     // Update is called once per frame
@@ -35,21 +50,12 @@ public class weaponpickup : Photon.MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
 
-            IsInTrigger = false;
-            foreach (GameObject p in allplayers)
+
+            if (other.gameObject == ThisPlayer)
             {
-                if (p.GetPhotonView().isMine)
-                {
-                    IsInTrigger = true;
-                }
 
-                Debug.Log("Photonview is mine: " + p.GetPhotonView().isMine);
-            }
 
-            if (IsInTrigger)
-            {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (other.gameObject.GetComponent<Player>().currMoney >= WeaponCost)
@@ -76,6 +82,7 @@ public class weaponpickup : Photon.MonoBehaviour
                 PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
             }
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
