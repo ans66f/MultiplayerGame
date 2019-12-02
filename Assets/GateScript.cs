@@ -82,7 +82,10 @@ public class GateScript : Photon.MonoBehaviour
 
 
 
-                PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
+                if (photonView.isMine)
+                {
+                    PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
+                }
             }
 
         }
@@ -90,7 +93,10 @@ public class GateScript : Photon.MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(false);
+        if (photonView.isMine)
+        {
+            PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(false);
+        }
     }
 
 }

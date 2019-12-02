@@ -11,10 +11,6 @@ public class bulletscript : Photon.MonoBehaviour
 
     float speed = 50.0f;
 
-
-    //AudioSource audioPistol;
-    //AudioSource audioGatling;
-
     float DespawnTimer = 10.0f;
     // Start is called before the first frame update
     void Start()
