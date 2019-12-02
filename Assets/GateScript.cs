@@ -86,27 +86,27 @@ public class GateScript : Photon.MonoBehaviour
 
                 if(other.gameObject == ThisPlayer) {
 
-                        if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (other.gameObject.GetComponent<Player>().currMoney >= GateCost)
                         {
-                            if (other.gameObject.GetComponent<Player>().currMoney >= GateCost)
-                            {
-                                other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - GateCost);
+                            other.gameObject.GetComponent<Player>().DoModifyMoney(other.gameObject.GetComponent<Player>().currMoney - GateCost);
 
-                                DoDestroyWallAndThis();
+                            DoDestroyWallAndThis();
 
-                            }
-                            else
-                            {
-                                Debug.Log("Not enough money skrub, need: " + (GateCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
-                            }
-                        
+                        }
+                        else
+                        {
+                            Debug.Log("Not enough money skrub, need: " + (GateCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
+                        }
 
 
 
 
 
-                        PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
                     }
+                        PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
+                    
                 }
             }
 
