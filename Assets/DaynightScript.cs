@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DaynightScript : MonoBehaviour
+public class DaynightScript : Photon.MonoBehaviour
 {
 
     public GameObject[] AllLampLights;
@@ -10,6 +10,10 @@ public class DaynightScript : MonoBehaviour
     public float sunspeed = 0.1f;
 
     public bool AreStreetLightsOn = false;
+    GameObject ThisPlayer;
+
+
+    float sunupdatetimer = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +29,45 @@ public class DaynightScript : MonoBehaviour
         }
     }
 
+
+    [PunRPC]
+    void UpdateSunPos(Quaternion q)
+    {
+        GetComponent<Transform>().rotation = q;
+    }
+    void DoUpdateSunPos()
+    {
+        photonView.RPC("UpdateSunPos", PhotonTargets.OthersBuffered, GetComponent<Transform>().rotation);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (ThisPlayer == null)
+        {
+            GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject p in allplayers)
+            {
+                if (p.GetPhotonView().isMine)
+                {
+                    ThisPlayer = p;
+                }
+
+            }
+        }
+        if(PhotonNetwork.isMasterClient)
+        {
+            sunupdatetimer -= Time.deltaTime;
+            if (sunupdatetimer <= 0)
+            {
+                sunupdatetimer = 1;
+                DoUpdateSunPos();
+            }
+        }
+
+
+
+
         GetComponent<Transform>().Rotate(Vector3.right, sunspeed);
 
 

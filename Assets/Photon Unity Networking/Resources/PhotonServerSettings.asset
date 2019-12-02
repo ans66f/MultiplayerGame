@@ -56,4 +56,5 @@ MonoBehaviour:
   - SpawnBullet
   - TaggedPlayer
   - UpdateUniqueID
+  - UpdateSunPos
   DisableAutoOpenWizard: 1
