@@ -23,22 +23,25 @@ public class weaponpickup : Photon.MonoBehaviour
         PressETextObject = GameObject.FindGameObjectWithTag("PressETextObject");
 
 
-        GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject p in allplayers)
-        {
-            if (p.GetPhotonView().isMine)
-            {
-                ThisPlayer = p;
-            }
 
-        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(ThisPlayer == null)
+        {
+            GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject p in allplayers)
+            {
+                if (p.GetPhotonView().isMine)
+                {
+                    ThisPlayer = p;
+                }
 
+            }
+        }
 
 
         CostTextObject.GetComponent<Text>().text = "Cost: " + WeaponCost;
