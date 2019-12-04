@@ -3,7 +3,107 @@ guid: 448aff05940fdfc4da79fc01d76e3f46
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Door_pCube15Mat
+    second: {fileID: 2100000, guid: e6acdf298813e3c4cb49683de4f41969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube24Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube25Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube26Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube27Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube28Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube29Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube30Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube31Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube32Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube34Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube35Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube36Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube37Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube38Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube39Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube40Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube41Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_Glass_pCube42Mat
+    second: {fileID: 2100000, guid: adb564949fe69f44b85327d2e953b8b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_pTorus1_DoorMat
+    second: {fileID: 2100000, guid: d7cf180cf0792fa469d6f2f69a333ced, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
