@@ -231,9 +231,10 @@ public class Player : Photon.MonoBehaviour
 
         if (UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID != -1)
         {
-            PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
-            PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
-
+            //PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
+            //PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
+            PlayerNameText.GetComponent<Text>().text = DataHandler.username;
+            PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
 
         }
 
