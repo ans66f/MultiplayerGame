@@ -11,8 +11,12 @@ public class GateScript : Photon.MonoBehaviour
 
     public bool IsGateOpen = false;
 
+    public int GateNum;
+
     public GameObject OpenBoxCollider;
     public GameObject ClosedBoxCollider;
+
+    GameObject ZombieSpawnManager;
 
     GameObject PressETextObject;
 
@@ -22,6 +26,8 @@ public class GateScript : Photon.MonoBehaviour
     void Start()
     {
         PressETextObject = GameObject.FindGameObjectWithTag("PressETextObject");
+
+        ZombieSpawnManager = GameObject.FindGameObjectWithTag("ZombieSpawnManager");
     }
 
     // Update is called once per frame
