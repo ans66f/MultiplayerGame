@@ -546,6 +546,8 @@ public class Player : Photon.MonoBehaviour
 
         // display highscores and wait for all players to die
         DeathCanvas.SetActive(true);
+        healthbarworldspace.SetActive(false);
+        currHealthLabel.enabled = false;
         ScoreText.GetComponent<Text>().text = totalScore.ToString();
         
         StartCoroutine(GetHighScores());
