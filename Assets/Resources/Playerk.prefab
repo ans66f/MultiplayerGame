@@ -3223,8 +3223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93df6e1e350d50249aad01932779fa4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
-  stats: []
+  _items: []
+  _stats: []
   log: 
 --- !u!1 &3912274531653234346
 GameObject:
@@ -3269,6 +3269,7 @@ Transform:
   - {fileID: 3062050503994592790}
   - {fileID: 2778075128675911804}
   - {fileID: 4226326556030793862}
+  - {fileID: 5187262283605113961}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3359,7 +3360,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  jumpstrength: 300
   playerid: -1
+  PlayerNameText: {fileID: 1657951337532462530}
+  PlayerNameTextWorld: {fileID: 2740810970046746807}
+  UniqueIDObject: {fileID: 3912274531653234346}
   timePlayed: 0
   nbOfKills: 0
   totalScore: 0
@@ -3369,29 +3374,21 @@ MonoBehaviour:
   pistol: {fileID: 3742007866276802472}
   smg: {fileID: 8291632766147433301}
   minigun: {fileID: 1932764872832533395}
-  PlayerCam: {fileID: 3742007866276802481}
-  PlayerStuff: {fileID: 3742007866276802486}
-  jumpstrength: 300
-  LocalCanvas: {fileID: 3596193564188223292}
   maxHealth: 200
   currHealth: 0
   currHealthLabel: {fileID: 4384072801277300159}
   currHealthLabelWorldspace: {fileID: 662150420300218315}
   healthbar: {fileID: 7402747647157002600}
   healthbarworldspace: {fileID: 8244652314637745754}
+  isDead: 0
   deathCountdown: 10
   currCountdown: 0
   currCountdownLabel: {fileID: 226038844527095972}
   DeathCanvas: {fileID: 6050839195784302421}
-  UniqueIDObject: {fileID: 3912274531653234346}
-  PlayerNameText: {fileID: 1657951337532462530}
-  PlayerNameTextWorld: {fileID: 2740810970046746807}
-  DbControllerManager: {fileID: 3869150375629263461}
   startMoney: 50
   currMoney: 0
   currMoneyLabel: {fileID: 1957857385345836696}
   currMoneyLabelWorldSpace: {fileID: 5596814934916225458}
-  isDead: 0
   Username1Text: {fileID: 2023520636334408209}
   Username2Text: {fileID: 361839098134702604}
   Username3Text: {fileID: 6698655339671551628}
@@ -3403,6 +3400,10 @@ MonoBehaviour:
   Score4Text: {fileID: 997929480230065159}
   Score5Text: {fileID: 211292755298568701}
   ScoreText: {fileID: 2703234464229588450}
+  PlayerCam: {fileID: 3742007866276802481}
+  PlayerStuff: {fileID: 3742007866276802486}
+  LocalCanvas: {fileID: 3596193564188223292}
+  DbControllerManager: {fileID: 3869150375629263461}
 --- !u!114 &770106900578500904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4788,6 +4789,89 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: username3
+--- !u!1 &6907124724297661699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5187262283605113961}
+  - component: {fileID: 5478160474010998027}
+  - component: {fileID: 1550267691149327789}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5187262283605113961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907124724297661699}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 117.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3912274531653234350}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!20 &5478160474010998027
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907124724297661699}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 18.97
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 2db1f1557d3eddc4bb930ed99a740ffd, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &1550267691149327789
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907124724297661699}
+  m_Enabled: 1
 --- !u!1 &6920205544273903486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,15 +6061,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270e7db22c4a43f46a7eaeb8bbe067a5, type: 3}
---- !u!1 &8171853793308175081 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 164852719943726048}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5130471211387132154 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 164852719943726048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8171853793308175081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
     type: 3}
   m_PrefabInstance: {fileID: 164852719943726048}
   m_PrefabAsset: {fileID: 0}
