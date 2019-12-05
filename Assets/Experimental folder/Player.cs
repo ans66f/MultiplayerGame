@@ -50,11 +50,13 @@ public class Player : Photon.MonoBehaviour
     public GameObject healthbarworldspace;
     float healthbarwidth;
 
+    [Header("Death")]
     public int deathCountdown = 15;
     public int currCountdown;
     public Text currCountdownLabel;
     IEnumerator deathCo;
 
+    public GameObject DeathCanvas;
 
     public GameObject UniqueIDObject;
     public GameObject PlayerNameText;
@@ -82,7 +84,20 @@ public class Player : Photon.MonoBehaviour
     float MouseX;
     float MouseY;
 
+    [Header("HighScores")]
+    public GameObject Username1Text;
+    public GameObject Username2Text;
+    public GameObject Username3Text;
+    public GameObject Username4Text;
+    public GameObject Username5Text;
 
+    public GameObject Score1Text;
+    public GameObject Score2Text;
+    public GameObject Score3Text;
+    public GameObject Score4Text;
+    public GameObject Score5Text;
+
+    public GameObject ScoreText;
 
     public bool IsCurrentGunNotMaxStorageAmmo(int weapontype)
     {
@@ -505,6 +520,31 @@ public class Player : Photon.MonoBehaviour
         // When the game ends, you save stuff to the database
         DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
         DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
+
+        // display highscores and wait for all players to die
+        DeathCanvas.SetActive(true);
+        ScoreText.GetComponent<Text>().text = totalScore.ToString();
+        
+        StartCoroutine(GetHighScores());
+    }
+
+    IEnumerator GetHighScores()
+    {
+        DbControllerManager.GetComponent<dbController>().LoadScores();
+        yield return new WaitForSeconds(1);
+        String[] items = DbControllerManager.GetComponent<dbController>().items;
+
+        Username1Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[0], "username:");
+        Username2Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[1], "username:");
+        Username3Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[2], "username:");
+        Username4Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[3], "username:");
+        Username5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "username:");
+
+        Score1Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[0], "score:");
+        Score2Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[1], "score:");
+        Score3Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[2], "score:");
+        Score4Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[3], "score:");
+        Score5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "score:");
     }
 
 }

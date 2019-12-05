@@ -98,6 +98,11 @@ public class MenuButtonScript : MonoBehaviour
         LoadingText.SetActive(true);
         yield return new WaitForSeconds(1);
         log = DbControllerManager.GetComponent<dbController>().log;
+        if (log == null)
+        {
+            yield return new WaitForSeconds(3);
+            log = DbControllerManager.GetComponent<dbController>().log;
+        }
         LoadingText.SetActive(false);
 
         if (log.Equals("wrong_password"))
