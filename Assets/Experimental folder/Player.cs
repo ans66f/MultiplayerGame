@@ -181,39 +181,6 @@ public class Player : Photon.MonoBehaviour
     }
 
 
-    /*
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.tag == "Player")
-        {
-            Player player = collision.collider.GetComponent<Player>();
-            if (player.isDead)
-            {
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    player.DoModifyHealth(maxHealth / 4);
-                    player.isDead = false;
-
-                    //if (keypress)
-                    //{
-                    //    keypress = false;
-                    //    timePressed = Time.time;
-                    //}
-                    //else
-                    //{
-                    //    if (Time.time - timePressed > 3.0f)
-                    //    {
-                    //        keypress = true;
-                    //        player.ModifyHealth(maxHealth / 4);
-                    //    }
-                    //}
-                }
-            }
-        }
-    }
-    */
-
-
     void Respawn()
     {
         currCountdownLabel.gameObject.SetActive(false);
@@ -253,10 +220,10 @@ public class Player : Photon.MonoBehaviour
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
+        if (gameIsDone)
+        {
 
-
-
-
+        }
 
 
 
@@ -276,27 +243,22 @@ public class Player : Photon.MonoBehaviour
 
         }
 
-        if (currHealth <= 0 && !isDead)
-        {
-            currCountdown = deathCountdown;
-            isDead = true;
-        }
         if(currMoney <= 0)
         {
             currMoney = 0;
         }
 
 
-        if (isDead)
+        if (isDead && !gameIsDone)
         {
             if (currCountdown <= 0)
             {
-                currCountdown = deathCountdown;
-                Respawn();
+                gameIsDone = true;
+                EndOfGame();
                // gameObject.SetActive(false);
             }
         }
-        else
+        else if (!isDead)
         {
             if (photonView.isMine)
             {
@@ -351,10 +313,12 @@ public class Player : Photon.MonoBehaviour
     [PunRPC]
     public void ModifyHealth(int amount)
     {
-        currHealth = Mathf.Clamp(amount, 0, maxHealth);
-        if(!donedeadcheck) CheckIfDead();
-        UpdateGUI();
-
+        if (!isDead)
+        {
+            currHealth = Mathf.Clamp(amount, 0, maxHealth);
+            CheckIfDead();
+            UpdateGUI();
+        }
     }
 
 
@@ -373,13 +337,13 @@ public class Player : Photon.MonoBehaviour
 
     private void CheckIfDead()
     {
-        if (isDead)
+        if (currHealth == 0 && !gameIsDone)
         {
+            isDead = true;
             currCountdown = deathCountdown;
             currCountdownLabel.gameObject.SetActive(true);
             //deathCo = DecreaseCountdown();
             StartCoroutine(DecreaseCountdown());
-            donedeadcheck = true;
         }
         else
         {
@@ -572,4 +536,36 @@ public class Player : Photon.MonoBehaviour
         Score5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "score:");
     }
 
+
+    /*
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            Player player = collision.collider.GetComponent<Player>();
+            if (player.isDead)
+            {
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    player.DoModifyHealth(maxHealth / 4);
+                    player.isDead = false;
+
+                    //if (keypress)
+                    //{
+                    //    keypress = false;
+                    //    timePressed = Time.time;
+                    //}
+                    //else
+                    //{
+                    //    if (Time.time - timePressed > 3.0f)
+                    //    {
+                    //        keypress = true;
+                    //        player.ModifyHealth(maxHealth / 4);
+                    //    }
+                    //}
+                }
+            }
+        }
+    }
+    */
 }
