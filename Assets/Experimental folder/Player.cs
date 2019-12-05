@@ -254,6 +254,19 @@ public class Player : Photon.MonoBehaviour
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
 
+
+        if (photonView.isMine)
+        {
+            PlayerNameText.GetComponent<Text>().text = DataHandler.username;
+            PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
+        }
+        else
+        {
+            photonView.RPC("GetPlayerUsername", PhotonTargets.OthersBuffered, DataHandler.username);
+        }
+
+
+
         if (UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID != -1)
         {
             //PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
@@ -261,15 +274,7 @@ public class Player : Photon.MonoBehaviour
 
 
             
-            if (photonView.isMine)
-            {
-                PlayerNameText.GetComponent<Text>().text = DataHandler.username;
-                PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
-            }
-            else
-            {
-                photonView.RPC("GetPlayerUsername", PhotonTargets.OthersBuffered, DataHandler.username);
-            }
+
         }
 
         if (currHealth <= 0 && !isDead)
