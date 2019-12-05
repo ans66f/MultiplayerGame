@@ -172,7 +172,7 @@ public class dbController : MonoBehaviour
         string itemsDataString = webRequest.text;
         print(itemsDataString);
         items = itemsDataString.Split(';');
-        print(GetDataValue(items[0], "score:"));
+        //print(GetDataValue(items[0], "score:"));
     }
 
     IEnumerator CLoadStats(string user)
