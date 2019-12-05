@@ -9,6 +9,8 @@ public class enemyspawnscript : MonoBehaviour
 
     public bool IsSpawnerActive;
 
+    GameObject ZombieSpawnManager;
+
     public Material Red;
     public Material Green;
 
@@ -17,6 +19,8 @@ public class enemyspawnscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ZombieSpawnManager = GameObject.FindGameObjectWithTag("ZombieSpawnManager");
+
         spawntimer = 2.0f; 
     }
 
@@ -33,7 +37,10 @@ public class enemyspawnscript : MonoBehaviour
             {
                 spawntimer = Random.Range(5.0f, 20.0f);
 
-                PhotonNetwork.Instantiate(EnemyTemplate.name, GetComponent<Transform>().position, Quaternion.identity, 0);
+                if (ZombieSpawnManager.GetComponent<ZombieSpawnManagerScript>().TrySpawnZombie())
+                {
+                    PhotonNetwork.Instantiate(EnemyTemplate.name, GetComponent<Transform>().position, Quaternion.identity, 0);
+                }
             }
         }
         else
