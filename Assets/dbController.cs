@@ -6,7 +6,8 @@ using System.Text;
 using UnityEngine;
 
 public class dbController : MonoBehaviour
-{string createUserURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createUser.php";
+{
+    string createUserURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createUser.php";
     string createStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/createStats.php";
     string loadScoresURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/scoreData.php";
     string saveScoresURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/saveGameScore.php";
@@ -14,55 +15,31 @@ public class dbController : MonoBehaviour
     string loadStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/statsData.php";
     string updateStatsURL = "http://kunet.kingston.ac.uk/k1931511/unitySQL/updateStats.php";
 
-    public string[] items;
-    public string[] stats;
+    [SerializeField] private string[] _items;
+    [SerializeField] private string[] _stats;
+
+    public string[] items
+    {
+        get { return _items; }
+    }
+
+    public string[] stats
+    {
+        get { return _stats; }
+    }
 
     public string log;
-    bool done = false;
 
-    IEnumerator Waiter() // just for testing
-    {
-        Debug.Log("CREATE USER");
-        CreateUser("nolwennlg", GetSha1("okcomputer"));
-        yield return new WaitForSeconds(2);
-        Debug.Log("CHECK USER");
-        CheckUser("nolwennlg", GetSha1("okcomputer"));
-        yield return new WaitForSeconds(2);
-        Debug.Log("SAVE SCORE");
-        SaveScores("nolwennlg", 20);
-        yield return new WaitForSeconds(2);
-        Debug.Log("LOAD SCORE");
-        LoadScores();
-        yield return new WaitForSeconds(2);
-        Debug.Log("UPDATE STATS");
-        UpdateStats("nolwennlg", 14, 35, 65, 2, 23);
-        yield return new WaitForSeconds(2);
-        Debug.Log("LOAD STATS");
-        LoadStats("nolwennlg");
-    }
-
-    void Start()
-    {
-        // StartCoroutine(Waiter());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // main methods
     public void CreateUser(string user, string pass)
     {
         StartCoroutine(CCreateUser(user, pass));
     }
 
-
     public void CheckUser(string user, string pass)
     {
         StartCoroutine(CCheckUser(user, pass));
     }
-
 
     public void SaveScores(string user, int score)
     {
@@ -84,10 +61,9 @@ public class dbController : MonoBehaviour
         StartCoroutine(CUpdateStats(user, nbOfGames, timePlayed, nbOfKills, totalScore, bulletsShot));
     }
 
-
+    // coroutines
     IEnumerator CCreateUser(string user, string pass)
     {
-        done = false;
         WWWForm form = new WWWForm();
 
         form.AddField("username", user);
@@ -104,8 +80,6 @@ public class dbController : MonoBehaviour
             log = webRequest.text.ToString();
             Debug.Log(webRequest.text.ToString());
         }
-
-        done = true;
 
         //create stats
         if (!log.Equals("user_already_taken"))
@@ -171,7 +145,7 @@ public class dbController : MonoBehaviour
         yield return webRequest;
         string itemsDataString = webRequest.text;
         print(itemsDataString);
-        items = itemsDataString.Split(';');
+        _items = itemsDataString.Split(';');
         //print(GetDataValue(items[0], "score:"));
     }
 
@@ -185,8 +159,8 @@ public class dbController : MonoBehaviour
         yield return webRequest;
         string itemsDataString = webRequest.text;
         //print(itemsDataString);
-        items = itemsDataString.Split(';');
-        this.stats = items;
+        _items = itemsDataString.Split(';');
+        this._stats = _items;
         //print(GetDataValue(items[0], "nbOfKills:"));
     }
 
@@ -214,6 +188,7 @@ public class dbController : MonoBehaviour
         }
     }
 
+    // misc
     public string GetDataValue(string data, string index)
     {
         string value = data.Substring(data.IndexOf(index) + index.Length);
