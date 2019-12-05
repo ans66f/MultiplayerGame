@@ -255,15 +255,8 @@ public class Player : Photon.MonoBehaviour
 
 
 
-        if (photonView.isMine)
-        {
-            PlayerNameText.GetComponent<Text>().text = DataHandler.username;
-            PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
-        }
-        else
-        {
-            photonView.RPC("GetPlayerUsername", PhotonTargets.OthersBuffered, DataHandler.username);
-        }
+
+
 
 
 
@@ -273,7 +266,13 @@ public class Player : Photon.MonoBehaviour
             //PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
 
 
-            
+            if (photonView.isMine)
+            {
+                PlayerNameText.GetComponent<Text>().text = DataHandler.username;
+                PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
+
+                photonView.RPC("GetPlayerUsername", PhotonTargets.OthersBuffered, DataHandler.username);
+            }
 
         }
 
