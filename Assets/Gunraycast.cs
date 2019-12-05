@@ -18,7 +18,7 @@ public class Gunraycast : Photon.MonoBehaviour
     float CurrentRateOfFireValue = 0.0f;
 
     public int Damage = 10;
-    public float BulletSpeed = 10000.0f;
+    float BulletSpeed = 100.0f;
     public int GunType = -1;
 
     public bool isleftclick = false;
@@ -126,12 +126,12 @@ public class Gunraycast : Photon.MonoBehaviour
         //b.GetComponent<Rigidbody>().velocity = bulletDirection;
 
         Ray r = new Ray(bulletSpawn.transform.position, bulletSpawn.transform.forward);;
-        Vector3 bulletDirection = r.direction * BulletSpeed * Time.deltaTime;
+        Vector3 bulletDirection = r.direction;
 
         GameObject b = Instantiate(BulletTemplate, bulletSpawn.transform.position, bulletSpawn.transform.rotation, null);
         //b.transform.LookAt(transform.position + bulletDirection);
 
-        b.GetComponent<Rigidbody>().velocity = bulletDirection.normalized;
+        b.GetComponent<Rigidbody>().velocity = bulletDirection.normalized * BulletSpeed;
 
 
 
