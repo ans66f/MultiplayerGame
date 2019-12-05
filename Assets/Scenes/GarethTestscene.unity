@@ -16165,7 +16165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: 276}
+  m_AnchoredPosition: {x: 44, y: 346}
   m_SizeDelta: {x: 2634.9, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &808043628
@@ -43260,6 +43260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091308901}
   - component: {fileID: 2091308902}
+  - component: {fileID: 2091308903}
   m_Layer: 0
   m_Name: ZombieSpawnManager
   m_TagString: ZombieSpawnManager
@@ -43305,6 +43306,33 @@ MonoBehaviour:
   - {fileID: 1797353828}
   - {fileID: 1136111345}
   ZombieTextObject: {fileID: 808043626}
+--- !u!114 &2091308903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091308900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 26
+  instantiationId: 26
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!1001 &2091524016
 PrefabInstance:
   m_ObjectHideFlags: 0
