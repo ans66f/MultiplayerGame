@@ -57,4 +57,5 @@ MonoBehaviour:
   - TaggedPlayer
   - UpdateSunPos
   - UpdateUniqueID
+  - GetPlayerUsername
   DisableAutoOpenWizard: 1

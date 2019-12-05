@@ -221,6 +221,16 @@ public class Player : Photon.MonoBehaviour
 
 // Update is called once per frame
 
+
+
+    [PunRPC]
+    public void GetPlayerUsername(string username)
+    {
+        PlayerNameText.GetComponent<Text>().text = username;
+        PlayerNameTextWorld.GetComponent<Text>().text = username;
+    }
+
+
     void Update()
     {
         float f = (float)maxHealth / (float)currHealth;
@@ -233,9 +243,18 @@ public class Player : Photon.MonoBehaviour
         {
             //PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
             //PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
-            PlayerNameText.GetComponent<Text>().text = DataHandler.username;
-            PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
 
+
+            
+            if (photonView.isMine)
+            {
+                PlayerNameText.GetComponent<Text>().text = DataHandler.username;
+                PlayerNameTextWorld.GetComponent<Text>().text = DataHandler.username;
+            }
+            else
+            {
+                photonView.RPC("GetPlayerUsername", PhotonTargets.OthersBuffered, DataHandler.username);
+            }
         }
 
         if (currHealth <= 0 && !isDead)
