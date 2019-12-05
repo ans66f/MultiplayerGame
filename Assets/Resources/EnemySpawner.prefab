@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8059841128164027273}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 641044501437598060, guid: 443a9e6323f0af2409597c748332bf7c,
     type: 3}
+  GateNum: 0
+  IsSpawnerActive: 0
+  Red: {fileID: 2100000, guid: b8c7e219e5893074783e4cf6f4043354, type: 2}
+  Green: {fileID: 2100000, guid: 8d034628a1766f64bb892b8e4aea38ae, type: 2}

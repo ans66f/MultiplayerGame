@@ -22,6 +22,8 @@ TagManager:
   - PressETextObject
   - LampLight
   - ReviveHitbox
+  - ZombieSpawnManager
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

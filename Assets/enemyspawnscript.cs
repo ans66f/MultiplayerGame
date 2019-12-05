@@ -5,6 +5,12 @@ using UnityEngine;
 public class enemyspawnscript : MonoBehaviour
 {
     public GameObject EnemyTemplate;
+    public int GateNum;
+
+    public bool IsSpawnerActive;
+
+    public Material Red;
+    public Material Green;
 
     float spawntimer;
 
@@ -17,14 +23,22 @@ public class enemyspawnscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawntimer -= Time.deltaTime;
-
-        if(spawntimer <= 0)
+        if (IsSpawnerActive)
         {
-            spawntimer = Random.Range(5.0f, 20.0f);
+            GetComponent<Renderer>().material = Green;
 
-           PhotonNetwork.Instantiate(EnemyTemplate.name, GetComponent<Transform>().position, Quaternion.identity, 0);
+            spawntimer -= Time.deltaTime;
+
+            if (spawntimer <= 0)
+            {
+                spawntimer = Random.Range(5.0f, 20.0f);
+
+                PhotonNetwork.Instantiate(EnemyTemplate.name, GetComponent<Transform>().position, Quaternion.identity, 0);
+            }
         }
-        
+        else
+        {
+            GetComponent<Renderer>().material = Red;
+        }
     }
 }
