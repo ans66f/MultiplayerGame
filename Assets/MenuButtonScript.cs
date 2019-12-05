@@ -76,11 +76,12 @@ public class MenuButtonScript : MonoBehaviour
         DbControllerManager.GetComponent<dbController>().CreateUser(usernametext, DbControllerManager.GetComponent<dbController>().GetSha1(passwordtext));
 
         LoadingText.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         log = DbControllerManager.GetComponent<dbController>().log;
+        Debug.Log(log);
         LoadingText.SetActive(false);
 
-        if (log.Equals("user_already_exists"))
+        if (log.Equals("User could not be created"))
         {
             UsernameTakenText.SetActive(true);
         }
@@ -96,16 +97,11 @@ public class MenuButtonScript : MonoBehaviour
         DbControllerManager.GetComponent<dbController>().CheckUser(usernametext, DbControllerManager.GetComponent<dbController>().GetSha1(passwordtext));
 
         LoadingText.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         log = DbControllerManager.GetComponent<dbController>().log;
-        if (log == null)
-        {
-            yield return new WaitForSeconds(3);
-            log = DbControllerManager.GetComponent<dbController>().log;
-        }
         LoadingText.SetActive(false);
 
-        if (log.Equals("wrong_password"))
+        if (log.Equals("Wrong password"))
         {
             WrongPasswordText.SetActive(true);
         } else if (log.Equals("no_such_username")) {
