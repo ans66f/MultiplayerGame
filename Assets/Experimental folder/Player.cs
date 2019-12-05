@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -93,6 +94,7 @@ public class Player : Photon.MonoBehaviour
     public GameObject LocalCanvas;
     public GameObject DbControllerManager;
     GameObject[] spawnpoints;
+    GameObject[] OtherPlayers;
 
 
     private void Start()
@@ -128,11 +130,6 @@ public class Player : Photon.MonoBehaviour
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
         // Debug.Log(maxHealth + " " + currHealth + " " + healthbarwidth + " " + f);
 
-        if (gameIsDone)
-        {
-            // do something
-        }
-
 
         if (UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID != -1)
         {
@@ -155,8 +152,11 @@ public class Player : Photon.MonoBehaviour
         {
             if (currCountdown <= 0)
             {
-                gameIsDone = true;
-                EndOfGame();
+                if (photonView.isMine)
+                {
+                    gameIsDone = true;
+                    EndOfGame();
+                }
             }
         }
         else if (!isDead)
@@ -273,13 +273,11 @@ public class Player : Photon.MonoBehaviour
             isDead = true;
             currCountdown = deathCountdown;
             currCountdownLabel.gameObject.SetActive(true);
-            //deathCo = DecreaseCountdown();
             StartCoroutine(DecreaseCountdown());
         }
         else
         {
             StopCoroutine(DecreaseCountdown());
-           // deathCo = null;
             currCountdownLabel.gameObject.SetActive(false);
         }
     }
@@ -295,9 +293,7 @@ public class Player : Photon.MonoBehaviour
         }
     }
 
-
     private void InputColorChange()
-
     {
         if (!isDead)
         {
@@ -402,29 +398,31 @@ public class Player : Photon.MonoBehaviour
 
     void EndOfGame()
     {
-        totalScore += 8 * nbOfKills;
-        for (int i = 0; i < nbOfWavesCompleted; i++)
+        if (photonView.isMine)
         {
-            if (i < 5)
+            this.GetComponent<MeshRenderer>().enabled = false;
+            totalScore += 8 * nbOfKills;
+            for (int i = 0; i < nbOfWavesCompleted; i++)
             {
-                totalScore += 5;
-            } else
-            {
-                totalScore += 10;
+                if (i < 5)
+                {
+                    totalScore += 5;
+                } else
+                {
+                    totalScore += 10;
+                }
             }
-        }
-        totalScore += currMoney;
-        // When the game ends, you save stuff to the database
-        DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
-        DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
+            totalScore += currMoney;
+            // When the game ends, you save stuff to the database
+            DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
+            DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
 
-        // display highscores and wait for all players to die
-        DeathCanvas.SetActive(true);
-        healthbarworldspace.SetActive(false);
-        currHealthLabel.enabled = false;
-        ScoreText.GetComponent<Text>().text = totalScore.ToString();
-        
-        StartCoroutine(GetHighScores());
+            DeathCanvas.SetActive(true); //display death screen
+            ScoreText.GetComponent<Text>().text = totalScore.ToString(); //display player score in this game
+
+            StartCoroutine(GetHighScores()); // get high scores
+            StartCoroutine(SpectateUntilEnd()); // spectate until every player is dead
+        }
     }
 
     IEnumerator GetHighScores()
@@ -446,6 +444,33 @@ public class Player : Photon.MonoBehaviour
         Score5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "score:");
     }
 
+    IEnumerator SpectateUntilEnd()
+    {
+        int nbOfPlayersAlive = 3;
+        GameObject spectatedPlayer = null;
+        while (nbOfPlayersAlive > 0)
+        {
+            Debug.Log(DataHandler.username + " : " + nbOfPlayersAlive);
+            nbOfPlayersAlive = 0;
+            OtherPlayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in OtherPlayers)
+            {
+                if (!player.GetComponent<Player>().gameIsDone)
+                {
+                    nbOfPlayersAlive++;
+                    spectatedPlayer = player;
+                }
+            }
+            if (!(spectatedPlayer == null) && !(spectatedPlayer.GetComponent<Player>().gameIsDone))
+            {
+                Debug.Log("hello");
+                this.PlayerCam = spectatedPlayer.GetComponent<Player>().PlayerCam;
+            }
+            yield return new WaitForSeconds(1);
+        }
+        SceneManager.LoadScene("MenuScene");
+    }
+
     IEnumerator Timing()
     {
         while (!gameIsDone)
@@ -463,35 +488,4 @@ public class Player : Photon.MonoBehaviour
         PlayerNameTextWorld.GetComponent<Text>().text = username;
     }
 
-    /*
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.tag == "Player")
-        {
-            Player player = collision.collider.GetComponent<Player>();
-            if (player.isDead)
-            {
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    player.DoModifyHealth(maxHealth / 4);
-                    player.isDead = false;
-
-                    //if (keypress)
-                    //{
-                    //    keypress = false;
-                    //    timePressed = Time.time;
-                    //}
-                    //else
-                    //{
-                    //    if (Time.time - timePressed > 3.0f)
-                    //    {
-                    //        keypress = true;
-                    //        player.ModifyHealth(maxHealth / 4);
-                    //    }
-                    //}
-                }
-            }
-        }
-    }
-    */
 }
