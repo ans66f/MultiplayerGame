@@ -2710,7 +2710,6 @@ MonoBehaviour:
     type: 3}
   RateOfFire: 0.4
   Damage: 10
-  BulletSpeed: 5000
   GunType: 1
   isleftclick: 0
   Minigun: {fileID: 0}
@@ -4010,7 +4009,6 @@ MonoBehaviour:
     type: 3}
   RateOfFire: 0.1
   Damage: 4
-  BulletSpeed: 5000
   GunType: 2
   isleftclick: 0
   Minigun: {fileID: 0}
@@ -5606,16 +5604,15 @@ MonoBehaviour:
     type: 3}
   RateOfFire: 0.01
   Damage: 1
-  BulletSpeed: 5000
   GunType: 3
   isleftclick: 0
   Minigun: {fileID: 1932764872832533395}
   IsMinigun: 1
   AmmoTextObject: {fileID: 6920205544273903486}
   CurrentAmmo: 0
-  MaxCurrentAmmo: 200
-  CurrentAmmoStorage: 500
-  MaxAmmoStorage: 1000
+  MaxCurrentAmmo: 2000
+  CurrentAmmoStorage: 5000
+  MaxAmmoStorage: 10000
 --- !u!120 &5212414988160838846
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6095,10 +6092,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3912274531653234350}
     m_Modifications:
-    - target: {fileID: 119000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
-      propertyPath: m_Name
-      value: TT_demo_male_B
-      objectReference: {fileID: 0}
     - target: {fileID: 439102, guid: 907fd825e3988774caab4234b943bf44, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000036019
@@ -6154,6 +6147,10 @@ PrefabInstance:
     - target: {fileID: 439102, guid: 907fd825e3988774caab4234b943bf44, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3021877
+      objectReference: {fileID: 0}
+    - target: {fileID: 119000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
+      propertyPath: m_Name
+      value: TT_demo_male_B
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 907fd825e3988774caab4234b943bf44, type: 3}
