@@ -8,37 +8,40 @@ using UnityEngine.UI;
 
 public class Player : Photon.MonoBehaviour
 {
+    [Header("Player attributes")]
     public float speed = 10f;
+    public float jumpstrength;
+    bool jumpbool;
 
+
+    [Header("Name and ID")]
     public int playerid = -1;
+    public GameObject PlayerNameText;
+    public GameObject PlayerNameTextWorld;
+    public GameObject UniqueIDObject;
+    
 
-    private bool keypress = true;
-    private float timePressed = 0f;
+    [Header("Movement")]
+    float Horizontalaxis;
+    float Verticalaxis;
+    float MouseX;
+    float MouseY;
 
+
+    [Header("Stats")]
     public int timePlayed = 0;
     public int nbOfKills = 0;
     public int totalScore = 0;
     public int bulletsShot = 0;
-
     public int nbOfWavesCompleted = 0;
+
 
     [Header("Weapons")]
     public GameObject WeaponsObject;
-
-
     public GameObject pistol;
     public GameObject smg;
     public GameObject minigun;
 
-    [Header("Objects")]
-    public GameObject PlayerCam;
-    public GameObject PlayerStuff;
-
-
-    public float jumpstrength;
-
-    bool jumpbool;
-    public GameObject LocalCanvas;
 
     [Header("Health")]
     public int maxHealth = 200;
@@ -50,39 +53,22 @@ public class Player : Photon.MonoBehaviour
     public GameObject healthbarworldspace;
     float healthbarwidth;
 
+
     [Header("Death")]
+    public bool isDead;
+    bool gameIsDone;
     public int deathCountdown = 15;
     public int currCountdown;
     public Text currCountdownLabel;
-    IEnumerator deathCo;
-
     public GameObject DeathCanvas;
 
-    public GameObject UniqueIDObject;
-    public GameObject PlayerNameText;
-    public GameObject PlayerNameTextWorld;
-
-    public GameObject DbControllerManager;
 
     [Header("Money")]
     public int startMoney = 50;
     public int currMoney;
     public Text currMoneyLabel;
-
     public Text currMoneyLabelWorldSpace;
-    float moneybarwidth;
 
-    GameObject[] spawnpoints;
-
-
-    public bool isDead;
-    bool donedeadcheck;
-    bool gameIsDone;
-
-    float Horizontalaxis;
-    float Verticalaxis;
-    float MouseX;
-    float MouseY;
 
     [Header("HighScores")]
     public GameObject Username1Text;
@@ -99,45 +85,24 @@ public class Player : Photon.MonoBehaviour
 
     public GameObject ScoreText;
 
-    public bool IsCurrentGunNotMaxStorageAmmo(int weapontype)
-    {
-       // int currweapon = WeaponsObject.GetComponent<currentweaponscript>().currentgun;
 
+    [Header("Diverse Objects")]
+    public GameObject PlayerCam;
+    public GameObject PlayerStuff;
 
-            if (weapontype == 0)
-            {
-                if (WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
-                {
-                    return true;
-                }
+    public GameObject LocalCanvas;
+    public GameObject DbControllerManager;
+    GameObject[] spawnpoints;
 
-            }
-            if (weapontype == 1)
-            {
-                if (WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
-                {
-                    return true;
-                }
-            }
-            if (weapontype == 2)
-            {
-                if (WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
-                {
-                    return true;
-                }
-            }
-        
-        return false;
-
-    }
 
     private void Start()
     {
         isDead = false;
-        donedeadcheck = false;
         currCountdown = deathCountdown;
         spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         currMoney = startMoney;
+        jumpbool = false;
+        currHealth = maxHealth;
 
         if (photonView.isMine)
         {
@@ -149,69 +114,12 @@ public class Player : Photon.MonoBehaviour
             LocalCanvas.SetActive(false);
         }
 
-        //healthbar = GameObject.FindGameObjectWithTag("HealthBar");
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
 
-
-        jumpbool = false;
-        currHealth = maxHealth;
-        if (photonView.isMine) {
-            //currHealthLabel = GameObject.FindGameObjectWithTag("healthLabel").GetComponent<Text>();
-        }
-
-        StartCoroutine(Timing());
-
+        StartCoroutine(Timing()); // time played
         UpdateGUI();
     }
-
-    IEnumerator Timing()
-    {
-        while(!gameIsDone)
-        {
-            yield return new WaitForSeconds(1);
-            timePlayed += 1;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        jumpbool = false;
-
-    }
-
-
-    void Respawn()
-    {
-        currCountdownLabel.gameObject.SetActive(false);
-        isDead = false;
-        donedeadcheck = false;
-        currMoney = 0;
-        currHealth = maxHealth;
-        UpdateGUI();
-
-        GameObject randspawnpoint = spawnpoints[0];
-        foreach (GameObject spawnpoint in spawnpoints)
-        {
-            if (UnityEngine.Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
-            {
-                randspawnpoint = spawnpoint;
-            }
-        }
-        GetComponent<Transform>().position = randspawnpoint.transform.position;
-    }
-
-// Update is called once per frame
-
-
-
-    [PunRPC]
-    public void GetPlayerUsername(string username)
-    {
-        PlayerNameText.GetComponent<Text>().text = username;
-        PlayerNameTextWorld.GetComponent<Text>().text = username;
-    }
-
 
     void Update()
     {
@@ -222,17 +130,12 @@ public class Player : Photon.MonoBehaviour
 
         if (gameIsDone)
         {
-
+            // do something
         }
-
 
 
         if (UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID != -1)
         {
-            //PlayerNameText.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
-            //PlayerNameTextWorld.GetComponent<Text>().text = "Player: " + UniqueIDObject.GetComponent<UniqueIDScript>().UniqueID;
-
-
             if (photonView.isMine)
             {
                 PlayerNameText.GetComponent<Text>().text = DataHandler.username;
@@ -243,11 +146,10 @@ public class Player : Photon.MonoBehaviour
 
         }
 
-        if(currMoney <= 0)
+        if (currMoney <= 0)
         {
             currMoney = 0;
         }
-
 
         if (isDead && !gameIsDone)
         {
@@ -255,7 +157,6 @@ public class Player : Photon.MonoBehaviour
             {
                 gameIsDone = true;
                 EndOfGame();
-               // gameObject.SetActive(false);
             }
         }
         else if (!isDead)
@@ -268,7 +169,6 @@ public class Player : Photon.MonoBehaviour
                 PlayerCam.SetActive(true);
 
             }
-
             else
             {
                 PlayerCam.tag = "Untagged";
@@ -286,7 +186,40 @@ public class Player : Photon.MonoBehaviour
         }
     }
 
-    
+
+    public bool IsCurrentGunNotMaxStorageAmmo(int weapontype)
+    {
+            if (weapontype == 0)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().pistolbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+            }
+            if (weapontype == 1)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().smgbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+            }
+            if (weapontype == 2)
+            {
+                if (WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().CurrentAmmoStorage < WeaponsObject.GetComponent<currentweaponscript>().minigunbarrel.GetComponent<Gunraycast>().MaxAmmoStorage)
+                {
+                    return true;
+                }
+            }
+        return false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumpbool = false;
+
+    }
+
+
     void UpdateGUI()
     {
         if (currHealthLabel != null)
@@ -302,8 +235,6 @@ public class Player : Photon.MonoBehaviour
             currMoneyLabelWorldSpace.text = "$" + currMoney.ToString();
 
     }
-
-
 
     public void DoModifyHealth(int amount)
     {
@@ -379,13 +310,22 @@ public class Player : Photon.MonoBehaviour
         }
     }
 
+    public void HitChangeColour(Vector3 color)
+    {
+        photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
+    }
+
+
+    [PunRPC]
+    void ChangeColorTo(Vector3 color)
+    {
+        GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
+    }
+
     public void DoForceThing()
     {
         photonView.RPC("AddForceToPlayer", PhotonTargets.All);
     }
-
-
-
 
     [PunRPC]
     void AddForceToPlayer()
@@ -400,37 +340,6 @@ public class Player : Photon.MonoBehaviour
 
 
 
-
-    public void HitChangeColour(Vector3 color)
-    {
-        photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
-    }
-
-
-    [PunRPC]
-    void ChangeColorTo(Vector3 color)
-    {
-        GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
-
-    }
-
-
-    /*
-    [PunRPC]
-    void ChangeColorTo(Vector3 color)
-
-    {
-        GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
-        if (photonView.isMine)
-        {
-            photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
-        }
-
-    }
-    */
-
-
-
     private void InputMovement()
 
     {
@@ -442,52 +351,53 @@ public class Player : Photon.MonoBehaviour
             Verticalaxis = Input.GetAxisRaw("Vertical");
             PlayerStuff.GetComponent<CamMoveScript>().RotateCam();
 
-
             pistol.GetComponent<Lerptoaimposition>().LerpUpdate();
             smg.GetComponent<Lerptoaimposition>().LerpUpdate();
             minigun.GetComponent<Lerptoaimposition>().LerpUpdate();
 
-
             gameObject.transform.Rotate(new Vector3(0, MouseX * speed, 0));
 
             if (Verticalaxis > 0)
-
             {
                 gameObject.GetComponent<Transform>().Translate(Vector3.forward * speed * Time.deltaTime);
-                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + Vector3.forward * speed * Time.deltaTime);
-
             }
 
             if (Verticalaxis < 0)
-
             {
                 gameObject.GetComponent<Transform>().Translate((-Vector3.forward) * speed * Time.deltaTime);
-                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position - Vector3.forward * speed * Time.deltaTime);
-
             }
 
             if (Horizontalaxis > 0)
-
             {
 
                 gameObject.GetComponent<Transform>().Translate(Vector3.right * speed * Time.deltaTime);
-                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position+ Vector3.right * speed * Time.deltaTime);
-
             }
 
             if (Horizontalaxis < 0)
-
             {
                 gameObject.GetComponent<Transform>().Translate((-Vector3.right) * speed * Time.deltaTime);
-                //GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position- Vector3.right * speed * Time.deltaTime);
-
             }
 
-            if (Input.GetKeyDown(KeyCode.Z))
+        }
+    }
+
+    void Respawn()
+    {
+        currCountdownLabel.gameObject.SetActive(false);
+        isDead = false;
+        currMoney = 0;
+        currHealth = maxHealth;
+        UpdateGUI();
+
+        GameObject randspawnpoint = spawnpoints[0];
+        foreach (GameObject spawnpoint in spawnpoints)
+        {
+            if (UnityEngine.Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
             {
-                EndOfGame();
+                randspawnpoint = spawnpoint;
             }
         }
+        GetComponent<Transform>().position = randspawnpoint.transform.position;
     }
 
     void EndOfGame()
@@ -536,6 +446,22 @@ public class Player : Photon.MonoBehaviour
         Score5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "score:");
     }
 
+    IEnumerator Timing()
+    {
+        while (!gameIsDone)
+        {
+            yield return new WaitForSeconds(1);
+            timePlayed += 1;
+        }
+    }
+
+
+    [PunRPC]
+    public void GetPlayerUsername(string username)
+    {
+        PlayerNameText.GetComponent<Text>().text = username;
+        PlayerNameTextWorld.GetComponent<Text>().text = username;
+    }
 
     /*
     private void OnCollisionStay(Collision collision)
