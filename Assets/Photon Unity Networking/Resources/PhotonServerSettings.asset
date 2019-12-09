@@ -59,4 +59,6 @@ MonoBehaviour:
   - UpdateUniqueID
   - GetPlayerUsername
   - SyncZombieNumbers
+  - HidePlayer
+  - UnHidePlayer
   DisableAutoOpenWizard: 1

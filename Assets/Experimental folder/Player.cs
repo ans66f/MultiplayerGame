@@ -57,6 +57,7 @@ public class Player : Photon.MonoBehaviour
 
     [Header("Death")]
     public bool isDead;
+    bool spectating;
     bool gameIsDone;
     public int deathCountdown = 15;
     public int currCountdown;
@@ -148,14 +149,14 @@ public class Player : Photon.MonoBehaviour
             currMoney = 0;
         }
 
-        if (isDead && !gameIsDone)
+        if (isDead && !spectating)
         {
             if (currCountdown <= 0)
             {
                 if (photonView.isMine)
                 {
-                    gameIsDone = true;
-                    EndOfGame();
+                    //photonView.RPC("HidePlayer", PhotonTargets.All, this);
+                    StartCoroutine(Spectate());
                 }
             }
         }
@@ -216,7 +217,6 @@ public class Player : Photon.MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         jumpbool = false;
-
     }
 
 
@@ -377,37 +377,83 @@ public class Player : Photon.MonoBehaviour
         }
     }
 
-    void Respawn()
+    public void Respawn()
     {
-        currCountdownLabel.gameObject.SetActive(false);
-        isDead = false;
-        currMoney = 0;
-        currHealth = maxHealth;
-        UpdateGUI();
-
-        GameObject randspawnpoint = spawnpoints[0];
-        foreach (GameObject spawnpoint in spawnpoints)
+        if (photonView.isMine)
         {
-            if (UnityEngine.Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
+            if (isDead)
             {
-                randspawnpoint = spawnpoint;
+                StopCoroutine(Spectate());
+                //photonView.RPC("UnHidePlayer", PhotonTargets.All, this);
+                currCountdownLabel.gameObject.SetActive(false);
+                isDead = false;
+                currMoney = 0;
+                currHealth = maxHealth;
+                UpdateGUI();
+
+                GameObject randspawnpoint = spawnpoints[0];
+                foreach (GameObject spawnpoint in spawnpoints)
+                {
+                    if (UnityEngine.Random.Range(0, spawnpoints.Length) == spawnpoints.Length)
+                    {
+                        randspawnpoint = spawnpoint;
+                    }
+                }
+                GetComponent<Transform>().position = randspawnpoint.transform.position;
             }
         }
-        GetComponent<Transform>().position = randspawnpoint.transform.position;
+    }
+
+    
+    IEnumerator Spectate()
+    {
+        spectating = true;
+        int nbOfPlayersAlive = 3;
+        //GameObject spectatedPlayer = null;
+        while (nbOfPlayersAlive > 0)
+        {
+            Debug.Log(DataHandler.username + "Spectating");
+            if (photonView.isMine)
+            {
+                Debug.Log(DataHandler.username + " : " + nbOfPlayersAlive);
+                nbOfPlayersAlive = 0;
+                //spectatedPlayer = null;
+                OtherPlayers = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject player in OtherPlayers)
+                {
+                    if (!player.GetComponent<Player>().isDead)
+                    {
+                        nbOfPlayersAlive++;
+                        //spectatedPlayer = player;
+                    }
+                }
+                //if (!(spectatedPlayer == null))
+                //{
+                //    PlayerCam.tag = "Untagged";
+                //    PlayerCam.SetActive(false);
+                //    spectatedPlayer.GetComponent<Player>().PlayerCam.tag = "MainCamera";
+                //    spectatedPlayer.GetComponent<Player>().PlayerCam.SetActive(true);
+                //}
+                yield return new WaitForSeconds(2);
+            }
+        }
+        EndOfGame();
     }
 
     void EndOfGame()
     {
+        Debug.Log("End of game");
         if (photonView.isMine)
         {
-            this.GetComponent<MeshRenderer>().enabled = false;
+            gameIsDone = true;
             totalScore += 8 * nbOfKills;
             for (int i = 0; i < nbOfWavesCompleted; i++)
             {
                 if (i < 5)
                 {
                     totalScore += 5;
-                } else
+                }
+                else
                 {
                     totalScore += 10;
                 }
@@ -416,13 +462,17 @@ public class Player : Photon.MonoBehaviour
             // When the game ends, you save stuff to the database
             DbControllerManager.GetComponent<dbController>().SaveScores(DataHandler.username, this.totalScore); // save game score (for highscores)
             DbControllerManager.GetComponent<dbController>().UpdateStats(DataHandler.username, 1, timePlayed, nbOfKills, totalScore, bulletsShot); // update user stats
-
-            DeathCanvas.SetActive(true); //display death screen
-            ScoreText.GetComponent<Text>().text = totalScore.ToString(); //display player score in this game
-
-            StartCoroutine(GetHighScores()); // get high scores
-            StartCoroutine(SpectateUntilEnd()); // spectate until every player is dead
         }
+        DeathCanvas.SetActive(true); //display death screen
+        currCountdownLabel.gameObject.SetActive(false);
+        if (photonView.isMine)
+        {
+            ScoreText.GetComponent<Text>().text = totalScore.ToString(); //display player score in this game
+        }
+        
+
+        StartCoroutine(GetHighScores()); // get high scores
+        StartCoroutine(Finish());
     }
 
     IEnumerator GetHighScores()
@@ -444,30 +494,9 @@ public class Player : Photon.MonoBehaviour
         Score5Text.GetComponent<Text>().text = DbControllerManager.GetComponent<dbController>().GetDataValue(items[4], "score:");
     }
 
-    IEnumerator SpectateUntilEnd()
+    IEnumerator Finish()
     {
-        int nbOfPlayersAlive = 3;
-        GameObject spectatedPlayer = null;
-        while (nbOfPlayersAlive > 0)
-        {
-            Debug.Log(DataHandler.username + " : " + nbOfPlayersAlive);
-            nbOfPlayersAlive = 0;
-            OtherPlayers = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in OtherPlayers)
-            {
-                if (!player.GetComponent<Player>().gameIsDone)
-                {
-                    nbOfPlayersAlive++;
-                    spectatedPlayer = player;
-                }
-            }
-            if (!(spectatedPlayer == null) && !(spectatedPlayer.GetComponent<Player>().gameIsDone))
-            {
-                Debug.Log("hello");
-                this.PlayerCam = spectatedPlayer.GetComponent<Player>().PlayerCam;
-            }
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(10);
         SceneManager.LoadScene("MenuScene");
     }
 
@@ -488,4 +517,15 @@ public class Player : Photon.MonoBehaviour
         PlayerNameTextWorld.GetComponent<Text>().text = username;
     }
 
+    //[PunRPC]
+    //public void HidePlayer(GameObject player)
+    //{
+    //    player.GetComponent<Renderer>().enabled = false;
+    //}
+
+    //[PunRPC]
+    //public void UnHidePlayer(GameObject player)
+    //{
+    //    player.GetComponent<Renderer>().enabled = true;
+    //}
 }

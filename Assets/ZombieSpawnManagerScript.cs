@@ -111,7 +111,7 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
         if (CurrentZombieStorage <= 0 && AllZombies.Length <= 0)
         {
             Wavenum += 1;
-
+            
             InitialZombieNum += 5;
             CurrentZombieStorage = InitialZombieNum;
 
@@ -121,7 +121,7 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
             }
             else
             {
-                ThisPlayer.GetComponent<Player>().isDead = false;
+                ThisPlayer.GetComponent<Player>().Respawn();
             }
         }
     }

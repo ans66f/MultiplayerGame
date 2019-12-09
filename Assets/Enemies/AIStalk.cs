@@ -71,7 +71,7 @@ public class AIStalk : Photon.MonoBehaviour
         foreach (GameObject player in players)
         {
             Vector3 disp = player.transform.position - GetComponent<Transform>().position;
-            if (disp.magnitude < closest)
+            if (disp.magnitude < closest && !player.GetComponent<Player>().isDead)
             {
                 closest = disp.magnitude;
                 nearestplayer = player;
