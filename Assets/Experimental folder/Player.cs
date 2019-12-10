@@ -91,6 +91,7 @@ public class Player : Photon.MonoBehaviour
     [Header("Diverse Objects")]
     public GameObject PlayerCam;
     public GameObject PlayerStuff;
+    public GameObject MinimapCam;
 
     public GameObject LocalCanvas;
     public GameObject DbControllerManager;
@@ -115,6 +116,7 @@ public class Player : Photon.MonoBehaviour
         {
             GetComponent<Rigidbody>().useGravity = false;
             LocalCanvas.SetActive(false);
+            MinimapCam.SetActive(false);
         }
 
         healthbarwidth = healthbar.GetComponent<RawImage>().rectTransform.rect.width;
