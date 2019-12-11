@@ -163,7 +163,7 @@ public class Player : Photon.MonoBehaviour
                 if (photonView.isMine)
                 {
                     EnterSpectate();
-                    photonView.RPC("HidePlayer", PhotonTargets.All, this);
+                    photonView.RPC("HidePlayer", PhotonTargets.All);
                     StartCoroutine(Spectate());                    
                 }
             }
@@ -173,7 +173,6 @@ public class Player : Photon.MonoBehaviour
             if (photonView.isMine)
             {
                 InputMovement();
-                InputColorChange();
                 PlayerCam.tag = "MainCamera";
                 PlayerCam.SetActive(true);
 
@@ -305,32 +304,7 @@ public class Player : Photon.MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
-
-    private void InputColorChange()
-    {
-        if (!isDead)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-
-            {
-                ChangeColorTo(new Vector3(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f),
-                UnityEngine.Random.Range(0f, 1f)));
-            }
-        }
-    }
-
-    public void HitChangeColour(Vector3 color)
-    {
-        photonView.RPC("ChangeColorTo", PhotonTargets.All, color);
-    }
-
-
-    [PunRPC]
-    void ChangeColorTo(Vector3 color)
-    {
-        GetComponent<Renderer>().material.color = new Color(color.x, color.y, color.z, 1f);
-    }
-
+    
     public void DoForceThing()
     {
         photonView.RPC("AddForceToPlayer", PhotonTargets.All);
@@ -346,9 +320,7 @@ public class Player : Photon.MonoBehaviour
             gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
         }
     }
-
-
-
+       
     private void InputMovement()
 
     {
@@ -571,9 +543,10 @@ public class Player : Photon.MonoBehaviour
     //}
 
     [PunRPC]
-    public void HidePlayer(GameObject player)
+    public void HidePlayer()
     {
         gameObject.transform.position = new Vector3(0f, -10f, 0f);
+        gameObject.GetComponent<Rigidbody>().position = new Vector3(0f, -10f, 0f);
         //player.GetComponent<Renderer>().enabled = true;
     }
 }
