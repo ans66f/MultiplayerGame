@@ -160,6 +160,7 @@ public class Player : Photon.MonoBehaviour
         {
             if (currCountdown <= 0)
             {
+                currCountdown = deathCountdown;
                 if (photonView.isMine)
                 {
                     EnterSpectate();
@@ -413,7 +414,7 @@ public class Player : Photon.MonoBehaviour
                         randspawnpoint = spawnpoint;
                     }
                 }
-                GetComponent<Transform>().position = randspawnpoint.transform.position;
+                GetComponent<Transform>().position = new Vector3(0f, 5f, 0f);
             }
         }
     }

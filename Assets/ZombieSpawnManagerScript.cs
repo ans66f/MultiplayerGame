@@ -122,6 +122,8 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
             else
             {
                 ThisPlayer.GetComponent<Player>().Respawn();
+                GetComponent<Transform>().position = new Vector3(0f, 5f, 0f);
+
             }
         }
     }
