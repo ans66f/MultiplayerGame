@@ -236,7 +236,7 @@ public class Player : Photon.MonoBehaviour
     {
         if (other.tag == "ReviveHitbox")
         {
-            Player otherPlayer = other.GetComponent<Player>();
+            Player otherPlayer = other.GetComponentInParent<Player>();
             if (otherPlayer.isDead)
             {
                 if (photonView.isMine)
