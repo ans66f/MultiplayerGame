@@ -60,4 +60,5 @@ MonoBehaviour:
   - UpdateSunPos
   - UpdateUniqueID
   - UnHidePlayer
+  - HidePlayer
   DisableAutoOpenWizard: 1

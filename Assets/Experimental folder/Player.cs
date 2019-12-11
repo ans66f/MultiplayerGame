@@ -90,6 +90,7 @@ public class Player : Photon.MonoBehaviour
 
     [Header("Diverse Objects")]
     public GameObject PlayerCam;
+    public GameObject PlayerCamPosition;
     public GameObject PlayerStuff;
     public GameObject MinimapCam;
 
@@ -161,9 +162,9 @@ public class Player : Photon.MonoBehaviour
             {
                 if (photonView.isMine)
                 {
-                    photonView.RPC("HidePlayer", PhotonTargets.All, this);
-                    StartCoroutine(Spectate());
                     EnterSpectate();
+                    photonView.RPC("HidePlayer", PhotonTargets.All, this);
+                    StartCoroutine(Spectate());                    
                 }
             }
         }
@@ -191,6 +192,11 @@ public class Player : Photon.MonoBehaviour
                     jumpbool = true;
                 }
             }
+        }
+
+        if(spectating && photonView.isMine)
+        {            
+            TrackSpectatedPlayer();
         }
     }
 
@@ -415,7 +421,6 @@ public class Player : Photon.MonoBehaviour
     
     IEnumerator Spectate()
     {
-        spectating = true;
         int nbOfPlayersAlive = 3;
         //GameObject spectatedPlayer = null;
         while (nbOfPlayersAlive > 0)
@@ -452,24 +457,32 @@ public class Player : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
+            spectating = true;
             players.AddRange(GameObject.FindObjectsOfType<Player>()); // get every other player in the scene
             players.Remove(this); // remove my own spectate
-            PlayerCam.GetComponent<Camera>().enabled = false; // diable my camera
             SetSpectatingPlayer(players[0]);
         }
     }
 
     public void SetSpectatingPlayer(Player player)
     {
-        if (spectatedPlayer != null) spectatedPlayer.PlayerCam.GetComponent<Camera>().enabled = false; // if currently spectating, disable camera
         spectatedPlayer = player; // set to new spectating player
-        spectatedPlayer.PlayerCam.GetComponent<Camera>().enabled = true; // enable camera on player we are now spectating
+        TrackSpectatedPlayer();
+    }
+
+    public void TrackSpectatedPlayer()
+    {
+        //Vector3 posBefore = PlayerCam.transform.position;
+        PlayerCam.transform.position = spectatedPlayer.PlayerCamPosition.transform.position;
+        PlayerCam.transform.rotation = spectatedPlayer.PlayerCamPosition.transform.rotation;
+        //Debug.Log("PosBefore: " + posBefore + "\nPosAfter: " + PlayerCam.transform.position);
     }
 
     public void ExitSpectate()
     {
         if (photonView.isMine)
         {
+            spectating = false;
             SetSpectatingPlayer(this);
         }
     }
