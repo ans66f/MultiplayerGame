@@ -41,6 +41,7 @@ MonoBehaviour:
   - DestroyWeaponAndThis
   - DoJump
   - Flash
+  - GetPlayerUsername
   - InstantiateRpc
   - Marco
   - ModifyHealth
@@ -54,11 +55,9 @@ MonoBehaviour:
   - RequestForPickupTimes
   - SetCurrentWeapon
   - SpawnBullet
+  - SyncZombieNumbers
   - TaggedPlayer
   - UpdateSunPos
   - UpdateUniqueID
-  - GetPlayerUsername
-  - SyncZombieNumbers
-  - HidePlayer
   - UnHidePlayer
   DisableAutoOpenWizard: 1

@@ -98,6 +98,9 @@ public class Player : Photon.MonoBehaviour
     GameObject[] spawnpoints;
     GameObject[] OtherPlayers;
 
+    private List<Player> players = new List<Player>();
+    private Player spectatedPlayer;
+
 
     private void Start()
     {
@@ -123,7 +126,8 @@ public class Player : Photon.MonoBehaviour
         healthbarworldspace.GetComponent<RawImage>().rectTransform.sizeDelta = healthbar.GetComponent<RawImage>().rectTransform.sizeDelta;
 
         StartCoroutine(Timing()); // time played
-        UpdateGUI();
+        UpdateGUI();        
+
     }
 
     void Update()
@@ -157,8 +161,9 @@ public class Player : Photon.MonoBehaviour
             {
                 if (photonView.isMine)
                 {
-                    //photonView.RPC("HidePlayer", PhotonTargets.All, this);
+                    photonView.RPC("HidePlayer", PhotonTargets.All, this);
                     StartCoroutine(Spectate());
+                    EnterSpectate();
                 }
             }
         }
@@ -386,6 +391,7 @@ public class Player : Photon.MonoBehaviour
             if (isDead)
             {
                 StopCoroutine(Spectate());
+                ExitSpectate();
                 //photonView.RPC("UnHidePlayer", PhotonTargets.All, this);
                 currCountdownLabel.gameObject.SetActive(false);
                 isDead = false;
@@ -440,6 +446,32 @@ public class Player : Photon.MonoBehaviour
             }
         }
         EndOfGame();
+    }
+
+    public void EnterSpectate()
+    {
+        if (photonView.isMine)
+        {
+            players.AddRange(GameObject.FindObjectsOfType<Player>()); // get every other player in the scene
+            players.Remove(this); // remove my own spectate
+            PlayerCam.SetActive(false); // diable my camera
+            SetSpectatingPlayer(players[0]);
+        }
+    }
+
+    public void SetSpectatingPlayer(Player player)
+    {
+        if (spectatedPlayer != null) spectatedPlayer.PlayerCam.SetActive(false); // if currently spectating, disable camera
+        spectatedPlayer = player; // set to new spectating player
+        spectatedPlayer.PlayerCam.SetActive(true); // enable camera on player we are now spectating
+    }
+
+    public void ExitSpectate()
+    {
+        if (photonView.isMine)
+        {
+            SetSpectatingPlayer(this);
+        }
     }
 
     void EndOfGame()
@@ -525,9 +557,10 @@ public class Player : Photon.MonoBehaviour
     //    player.GetComponent<Renderer>().enabled = false;
     //}
 
-    //[PunRPC]
-    //public void UnHidePlayer(GameObject player)
-    //{
-    //    player.GetComponent<Renderer>().enabled = true;
-    //}
+    [PunRPC]
+    public void UnHidePlayer(GameObject player)
+    {
+        gameObject.transform.position = new Vector3(0f, -10f, 0f);
+        //player.GetComponent<Renderer>().enabled = true;
+    }
 }
