@@ -232,6 +232,25 @@ public class Player : Photon.MonoBehaviour
     }
 
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "ReviveHitbox")
+        {
+            Player otherPlayer = other.GetComponent<Player>();
+            if (otherPlayer.isDead)
+            {
+                if (photonView.isMine)
+                {
+                    if (Input.GetKey(KeyCode.Q))
+                    {
+                        otherPlayer.DoModifyHealth(otherPlayer.maxHealth / 4);
+                        otherPlayer.isDead = false;
+                    }
+                }
+            }
+        }
+    }
+
     void UpdateGUI()
     {
         if (currHealthLabel != null)
@@ -386,7 +405,7 @@ public class Player : Photon.MonoBehaviour
                         randspawnpoint = spawnpoint;
                     }
                 }
-                GetComponent<Transform>().position = randspawnpoint.transform.position + new Vector3(0f, 5f, 0f);
+                GetComponent<Transform>().position = new Vector3(0f, 5f, 0f);
             }
         }
     }
