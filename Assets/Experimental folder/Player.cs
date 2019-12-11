@@ -366,10 +366,6 @@ public class Player : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
-            //if (gameObject.GetComponent<revivehitboxscript> && )
-            //{
-
-            //}
                        
         if (isDead)
             {
@@ -390,7 +386,7 @@ public class Player : Photon.MonoBehaviour
                         randspawnpoint = spawnpoint;
                     }
                 }
-                GetComponent<Transform>().position = randspawnpoint.transform.position;
+                GetComponent<Transform>().position = randspawnpoint.transform.position + new Vector3(0f, 5f, 0f);
             }
         }
     }
