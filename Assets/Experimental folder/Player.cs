@@ -393,14 +393,14 @@ public class Player : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
-                       
-        if (isDead)
+
+            if (isDead)
             {
+                isDead = false;
                 StopCoroutine(Spectate());
                 ExitSpectate();
                 //photonView.RPC("UnHidePlayer", PhotonTargets.All, this);
                 currCountdownLabel.gameObject.SetActive(false);
-                isDead = false;
                 currMoney = 0;
                 currHealth = maxHealth;
                 UpdateGUI();
@@ -413,7 +413,7 @@ public class Player : Photon.MonoBehaviour
                         randspawnpoint = spawnpoint;
                     }
                 }
-                GetComponent<Transform>().position = new Vector3(0f, 5f, 0f);
+                GetComponent<Transform>().position = randspawnpoint.transform.position;
             }
         }
     }
