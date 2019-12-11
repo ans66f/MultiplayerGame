@@ -234,17 +234,25 @@ public class Player : Photon.MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "ReviveHitbox")
+        if (photonView.isMine)
         {
-            Player otherPlayer = other.GetComponentInParent<Player>();
-            if (otherPlayer.isDead)
+            if (other.tag == "ReviveHitbox")
             {
-                if (photonView.isMine)
+                Player otherPlayer = other.GetComponentInParent<Player>();
+                Debug.Log("got here");
+                Debug.Log(otherPlayer);
+                if (otherPlayer.isDead)
                 {
+                    Debug.Log("got here too");
                     if (Input.GetKey(KeyCode.Q))
                     {
-                        otherPlayer.DoModifyHealth(otherPlayer.maxHealth / 4);
+                        Debug.Log("pressed Q");
+                        otherPlayer.StopCoroutine(DecreaseCountdown());
+                        otherPlayer.currCountdownLabel.gameObject.SetActive(false);
                         otherPlayer.isDead = false;
+                        otherPlayer.currMoney = 0;
+                        otherPlayer.currHealth = maxHealth/4;
+                        otherPlayer.UpdateGUI();
                     }
                 }
             }
