@@ -2038,7 +2038,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -5682,6 +5682,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: GateNum
@@ -6634,11 +6639,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 667616481}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
-        type: 3}
-      propertyPath: m_Name
-      value: Minigun (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6708,6 +6708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.12931554
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
+        type: 3}
+      propertyPath: m_Name
+      value: Minigun (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270e7db22c4a43f46a7eaeb8bbe067a5, type: 3}
@@ -12043,7 +12048,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -12194,6 +12199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: healthPackGenerator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434829036785416, guid: c5a8a782b2d47804ebd2c32eab269d2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757375134029895726, guid: c5a8a782b2d47804ebd2c32eab269d2e,
         type: 3}
@@ -18335,7 +18345,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -19981,7 +19991,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -20136,7 +20146,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b882c1a7fc6621e45ac77cf54443504c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.11467
+      value: -9.01
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b882c1a7fc6621e45ac77cf54443504c,
         type: 3}
@@ -20775,7 +20785,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -22076,11 +22086,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 667616481}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: c42010fe0bd86e44484e33b85661592e,
-        type: 3}
-      propertyPath: m_Name
-      value: Machine Gun
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c42010fe0bd86e44484e33b85661592e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22150,6 +22155,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.20000012
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c42010fe0bd86e44484e33b85661592e,
+        type: 3}
+      propertyPath: m_Name
+      value: Machine Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c42010fe0bd86e44484e33b85661592e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 856365191234717131, guid: c42010fe0bd86e44484e33b85661592e,
         type: 3}
@@ -23034,7 +23049,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -24655,7 +24670,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -26298,7 +26313,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -27218,11 +27233,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 667616481}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
-        type: 3}
-      propertyPath: m_Name
-      value: Minigun
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27292,6 +27302,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.12931554
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
+        type: 3}
+      propertyPath: m_Name
+      value: Minigun
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 270e7db22c4a43f46a7eaeb8bbe067a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270e7db22c4a43f46a7eaeb8bbe067a5, type: 3}
@@ -27448,7 +27468,7 @@ PrefabInstance:
     - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
@@ -36056,11 +36076,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 667616481}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: c42010fe0bd86e44484e33b85661592e,
-        type: 3}
-      propertyPath: m_Name
-      value: Machine Gun (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c42010fe0bd86e44484e33b85661592e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36130,6 +36145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.20000012
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c42010fe0bd86e44484e33b85661592e,
+        type: 3}
+      propertyPath: m_Name
+      value: Machine Gun (1)
       objectReference: {fileID: 0}
     - target: {fileID: 856365191234717131, guid: c42010fe0bd86e44484e33b85661592e,
         type: 3}
@@ -44095,6 +44115,11 @@ PrefabInstance:
     - target: {fileID: 7640230006279669405, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 815847235685913489, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059841128164027273, guid: 2c9ae92ac6cf6eb46bd169c82fc0a5fc,
