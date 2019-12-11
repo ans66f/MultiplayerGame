@@ -17,6 +17,8 @@ public class revivehitboxscript : Photon.MonoBehaviour
         
     }
 
+    float timePressed;
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
@@ -31,19 +33,16 @@ public class revivehitboxscript : Photon.MonoBehaviour
                         player.DoModifyHealth(player.maxHealth / 4);
                         player.isDead = false;
 
-                        //if (keypress)
-                        //{
-                        //    keypress = false;
-                        //    timePressed = Time.time;
-                        //}
-                        //else
-                        //{
-                        //    if (Time.time - timePressed > 3.0f)
-                        //    {
-                        //        keypress = true;
-                        //        player.ModifyHealth(maxHealth / 4);
-                        //    }
-                        //}
+                        if (Input.GetKey(KeyCode.Q) == false)
+                        {
+                            timePressed = Time.time;
+                        }
+                        else if ((Input.GetKey(KeyCode.Q) == true) && (Time.time - timePressed > 3.0f))
+                            {
+                                player.ModifyHealth(gameObject.GetComponent<Player>().maxHealth / 4);
+                            }
+
+                           
                     }
                 }
             }

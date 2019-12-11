@@ -366,7 +366,12 @@ public class Player : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
-            if (isDead)
+            //if (gameObject.GetComponent<revivehitboxscript> && )
+            //{
+
+            //}
+                       
+        if (isDead)
             {
                 StopCoroutine(Spectate());
                 ExitSpectate();
