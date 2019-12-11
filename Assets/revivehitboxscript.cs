@@ -37,7 +37,7 @@ public class revivehitboxscript : Photon.MonoBehaviour
                         {
                             timePressed = Time.time;
                         }
-                        else if ((Input.GetKey(KeyCode.Q) == true) && (Time.time - timePressed > 3.0f))
+                        else if ((Input.GetKey(KeyCode.Q) == true) && (Time.time - timePressed > 1.0f))
                             {
                                 player.ModifyHealth(gameObject.GetComponent<Player>().maxHealth / 4);
                             }
