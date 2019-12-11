@@ -15,10 +15,6 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
 
     public GameObject ZombieTextObject;
 
-    /* // Optimisation ?? maybe
-    public int CurrentZombie = 0;
-    public int MaxCurrentZombie = 10;
-    */
 
     int InitialZombieNum = 5;
 
@@ -66,8 +62,6 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
 
     void DoWaveCalculations()
     {
-
-
         if (ThisPlayer == null)
         {
             GameObject[] allplayers = GameObject.FindGameObjectsWithTag("Player");
@@ -77,7 +71,6 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
                 {
                     ThisPlayer = p;
                 }
-
             }
         }
 
@@ -131,8 +124,6 @@ public class ZombieSpawnManagerScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (PhotonNetwork.isMasterClient)
         {
             if (photonView.isMine)

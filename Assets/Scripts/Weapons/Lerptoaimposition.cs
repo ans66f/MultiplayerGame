@@ -12,12 +12,6 @@ public class Lerptoaimposition : MonoBehaviour
     float lerptime = 0.5f;
     float l = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void LerpUpdate()
     {
         l = lerpamount / lerptime;
@@ -46,11 +40,4 @@ public class Lerptoaimposition : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      
-
-
-    }
 }

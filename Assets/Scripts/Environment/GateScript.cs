@@ -46,12 +46,8 @@ public class GateScript : Photon.MonoBehaviour
             }
         }
 
-
-
-
         CostText.GetComponent<Text>().text = "Cost: " + GateCost;
 
-        
         if (GetComponent<Animator>().GetBool("IsGateOpen"))
         {
             OpenBoxCollider.SetActive(true);
@@ -80,7 +76,6 @@ public class GateScript : Photon.MonoBehaviour
         IsGateOpen = true;
         GetComponent<Animator>().SetBool("IsGateOpen", IsGateOpen);
 
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -106,16 +101,11 @@ public class GateScript : Photon.MonoBehaviour
                             Debug.Log("Not enough money skrub, need: " + (GateCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
                         }
 
-
-
-
-
                     }
                         PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
                     
                 }
             }
-
         }
     }
 

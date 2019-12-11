@@ -55,10 +55,6 @@ public class minigunscript : MonoBehaviour
 
             hasdonespeedupsound = true;
         }
-        else
-        {
-            //GetComponent<AudioSource>().Stop();
-        }
 
 
 
@@ -73,6 +69,5 @@ public class minigunscript : MonoBehaviour
 
         miniguncylinder.GetComponent<Transform>().Rotate(0,0, cylinderspeed);
 
-        //Debug.Log(cylinderspeed);
     }
 }

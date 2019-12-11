@@ -7,11 +7,6 @@ public class pressetextscript : MonoBehaviour
     public GameObject ThePressEText;
     float pressetimer = 0.1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void SetPressETextActive(bool t)
     {

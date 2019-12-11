@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StatsMenuScript : MonoBehaviour
 {
-    //string username = DataHandler.username;
-    string username = "nolwennlg";
+    string username = DataHandler.username;
 
     public GameObject UsernameText;
 

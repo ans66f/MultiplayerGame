@@ -11,12 +11,6 @@ public class HealthPack : Photon.MonoBehaviour
         set { _healing = value; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //healing = -200;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -45,10 +39,6 @@ public class HealthPack : Photon.MonoBehaviour
         {
             associatedGenerator.ReloadPack();
         }
-
-
-        
-
     }
 
     void DoDeactivateHealthPack()

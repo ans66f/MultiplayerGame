@@ -342,7 +342,7 @@ public class Player : Photon.MonoBehaviour
     void AddForceToPlayer()
     {
         //Debug.Log("Viewid given" + ownerId + " ViewID needed " + GetComponent<PhotonView>().ownerId);
-        //if (ownerId == GetComponent<PhotonView>().ownerId)
+        
         {
             Debug.Log("given force");
             gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * 100);
@@ -423,7 +423,6 @@ public class Player : Photon.MonoBehaviour
     IEnumerator Spectate()
     {
         int nbOfPlayersAlive = 3;
-        //GameObject spectatedPlayer = null;
         while (nbOfPlayersAlive > 0)
         {
             Debug.Log(DataHandler.username + "Spectating");
@@ -431,23 +430,15 @@ public class Player : Photon.MonoBehaviour
             {
                 Debug.Log(DataHandler.username + " : " + nbOfPlayersAlive);
                 nbOfPlayersAlive = 0;
-                //spectatedPlayer = null;
                 OtherPlayers = GameObject.FindGameObjectsWithTag("Player");
                 foreach (GameObject player in OtherPlayers)
                 {
                     if (!player.GetComponent<Player>().isDead)
                     {
                         nbOfPlayersAlive++;
-                        //spectatedPlayer = player;
+                        
                     }
                 }
-                //if (!(spectatedPlayer == null))
-                //{
-                //    PlayerCam.tag = "Untagged";
-                //    PlayerCam.SetActive(false);
-                //    spectatedPlayer.GetComponent<Player>().PlayerCam.tag = "MainCamera";
-                //    spectatedPlayer.GetComponent<Player>().PlayerCam.SetActive(true);
-                //}
                 yield return new WaitForSeconds(2);
             }
         }
@@ -473,7 +464,6 @@ public class Player : Photon.MonoBehaviour
 
     public void TrackSpectatedPlayer()
     {
-        //Vector3 posBefore = PlayerCam.transform.position;
         PlayerCam.transform.position = spectatedPlayer.PlayerCamPosition.transform.position;
         PlayerCam.transform.rotation = spectatedPlayer.PlayerCamPosition.transform.rotation;
         //Debug.Log("PosBefore: " + posBefore + "\nPosAfter: " + PlayerCam.transform.position);
@@ -565,11 +555,6 @@ public class Player : Photon.MonoBehaviour
         PlayerNameTextWorld.GetComponent<Text>().text = username;
     }
 
-    //[PunRPC]
-    //public void HidePlayer(GameObject player)
-    //{
-    //    player.GetComponent<Renderer>().enabled = false;
-    //}
 
     [PunRPC]
     public void HidePlayer()

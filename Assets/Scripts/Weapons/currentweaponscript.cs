@@ -31,6 +31,56 @@ public class currentweaponscript : Photon.MonoBehaviour
 
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (photonView.isMine)
+        {
+            if (Input.mouseScrollDelta.y > 0)
+            {
+                currentgun--;
+                if (CheckIfPlayerHasWeapon(currentgun))
+                {
+                    DoSetCurrentWeapon();
+                }
+            }
+            if (Input.mouseScrollDelta.y < 0)
+            {
+                currentgun++;
+                if (CheckIfPlayerHasWeapon(currentgun))
+                {
+                    DoSetCurrentWeapon();
+                }
+            }
+
+            if (currentgun < 0) currentgun = availableguns;
+            if (currentgun > availableguns) currentgun = 0;
+
+        }
+
+        if (currentgun == 0 && CheckIfPlayerHasWeapon(0))
+        {
+            pistol.SetActive(true);
+
+            smg.SetActive(false);
+            minigun.SetActive(false);
+        }
+        if (currentgun == 1 && CheckIfPlayerHasWeapon(1))
+        {
+            smg.SetActive(true);
+
+            pistol.SetActive(false);
+            minigun.SetActive(false);
+        }
+        if (currentgun == 2 && CheckIfPlayerHasWeapon(2))
+        {
+            minigun.SetActive(true);
+
+            pistol.SetActive(false);
+            smg.SetActive(false);
+        }
+
+    }
 
     public void AddAmmoAndWeapon(int weapontype)
     {
@@ -47,8 +97,6 @@ public class currentweaponscript : Photon.MonoBehaviour
         {
             enabledweapons.Add(weapontype);
         }
-
-
 
         if (weapontype == 0 && CheckIfPlayerHasWeapon(0)) //pistol
         {
@@ -106,58 +154,5 @@ public class currentweaponscript : Photon.MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (photonView.isMine)
-        {
-            if (Input.mouseScrollDelta.y > 0)
-            {
-                currentgun--;
-                if (CheckIfPlayerHasWeapon(currentgun))
-                {
-                    DoSetCurrentWeapon();
-                }
-            }
-            if (Input.mouseScrollDelta.y < 0)
-            {
-                currentgun++;
-                if (CheckIfPlayerHasWeapon(currentgun))
-                {
-                    DoSetCurrentWeapon();
-                }
-            }
-
-            if (currentgun < 0) currentgun = availableguns;
-            if (currentgun > availableguns) currentgun = 0;
-
-
-            
-
-        }
-
-
-        if(currentgun == 0 && CheckIfPlayerHasWeapon(0))
-        {
-            pistol.SetActive(true);
-
-            smg.SetActive(false);
-            minigun.SetActive(false);
-        }
-        if (currentgun == 1 && CheckIfPlayerHasWeapon(1))
-        {
-            smg.SetActive(true);
-
-            pistol.SetActive(false);
-            minigun.SetActive(false);
-        }
-        if (currentgun == 2 && CheckIfPlayerHasWeapon(2))
-        {
-            minigun.SetActive(true);
-
-            pistol.SetActive(false);
-            smg.SetActive(false);
-        }
-        
-    }
+    
 }

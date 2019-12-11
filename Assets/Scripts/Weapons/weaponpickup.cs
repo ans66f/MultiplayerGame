@@ -22,9 +22,6 @@ public class weaponpickup : Photon.MonoBehaviour
     {
         PressETextObject = GameObject.FindGameObjectWithTag("PressETextObject");
 
-
-
-
     }
 
     // Update is called once per frame
@@ -39,10 +36,8 @@ public class weaponpickup : Photon.MonoBehaviour
                 {
                     ThisPlayer = p;
                 }
-
             }
         }
-
 
         CostTextObject.GetComponent<Text>().text = "Cost: " + WeaponCost;
     }
@@ -53,12 +48,8 @@ public class weaponpickup : Photon.MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
-
             if (other.gameObject == ThisPlayer)
             {
-
-
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (other.gameObject.GetComponent<Player>().currMoney >= WeaponCost)
@@ -75,13 +66,7 @@ public class weaponpickup : Photon.MonoBehaviour
                     {
                         Debug.Log("Not enough money skrub, need: " + (WeaponCost - other.gameObject.GetComponent<Player>().currMoney) + " more");
                     }
-
-
-
-
                 }
-
-
                 PressETextObject.GetComponent<pressetextscript>().SetPressETextActive(true);
             }
         }

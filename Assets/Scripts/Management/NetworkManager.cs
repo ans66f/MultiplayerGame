@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviour
 {
-    private const string roomName = "RoomName";
+    private const string roomName = "Cool_Apocalypse";
     private TypedLobby lobbyName = new TypedLobby("New_Lobby", LobbyType.Default);
     private RoomInfo[] roomsList;
     public GameObject player;
@@ -19,12 +19,6 @@ public class NetworkManager : MonoBehaviour
     {
         spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         PhotonNetwork.ConnectUsingSettings("v1.0");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnGUI()
