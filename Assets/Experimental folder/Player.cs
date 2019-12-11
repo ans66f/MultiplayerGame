@@ -558,7 +558,7 @@ public class Player : Photon.MonoBehaviour
     //}
 
     [PunRPC]
-    public void UnHidePlayer(GameObject player)
+    public void HidePlayer(GameObject player)
     {
         gameObject.transform.position = new Vector3(0f, -10f, 0f);
         //player.GetComponent<Renderer>().enabled = true;
