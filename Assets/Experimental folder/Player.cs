@@ -454,16 +454,16 @@ public class Player : Photon.MonoBehaviour
         {
             players.AddRange(GameObject.FindObjectsOfType<Player>()); // get every other player in the scene
             players.Remove(this); // remove my own spectate
-            PlayerCam.SetActive(false); // diable my camera
+            PlayerCam.GetComponent<Camera>().enabled = false; // diable my camera
             SetSpectatingPlayer(players[0]);
         }
     }
 
     public void SetSpectatingPlayer(Player player)
     {
-        if (spectatedPlayer != null) spectatedPlayer.PlayerCam.SetActive(false); // if currently spectating, disable camera
+        if (spectatedPlayer != null) spectatedPlayer.PlayerCam.GetComponent<Camera>().enabled = false; // if currently spectating, disable camera
         spectatedPlayer = player; // set to new spectating player
-        spectatedPlayer.PlayerCam.SetActive(true); // enable camera on player we are now spectating
+        spectatedPlayer.PlayerCam.GetComponent<Camera>().enabled = true; // enable camera on player we are now spectating
     }
 
     public void ExitSpectate()
